@@ -62,6 +62,33 @@ namespace Task__1
                 Console.WriteLine(newline+"\n");
             }
         }
+        static void addArrayString()
+        {
+            using (StreamReader fileIn = new StreamReader(@"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\textSample.txt", Encoding.GetEncoding(1251)))
+            using (StreamWriter fileOut = new StreamWriter(@"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\newText.txt", false))
+            {
+                string line = fileIn.ReadToEnd();
+                StringBuilder newline = new StringBuilder();
+                string[] split = line.Split('.', '?');
+                string [] split2=split[2].Split(',',' ', '.', '?');
+                foreach(string x in split2)
+                    {
+                        char[] a = x.ToCharArray();
+                        Array.Reverse(a);
+                        string temp = new string(a);
+                        newline.Append(temp+" ");
+                    }
+                StringBuilder text = new StringBuilder();
+                for (int i = 0; i < split.Length; i++)
+                    {
+                        if (split[2]==split[i])
+                            text.Append(Convert.ToString(newline));
+                        else
+                            text.Append(split[i]);
+                    }
+                Console.WriteLine(text);
+            }
+        }
         static void Main(string[] args)
         {
             int quest;
@@ -69,13 +96,14 @@ namespace Task__1
             {
                 Console.WriteLine("Выберите номер операции \n1.Считать тхт файл и удалить в нем указанное слово \n" +
                     "2.Вывести кол-во слов и вывести текст где после каждого 10го слова будет стоять запятая \n" +
-                    "3.Выйти");
+                    "3.Перевернуть слова в предложении №3 \n5.Выйти");
                 quest = Convert.ToInt16(Console.ReadLine());
                 switch (quest)
                 {
                     case 1: changeFile(); break;
                     case 2: numberWords(); break;
-                    case 3: return;
+                    case 3: addArrayString(); break;
+                    case 5: return;
                     default: Console.WriteLine("Неверный ввод"); break;
                 }
             }
