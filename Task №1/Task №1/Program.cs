@@ -5,13 +5,13 @@ using System.IO;
 namespace Task__1
 {
     class Program
-    {//Создать методы для подзаданий
-     //Задание 3 и 4
-     //Почистить код от всякого г..на
+    {
+        static string url = @"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\textSample.txt"; // Чтение 
+        static string url_2 = @"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\newText.txt";// Запись
         static void changeFile()
         {
-            using (StreamReader fileIn = new StreamReader(@"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\textSample.txt",Encoding.GetEncoding(1251)))
-            using (StreamWriter fileOut = new StreamWriter(@"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\newText.txt", false))
+            using (StreamReader fileIn = new StreamReader(url,Encoding.GetEncoding(1251)))
+            using (StreamWriter fileOut = new StreamWriter(url_2, false))
             {
                 string line = fileIn.ReadToEnd();
                 StringBuilder newline = new StringBuilder();
@@ -36,8 +36,8 @@ namespace Task__1
         }
         static void numberWords()
         {
-            using (StreamReader fileIn = new StreamReader(@"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\textSample.txt"))
-            using (StreamWriter fileOut = new StreamWriter(@"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\newText.txt", false))
+            using (StreamReader fileIn = new StreamReader(url, Encoding.GetEncoding(1251)))
+            using (StreamWriter fileOut = new StreamWriter(url_2, false))
             {
                 string line = fileIn.ReadToEnd();
                 StringBuilder newline = new StringBuilder();
@@ -64,8 +64,8 @@ namespace Task__1
         }
         static void addArrayString()
         {
-            using (StreamReader fileIn = new StreamReader(@"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\textSample.txt", Encoding.GetEncoding(1251)))
-            using (StreamWriter fileOut = new StreamWriter(@"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\newText.txt", false))
+            using (StreamReader fileIn = new StreamReader(url, Encoding.GetEncoding(1251)))
+            using (StreamWriter fileOut = new StreamWriter(url_2, false))
             {
                 string line = fileIn.ReadToEnd();
                 StringBuilder newline = new StringBuilder();
@@ -86,7 +86,25 @@ namespace Task__1
                         else
                             text.Append(split[i]);
                     }
-                Console.WriteLine(text);
+                Console.WriteLine(newline);
+            }
+        }
+        static void getDirectory()
+        {
+            string directory = @"C:\Users\Хозяйн";
+            string[] second = Directory.GetDirectories(directory);
+            Array.Sort(second);
+            for (int i = 0; i < second.Length; i++)
+            {
+                Console.WriteLine((i+1)+"/////////"+second[i]);
+            }
+            Console.Write("Введите идентификатор директории->");
+            int quest = Convert.ToInt16(Console.ReadLine());
+            string[] second2 =Directory.GetFiles(second[quest-1]);
+            Array.Sort(second2);
+            foreach(string x in second2)
+            {
+                Console.WriteLine(x);
             }
         }
         static void Main(string[] args)
@@ -96,13 +114,14 @@ namespace Task__1
             {
                 Console.WriteLine("Выберите номер операции \n1.Считать тхт файл и удалить в нем указанное слово \n" +
                     "2.Вывести кол-во слов и вывести текст где после каждого 10го слова будет стоять запятая \n" +
-                    "3.Перевернуть слова в предложении №3 \n5.Выйти");
+                    "3.Перевернуть слова в предложении №3 \n4.Работа с директориями\n5.Выйти");
                 quest = Convert.ToInt16(Console.ReadLine());
                 switch (quest)
                 {
                     case 1: changeFile(); break;
                     case 2: numberWords(); break;
                     case 3: addArrayString(); break;
+                    case 4: getDirectory(); break;
                     case 5: return;
                     default: Console.WriteLine("Неверный ввод"); break;
                 }
