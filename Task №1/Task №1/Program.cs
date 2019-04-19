@@ -99,12 +99,28 @@ namespace Task__1
                 Console.WriteLine((i+1)+"/////////"+second[i]);
             }
             Console.Write("Введите идентификатор директории->");
-            int quest = Convert.ToInt16(Console.ReadLine());
-            string[] second2 =Directory.GetFiles(second[quest-1]);
-            Array.Sort(second2);
-            foreach(string x in second2)
+            try
             {
-                Console.WriteLine(x);
+                int quest = Convert.ToInt16(Console.ReadLine());
+                string[] second2 = Directory.GetFiles(second[quest - 1]);
+
+                Array.Sort(second2);
+                foreach (string x in second2)
+                {
+                    Console.WriteLine(x);
+                }
+            }
+            catch(FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (IndexOutOfRangeException ex )
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
         static void Main(string[] args)
