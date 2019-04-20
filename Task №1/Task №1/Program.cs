@@ -16,21 +16,12 @@ namespace Task__1
                 string line = fileIn.ReadToEnd();//Text in file
                 StringBuilder newline = new StringBuilder();
                 Console.Write("\nВведите слово которое хотите удалить -> ");
-                string delete = Console.ReadLine();
-                string[] split = line.Split(' ', ',', '.', '?');
-                bool check = true;
-                foreach (string x in split)
-                {
-                    if (String.IsNullOrWhiteSpace(x))
-                        continue;
-                    else if (!x.Equals(delete))
-                        newline.Append(x + ' ');
-                    else check = false;
-                }
-                if (check)
-                    Console.WriteLine("\nУвы такого слова нет\n");
+                string wordToDelete = Console.ReadLine();
+                string replace = line.Replace(wordToDelete, "");
+                if (line==replace)
+                Console.WriteLine("\nУвы такого слова нет\n");
                 Console.WriteLine();
-                fileOut.WriteLine(newline);
+                fileOut.WriteLine(replace);
             }
         }
 
@@ -44,9 +35,9 @@ namespace Task__1
             using (StreamReader fileIn = new StreamReader(ReadUrl, Encoding.GetEncoding(1251)))
             using (StreamWriter fileOut = new StreamWriter(WriteUrl, false))
             {
-                string wordToDelete = fileIn.ReadToEnd();
+                string text = fileIn.ReadToEnd();
                 StringBuilder newline = new StringBuilder();
-                string[] split = wordToDelete.Split(' ', ',');
+                string[] split = text.Split(' ', ',');
                 int numStr = 1;
                 int numStr2 = 1;
                 foreach (string x in split)
