@@ -8,45 +8,45 @@ namespace Task__1
     {
         public static void change()
         {
-             string ReadUrl = @"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\textSample.txt"; // Чтение 
-             string WriteUrl = @"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\newText.txt";// Запись
+             string ReadUrl = @"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\textSample.txt"; // Read 
+             string WriteUrl = @"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\newText.txt";// Write
             using (StreamReader fileIn = new StreamReader(ReadUrl, Encoding.GetEncoding(1251)))
             using (StreamWriter fileOut = new StreamWriter(WriteUrl, false))
             {
-                string line = fileIn.ReadToEnd();//Текст в файле
+                string line = fileIn.ReadToEnd();//Text in file
                 StringBuilder newline = new StringBuilder();
                 Console.Write("\nВведите слово которое хотите удалить -> ");
                 string delete = Console.ReadLine();
                 string[] split = line.Split(' ', ',', '.', '?');
-                bool test = true;//Переменная проверки наличия указанного слова
+                bool check = true;
                 foreach (string x in split)
                 {
                     if (String.IsNullOrWhiteSpace(x))
                         continue;
-                    else if (x.Equals(delete) == false)
+                    else if (!x.Equals(delete))
                         newline.Append(x + ' ');
-                    else test = false;
+                    else check = false;
                 }
-                if (test)
+                if (check)
                     Console.WriteLine("\nУвы такого слова нет\n");
                 Console.WriteLine();
                 fileOut.WriteLine(newline);
             }
         }
 
-    }//Метод считывания txt файла 
+    }//Read txt file
     class numberWords
     {
         public static void number()
         {
-             string ReadUrl = @"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\textSample.txt"; // Чтение 
-             string WriteUrl = @"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\newText.txt";// Запись
+             string ReadUrl = @"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\textSample.txt"; // Read 
+             string WriteUrl = @"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\newText.txt";// Write
             using (StreamReader fileIn = new StreamReader(ReadUrl, Encoding.GetEncoding(1251)))
             using (StreamWriter fileOut = new StreamWriter(WriteUrl, false))
             {
-                string line = fileIn.ReadToEnd();
+                string wordToDelete = fileIn.ReadToEnd();
                 StringBuilder newline = new StringBuilder();
-                string[] split = line.Split(' ', ',');
+                string[] split = wordToDelete.Split(' ', ',');
                 int numStr = 1;
                 int numStr2 = 1;
                 foreach (string x in split)
@@ -68,13 +68,13 @@ namespace Task__1
             }
         }
 
-    }//Метод вывода колличества слов в тексте
+    }//Word count output
     class addArrayString
     {
         public static void addArray()
         {
-             string ReadUrl = @"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\textSample.txt"; // Чтение 
-             string WriteUrl = @"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\newText.txt";// Запись
+             string ReadUrl = @"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\textSample.txt"; // Read 
+             string WriteUrl = @"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\newText.txt";// Write
             using (StreamReader fileIn = new StreamReader(ReadUrl, Encoding.GetEncoding(1251)))
             using (StreamWriter fileOut = new StreamWriter(WriteUrl, false))
             {
@@ -101,7 +101,7 @@ namespace Task__1
             }
         }//Метод вывода слов наоборот
 
-    }//Метод вывода слов наоборот
+    }//Reverse words
     class getDirectory
     {
         public static void getDir()
@@ -124,9 +124,8 @@ namespace Task__1
                 {
                     Console.WriteLine(x);
                 }
-            
         }
-    }//Метод работы с директориями
+    }//Work with directories
 
     class Program
     {
@@ -141,8 +140,7 @@ namespace Task__1
                     "3.Перевернуть слова в предложении №3 \n4.Работа с директориями\n5.Выйти\nВыберите номер операции->");
                 try
                 {
-
-                    quest = Convert.ToInt16(Console.ReadLine());//Переменная выбора операции 
+                    quest = Convert.ToInt16(Console.ReadLine());
                     switch (quest)
                     {
                         case 1: changeFile.change(); break;
