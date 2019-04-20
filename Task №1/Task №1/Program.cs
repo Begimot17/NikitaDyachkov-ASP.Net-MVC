@@ -14,10 +14,9 @@ namespace Task__1
             using (StreamWriter fileOut = new StreamWriter(WriteUrl, false))
             {
                 string line = fileIn.ReadToEnd();//Text in file
-                StringBuilder newline = new StringBuilder();
                 Console.Write("\nВведите слово которое хотите удалить -> ");
                 string wordToDelete = Console.ReadLine();
-                string replace = line.Replace(wordToDelete, "");
+                string replace = line.Replace(wordToDelete, String.Empty);
                 if (line==replace)
                 Console.WriteLine("\nУвы такого слова нет\n");
                 Console.WriteLine();
@@ -90,7 +89,7 @@ namespace Task__1
                 }
                 Console.WriteLine($"\n{newline}\n");
             }
-        }//Метод вывода слов наоборот
+        }
 
     }//Reverse words
     class getDirectory
