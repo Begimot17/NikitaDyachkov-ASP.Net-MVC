@@ -4,14 +4,18 @@ using System.IO;
 
 namespace Task__1
 {
+    class Url
+    {
+        public static string ReadUrl = @"C:\Users\Хозяйн\Documents\Институт\Lecture 1\HomeTask\textSample.txt";
+        public static string WriteUrl = @"C:\Users\Хозяйн\Documents\Институт\Lecture 1\HomeTask\newText.txt";
+    }// StreamReader/Writer Url
     class changeFile
     {
+        
         public static void change()
         {
-             string ReadUrl = @"C:\Users\Хозяйн\Desktop\Институт\Lecture 1\HomeTask\textSample.txt"; // Read 
-             string WriteUrl = @"C:\Users\Хозяйн\Desktop\Институт\Lecture 1\HomeTask\newText.txt";// Write
-            using (StreamReader fileIn = new StreamReader(ReadUrl, Encoding.GetEncoding(1251)))
-            using (StreamWriter fileOut = new StreamWriter(WriteUrl, false))
+            using (StreamReader fileIn = new StreamReader(Url.ReadUrl, Encoding.GetEncoding(1251)))
+            using (StreamWriter fileOut = new StreamWriter(Url.WriteUrl, false))
             {
                 string line = fileIn.ReadToEnd();//Text in file
                 Console.Write("\nВведите слово которое хотите удалить -> ");
@@ -29,10 +33,8 @@ namespace Task__1
     {
         public static void number()
         {
-             string ReadUrl = @"C:\Users\Хозяйн\Desktop\Институт\Lecture 1\HomeTask\textSample.txt"; // Read 
-             string WriteUrl = @"C:\Users\Хозяйн\Desktop\Институт\Lecture 1\HomeTask\newText.txt";// Write
-            using (StreamReader fileIn = new StreamReader(ReadUrl, Encoding.GetEncoding(1251)))
-            using (StreamWriter fileOut = new StreamWriter(WriteUrl, false))
+            using (StreamReader fileIn = new StreamReader(Url.ReadUrl, Encoding.GetEncoding(1251)))
+            using (StreamWriter fileOut = new StreamWriter(Url.WriteUrl, false))
             {
                 string text = fileIn.ReadToEnd();
                 StringBuilder newline = new StringBuilder();
@@ -63,10 +65,8 @@ namespace Task__1
     {
         public static void addArray()
         {
-             string ReadUrl = @"C:\Users\Хозяйн\Desktop\Институт\Lecture 1\HomeTask\textSample.txt"; // Read 
-             string WriteUrl = @"C:\Users\Хозяйн\Desktop\Институт\Lecture 1\HomeTask\newText.txt";// Write
-            using (StreamReader fileIn = new StreamReader(ReadUrl, Encoding.GetEncoding(1251)))
-            using (StreamWriter fileOut = new StreamWriter(WriteUrl, false))
+            using (StreamReader fileIn = new StreamReader(Url.ReadUrl, Encoding.GetEncoding(1251)))
+            using (StreamWriter fileOut = new StreamWriter(Url.WriteUrl, false))
             {
                 string line = fileIn.ReadToEnd();
                 StringBuilder newline = new StringBuilder();
@@ -121,10 +121,8 @@ namespace Task__1
 
         }
     }//Work with directories
-
     class Program
     {
-       
         static void Main(string[] args)
         {
             int numCase;
@@ -146,7 +144,6 @@ namespace Task__1
                         default: Console.WriteLine("\nНеверный ввод!!!\n"); ; break;
                     }
                 else Console.WriteLine("\nНомер кейса должен быть целочисленным!!!\n");
-
             }
         }
     }
