@@ -79,14 +79,6 @@ namespace Task__1
                     string temp = new string(a);
                     newline.Append(temp + " ");
                 }
-                StringBuilder text = new StringBuilder();
-                for (int i = 0; i < split.Length; i++)
-                {
-                    if (split[2] == split[i])
-                        text.Append(Convert.ToString(newline));
-                    else
-                        text.Append(split[i]);
-                }
                 Console.WriteLine($"\n{newline}\n");
             }
         }
