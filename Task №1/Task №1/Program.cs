@@ -8,8 +8,8 @@ namespace Task__1
     {
         public static void change()
         {
-             string ReadUrl = @"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\textSample.txt"; // Read 
-             string WriteUrl = @"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\newText.txt";// Write
+             string ReadUrl = @"C:\Users\Хозяйн\Desktop\Институт\Lecture 1\HomeTask\textSample.txt"; // Read 
+             string WriteUrl = @"C:\Users\Хозяйн\Desktop\Институт\Lecture 1\HomeTask\newText.txt";// Write
             using (StreamReader fileIn = new StreamReader(ReadUrl, Encoding.GetEncoding(1251)))
             using (StreamWriter fileOut = new StreamWriter(WriteUrl, false))
             {
@@ -29,8 +29,8 @@ namespace Task__1
     {
         public static void number()
         {
-             string ReadUrl = @"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\textSample.txt"; // Read 
-             string WriteUrl = @"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\newText.txt";// Write
+             string ReadUrl = @"C:\Users\Хозяйн\Desktop\Институт\Lecture 1\HomeTask\textSample.txt"; // Read 
+             string WriteUrl = @"C:\Users\Хозяйн\Desktop\Институт\Lecture 1\HomeTask\newText.txt";// Write
             using (StreamReader fileIn = new StreamReader(ReadUrl, Encoding.GetEncoding(1251)))
             using (StreamWriter fileOut = new StreamWriter(WriteUrl, false))
             {
@@ -63,8 +63,8 @@ namespace Task__1
     {
         public static void addArray()
         {
-             string ReadUrl = @"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\textSample.txt"; // Read 
-             string WriteUrl = @"C:\Users\Хозяйн\Desktop\Lecture 1\HomeTask\newText.txt";// Write
+             string ReadUrl = @"C:\Users\Хозяйн\Desktop\Институт\Lecture 1\HomeTask\textSample.txt"; // Read 
+             string WriteUrl = @"C:\Users\Хозяйн\Desktop\Институт\Lecture 1\HomeTask\newText.txt";// Write
             using (StreamReader fileIn = new StreamReader(ReadUrl, Encoding.GetEncoding(1251)))
             using (StreamWriter fileOut = new StreamWriter(WriteUrl, false))
             {
@@ -105,15 +105,20 @@ namespace Task__1
                 Console.WriteLine((i + 1) + "/////////" + second[i]);
             }
             Console.Write("\nВведите идентификатор директории->");
+            int numDirectory;
+            string quest = Console.ReadLine();
+            if (int.TryParse(quest, out numDirectory)&& numDirectory < second.Length)
+            {
+                    Console.WriteLine();
+                    string[] second2 = Directory.GetFiles(second[numDirectory - 1]);
+                    Array.Sort(second2);
+                    foreach (string x in second2)
+                    {
+                        Console.WriteLine(x);
+                    }
+            }
+            else Console.WriteLine("Такой директории нет");
 
-            int quest = Convert.ToInt16(Console.ReadLine());
-            Console.WriteLine();
-                string[] second2 = Directory.GetFiles(second[quest - 1]);
-                Array.Sort(second2);
-                foreach (string x in second2)
-                {
-                    Console.WriteLine(x);
-                }
         }
     }//Work with directories
 
@@ -122,16 +127,16 @@ namespace Task__1
        
         static void Main(string[] args)
         {
-            int quest;
+            int numCase;
+            string quest;
             while (true)
             {
                 Console.Write("1.Считать тхт файл и удалить в нем указанное слово \n" +
                     "2.Вывести кол-во слов и вывести текст где после каждого 10го слова будет стоять запятая \n" +
                     "3.Перевернуть слова в предложении №3 \n4.Работа с директориями\n5.Выйти\nВыберите номер операции->");
-                try
-                {
-                    quest = Convert.ToInt16(Console.ReadLine());
-                    switch (quest)
+                    quest = Console.ReadLine();
+                    if( int.TryParse(quest, out numCase))
+                    switch (numCase)
                     {
                         case 1: changeFile.change(); break;
                         case 2: numberWords.number(); break;
@@ -140,11 +145,8 @@ namespace Task__1
                         case 5: return;
                         default: Console.WriteLine("\nНеверный ввод!!!\n"); ; break;
                     }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"\n{ex.Message}\n");
-                }
+                else Console.WriteLine("\nНомер кейса должен быть целочисленным!!!\n");
+
             }
         }
     }
