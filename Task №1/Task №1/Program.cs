@@ -4,74 +4,78 @@ using System.IO;
 
 namespace Task__1
 {
-    class Url
+    class FileManager//Write and Read File 
     {
-        public static string ReadUrl = @"C:\Users\Хозяйн\Documents\Институт\Lecture 1\HomeTask\textSample.txt";
-        public static string WriteUrl = @"C:\Users\Хозяйн\Documents\Институт\Lecture 1\HomeTask\newText.txt";
-    }// StreamReader/Writer Url
-    class changeFile
-    {
-        
-        public static void change()
+        public static string ReadFileString()
         {
-            using (StreamReader fileIn = new StreamReader(Url.ReadUrl, Encoding.GetEncoding(1251)))
-            using (StreamWriter fileOut = new StreamWriter(Url.WriteUrl, false))
+            Console.WriteLine("Пропишите путь к файлу");
+            string urlRead = Console.ReadLine();
+            using (StreamReader fileIn = new StreamReader(urlRead, Encoding.GetEncoding(1251)))
             {
-                string line = fileIn.ReadToEnd();//Text in file
-                Console.Write("\nВведите слово которое хотите удалить -> ");
-                string wordToDelete = Console.ReadLine();
-                string replace = line.Replace(wordToDelete, String.Empty);
-                if (line==replace)
-                Console.WriteLine("\nУвы такого слова нет\n");
-                Console.WriteLine();
-                fileOut.WriteLine(replace);
+                string ReadFile = fileIn.ReadToEnd();
+                return ReadFile;
             }
         }
-
-    }//Read txt file
-    class numberWords
-    {
-        public static void number()
+        public static void WriteFile(string content)
         {
-            using (StreamReader fileIn = new StreamReader(Url.ReadUrl, Encoding.GetEncoding(1251)))
-            using (StreamWriter fileOut = new StreamWriter(Url.WriteUrl, false))
+            Console.WriteLine("Введите путь к файлу в который хотите записать");
+            string urlWrite = Console.ReadLine();
+            using (StreamWriter fileOut = new StreamWriter(urlWrite,false))
             {
-                string text = fileIn.ReadToEnd();
-                StringBuilder newline = new StringBuilder();
-                string[] split = text.Split(' ', ',');
-                int numStr = 1;
-                int numStr2 = 1;
-                foreach (string x in split)
+                fileOut.WriteLine(content);
+            }
+        }
+    }
+    class TextManager
+    {
+
+        public static bool ReplaceWords(string text, string wordForDelete)
+        {
+            string replace = text.Replace(wordForDelete, String.Empty);
+            FileManager.WriteFile(replace);
+            if (text == replace)
+                return true;
+            else return false;
+        }
+        public static int GetWordsCount(string text,out StringBuilder newtext)
+        {
+            newtext = new StringBuilder();
+            string[] split = text.Split(' ', ',');
+            int numStr = 1;
+            int numStr2 = 1;
+            foreach (string x in split)
+            {
+                if (String.IsNullOrWhiteSpace(x))
+                    continue;
+                if (numStr2 != 10)
+                    newtext.Append(x + ' ');
+                else
                 {
-                    if (String.IsNullOrWhiteSpace(x))
-                        continue;
-                    if (numStr2 != 10)
-                        newline.Append(x + ' ');
-                    else
-                    {
-                        numStr2 = 0;
-                        newline.Append(x + ", ");
-                    }
-                    numStr++;
-                    numStr2++;
+                    numStr2 = 0;
+                    newtext.Append(x + ", ");
                 }
-                Console.WriteLine($"\nКол-во слов->{numStr}\n");
-                Console.WriteLine(newline + "\n");
+                numStr++;
+                numStr2++;
             }
+            return numStr;
         }
 
-    }//Word count output
-    class addArrayString
-    {
-        public static void addArray()
+        public static string GetSentence(string text, int sentenceNumber)
         {
-            using (StreamReader fileIn = new StreamReader(Url.ReadUrl, Encoding.GetEncoding(1251)))
-            using (StreamWriter fileOut = new StreamWriter(Url.WriteUrl, false))
-            {
-                string line = fileIn.ReadToEnd();
-                StringBuilder newline = new StringBuilder();
-                string[] split = line.Split('.', '?');
-                string[] split2 = split[2].Split(',', ' ', '.', '?');
+            StringBuilder newline = new StringBuilder();
+            string[] split = text.Split('.', '?');
+                string[] split2 = split[sentenceNumber - 1].Split(',', ' ', '.', '?');
+                foreach (string x in split2)
+                {
+                    newline.Append(x + " ");
+                }
+                return Convert.ToString(newline);
+        }
+        public static string ReverseSentence(string sentence)
+        {
+            StringBuilder newline = new StringBuilder();
+
+            string[] split2 = sentence.Split(',', ' ', '.', '?');
                 foreach (string x in split2)
                 {
                     char[] a = x.ToCharArray();
@@ -79,16 +83,48 @@ namespace Task__1
                     string temp = new string(a);
                     newline.Append(temp + " ");
                 }
-                Console.WriteLine($"\n{newline}\n");
-            }
+                return Convert.ToString(newline);
+        }
+    }
+    class changeFile
+    {
+        public static void change()
+        {
+                string line = FileManager.ReadFileString();
+                Console.Write("\nВведите слово которое хотите удалить -> ");
+                string wordToDelete = Console.ReadLine();
+            bool quest =TextManager.ReplaceWords(line, wordToDelete);
+            if (!quest)
+                Console.WriteLine("\nУвы такого слова нет\n");
         }
 
-    }//Reverse words
+    }//Read txt file
+    class numberWords
+    {
+        public static void number()
+        {
+                string text = FileManager.ReadFileString();
+                Console.WriteLine($"\nКол-во слов->{TextManager.GetWordsCount(text, out StringBuilder newline)}\n");
+                Console.WriteLine(newline + "\n");
+        }
+    }//Word count output
+    class addArrayString
+    {
+        public static void addArray()
+        {
+            string text = FileManager.ReadFileString();
+            Console.WriteLine("Какое предложение вы хотите перевернуть");
+            string temp=Console.ReadLine();
+            int sentenceNum;
+            Int32.TryParse(temp, out sentenceNum);
+            string sentence = TextManager.ReverseSentence(TextManager.GetSentence(text, sentenceNum));
+                Console.WriteLine($"\n{sentence}\n");
+        }
+    }//Reverse words*/
     class getDirectory
     {
         public static void getDir()
         {
-
             string directory = @"C:\Users\Хозяйн";
             string[] second = Directory.GetDirectories(directory);
             Array.Sort(second);
@@ -123,7 +159,7 @@ namespace Task__1
             {
                 Console.Write("1.Считать тхт файл и удалить в нем указанное слово \n" +
                     "2.Вывести кол-во слов и вывести текст где после каждого 10го слова будет стоять запятая \n" +
-                    "3.Перевернуть слова в предложении №3 \n4.Работа с директориями\n5.Выйти\nВыберите номер операции->");
+                    "3.Перевернуть слова в предложении \n4.Работа с директориями\n5.Выйти\nВыберите номер операции->");
                     quest = Console.ReadLine();
                     if( int.TryParse(quest, out numCase))
                     switch (numCase)
