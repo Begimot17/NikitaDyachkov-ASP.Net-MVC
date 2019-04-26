@@ -44,7 +44,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
+    <Compile Include="Properties\addArrayString.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\changeFile.cs" />
+    <Compile Include="Properties\DirectoryManager.cs" />
+    <Compile Include="Properties\FileManager.cs" />
+    <Compile Include="Properties\numberWords.cs" />
+    <Compile Include="Properties\TextManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
