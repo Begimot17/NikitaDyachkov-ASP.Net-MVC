@@ -15,14 +15,17 @@ namespace Task__2
             List<Product> prodList = new List<Product>();
             prod[0] =new Product("Лимон", "Жёлтый", "Кислый", 15 );
             prod[1] = new Product("Яблоко", "Красное", "Сладкое", 20);
-            prod[2] = new Product("Ананас", "Жёлтый", "Сладкий", 30);
+            prod[2] = new Product("Лимон", "Жёлтый", "Сладкий", 30);
             prod[3] = new Product("Киви", "Зелёное", "Кислое", 213);
-            prod[4] = new Product("Тыква", "Оранжевая", "Хз", 432);
+            prod[4] = new Product("Лимон", "Оранжевая", "Хз", 432);
             prod[5] = new Product("Лук", "Зелёный", "Горький", 523);
-
+            foreach(Product x in prod)
+            {
+                prodList.Add(x);
+            }
             while (true)
             {
-                Console.WriteLine("1=Добавить\n2=Показать\n3=Удалить");
+                Console.WriteLine("1=Add\n2=Contains\n3=Remove");
                 short i = Convert.ToInt16(Console.ReadLine());
                 switch (i)
                 {

@@ -35,12 +35,15 @@ namespace Task__2
         {
             Console.WriteLine("Введите имя продукта");
             string prodToDelete=Console.ReadLine();
-            foreach(Product x in prod)
+            for (int i = 0; i < prod.Count; i++)
             {
-                if (x.Name == prodToDelete)
+                foreach (Product x in prod)
                 {
-                    prod.Remove(x);
-                    break;
+                    if (x.Name == prodToDelete)
+                    {
+                        prod.Remove(x);
+                        break;
+                    }
                 }
             }
         }
@@ -50,9 +53,10 @@ namespace Task__2
         }
          public void Contains(List<Product> prod)
         {
+            Console.WriteLine($"Name    Description    Type    Price");
             foreach (Product x in prod)
             {
-                Console.WriteLine($"Name    Description    Type    Price");
+                
                 Console.WriteLine($"{x.Name}    {x.Description}    {x.Type}    {x.Price}");
             }
         }
