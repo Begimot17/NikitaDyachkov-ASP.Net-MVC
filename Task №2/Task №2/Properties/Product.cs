@@ -12,7 +12,6 @@ namespace Task__2
         public string Description;
         public string Type;
         public int Price;
-        public int TotalPrice { get {return TotalPrice; } set {TotalPrice+=value; } }
         public Product()
         {
 

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Task__2
 {
-    interface IAction
+    interface IProductRepository
     {
-        void Add(ref List<Product> prod);
-        void Remove(ref List<Product> prod);
-        void Update(ref List<Product> prod);
+        void Add(List<Product> prod);
+        void Remove(List<Product> prod);
+        void Update(List<Product> prod);
         void Contains(List<Product> prod);
         void Search(List<Product> prod);
     }
