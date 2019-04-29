@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Task__2
 {
     class Product
@@ -12,10 +7,7 @@ namespace Task__2
         public string Description;
         public string Type;
         public int Price;
-        public Product()
-        {
-
-        }
+        public Product() { }
         public Product(string Name , string Description , string Type,int Price)
         {
             this.Name = Name;
@@ -25,7 +17,7 @@ namespace Task__2
         }
         static public void Show(Product x)
         {
-            Console.WriteLine($"{x.Name}    {x.Description}      {x.Type}    {x.Price}");
+            Console.WriteLine($"{x.Name,-25}  {x.Description,-6}  {x.Type,-10}  {x.Price,-5}");
         }
     }
 }

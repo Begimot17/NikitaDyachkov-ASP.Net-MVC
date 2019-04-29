@@ -2,9 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Task__2
 {
     class Cart : IEnumerable
@@ -32,61 +29,45 @@ namespace Task__2
                 }
             }
         }
-
-
         public Cart()
         {
-            _products = new List<Product> ();
+            _products = new List<Product>();
         }
 
         public Cart(string sortBy, IEnumerable<Product> collection)
         {
             SortBy = sortBy;
-            _products = collection.ToList() ;
+            _products = collection.ToList();
         }
-
-
         public string SortBy { get; private set; }
         public void Add(params Product[] prod)
         {
-            for(int i=0;i<prod.Length;i++)
+            for (int i = 0; i < prod.Length; i++)
             {
-                Console.Write("Введите названия: ");
+                Console.Write("Enter Name: ");
                 string Name = Console.ReadLine();
-
-
-                Console.Write("Введите описание:");
+                Console.Write("Enter Description:");
                 string Description = Console.ReadLine();
-
-
-                Console.Write("Введите тип:");
+                Console.Write("Enter Type:");
                 string Type = Console.ReadLine();
-
-
-                Console.Write("Введите цену продукта:");
+                Console.Write("Enter Price:");
                 int Price = Convert.ToInt32(Console.ReadLine());
                 prod[i] = new Product(Name, Description, Type, Price);
-
-                Console.WriteLine("1=Добавить еще\n2=Готово");
-                int quest =Convert.ToInt16(Console.ReadLine());
+                Console.WriteLine("1=Add more\n2=Сonfirm");
+                int quest = Convert.ToInt16(Console.ReadLine());
                 if (quest == 2)
                 {
                     foreach (Product x in prod)
                     {
-                        if (x != null)  _products.Add(x); 
+                        if (x != null) _products.Add(x);
                     }
                     break;
                 }
             }
-                 
-            
-            
-            
-            
         }
         public void Remove()
         {
-            Console.WriteLine("Введите имя продукта");
+            Console.Write("Enter Name: ");
             string prodToDelete = Console.ReadLine();
             for (int i = 0; i < _products.Count; i++)
             {
@@ -99,8 +80,6 @@ namespace Task__2
                     }
                 }
             }
-            
-
         }
         public void Update()
         {
@@ -109,24 +88,22 @@ namespace Task__2
         }
         public void Contains()
         {
-
             Update();
-            Console.WriteLine($"Name    Description    Type    Price");
+            Console.WriteLine($"{"Name",-25}  {"Description",-11}  {"Type",-10}  {"Price",-5}");
             foreach (Product x in _products)
             {
 
-                Console.WriteLine($"{x.Name}    {x.Description}    {x.Type}    {x.Price}");
+                Console.WriteLine($"{x.Name,-25}  {x.Description,-11}  {x.Type,-10}  {x.Price,-5}");
             }
             Console.WriteLine($"TotalPrice={TotalPrice}");
-
         }
         public void Search()
         {
-            Console.WriteLine("Поиск по 1=Имени 2=Описанию");
-            int quest=Convert.ToInt16(Console.ReadLine());
+            Console.WriteLine("Search by 1=Name 2=Description");
+            int quest = Convert.ToInt16(Console.ReadLine());
             if (quest == 1)
             {
-                Console.WriteLine("Введите имя продукта");
+                Console.Write("Enter Name: ");
                 string prodToSearch = Console.ReadLine();
                 foreach (Product x in _products)
                 {
@@ -138,7 +115,7 @@ namespace Task__2
             }
             else if (quest == 2)
             {
-                Console.WriteLine("Введите описание продукта");
+                Console.Write("Enter Description: ");
                 string prodToSearch = Console.ReadLine();
                 foreach (Product x in _products)
                 {
@@ -161,7 +138,7 @@ namespace Task__2
         }
         public void SortToСhange()
         {
-            Console.WriteLine("По какому полю будем сортировать 1=Name/2=Description/3=Type/4=Price");
+            Console.WriteLine("Sort by 1=Name/2=Description/3=Type/4=Price");
             int quest = Convert.ToInt16(Console.ReadLine());
             switch (quest)
             {
@@ -175,23 +152,57 @@ namespace Task__2
         }
         public void Total()
         {
-            int total=0;
+            int total = 0;
             foreach (Product x in _products)
             {
                 total += x.Price;
             }
             TotalPrice = total;
-           
         }
-
         public void CopyTo(Array array, int index)
         {
             throw new NotImplementedException();
         }
-
         public IEnumerator GetEnumerator()
         {
             throw new NotImplementedException();
+        }
+        public void AddFromCatalog()
+        {
+            List<Product> catalog = new List<Product>();
+            catalog.Add(new Product("Iphone SE 32gb", "Black", "Smartphone", 7999));
+            catalog.Add(new Product("Ipad PRO", "Silver", "Tablet", 50499));
+            catalog.Add(new Product("AirPods", "Black", "Headphones", 9749));
+            catalog.Add(new Product("Iphone XS MAX 512gb", "White", "Smartphone", 46999));
+            catalog.Add(new Product("Sennheiser MOMENTUM M2", "White", "Headphones", 6999));
+            catalog.Add(new Product("SAMSUNG Galaxy Tab", "Black", "Tablet", 5999));
+            while (true)
+            {
+                int i = 1;
+                Console.WriteLine($"{"ID",-3} {"Name",-25}  {"Description",-11}  {"Type",-10}  {"Price",-5}");
+                foreach (Product x in catalog)
+                {
+                    Console.WriteLine($"{i,-3} {x.Name,-25}  {x.Description,-11}  {x.Type,-10}  {x.Price,-5}");
+                    i++;
+                }
+                int quest = Convert.ToInt32(Console.ReadLine());
+                switch (quest)
+                {
+                    case 1: _products.Add(catalog[0]); break;
+                    case 2: _products.Add(catalog[1]); break;
+                    case 3: _products.Add(catalog[2]); break;
+                    case 4: _products.Add(catalog[3]); break;
+                    case 5: _products.Add(catalog[4]); break;
+                    case 6: _products.Add(catalog[5]); break;
+                    default: Console.WriteLine("Wrong input"); break;
+                }
+                Console.WriteLine("1=Add more\n2=Сonfirm");
+                int quest2 =Convert.ToInt32(Console.ReadLine());
+                if (quest2 == 2)
+                {
+                    break;
+                }
+            }
         }
     }
 }
