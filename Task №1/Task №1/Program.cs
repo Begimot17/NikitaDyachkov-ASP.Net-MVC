@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Text;
-using System.IO;
-
 namespace Task__1
 {
     class Program
@@ -13,7 +10,7 @@ namespace Task__1
             {
                 Console.Write("1. Read txt file and delete the specified word in it \n" +
                             "2. Enter the number of words and output the text where after each 10th word there will be a comma \n" +
-                         "3.Turn the words in the sentence \n4. Work with directories \n5.Exit \n nSelect the operation number->");
+                         "3.Turn the words in the sentence \n4. Work with directories \n5.Exit \nSelect the operation number->");
                 string quest = Console.ReadLine();
                     if( int.TryParse(quest, out int numCase))
                     switch (numCase)

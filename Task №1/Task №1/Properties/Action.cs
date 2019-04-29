@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-
-using System.Threading.Tasks;
-
 namespace Task__1
 {
     class Action
     {
-        
         public Action() { }
         public void GetDir()
         {

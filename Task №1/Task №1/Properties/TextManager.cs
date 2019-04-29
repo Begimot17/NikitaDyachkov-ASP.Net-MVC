@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-
 namespace Task__1
 {
     class TextManager
     {
-
         public static bool ReplaceWords(string text, string wordForDelete)
         {
             string replace = text.Replace(wordForDelete, String.Empty);
             FileManager.WriteFile(replace);
             return text == replace;
-
         }
         public static int GetWordsCount(string text, out StringBuilder newtext)
         {
@@ -38,7 +32,6 @@ namespace Task__1
             }
             return numStr;
         }
-
         public static string GetSentence(string text, int sentenceNumber)
         {
             StringBuilder newline = new StringBuilder();
