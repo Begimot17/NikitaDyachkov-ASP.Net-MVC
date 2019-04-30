@@ -8,7 +8,15 @@ namespace Task__2
     {
         private List<Product> _products;
         public static int TotalPrice { get; set; }
-
+        public static List<Product> catalog = new List<Product>
+            {
+                new Product("Iphone SE 32gb", "Black", "Smartphone", 7999),
+                new Product("Ipad PRO", "Silver", "Tablet", 50499),
+                new Product("AirPods", "Black", "Headphones", 9749),
+                new Product("Iphone XS MAX 512gb", "White", "Smartphone", 46999),
+                new Product("Sennheiser MOMENTUM M2", "White", "Headphones", 6999),
+                new Product("SAMSUNG Galaxy Tab", "Black", "Tablet", 5999)
+            };
         public Product this[int index] {
             get
             {
@@ -59,7 +67,7 @@ namespace Task__2
                 {
                     foreach (Product x in prod)
                     {
-                        if (x != null) _products.Add(x);
+                        if (x != null) catalog.Add(x);
                     }
                     break;
                 }
@@ -86,10 +94,14 @@ namespace Task__2
             Sort();
             Total();
         }
+        public void Head()
+        {
+            Console.WriteLine($"{"Name",-25}  {"Description",-11}  {"Type",-10}  {"Price",-5}");
+        }
         public void Contains()
         {
             Update();
-            Console.WriteLine($"{"Name",-25}  {"Description",-11}  {"Type",-10}  {"Price",-5}");
+            Head();
             foreach (Product x in _products)
             {
 
@@ -105,24 +117,30 @@ namespace Task__2
             {
                 Console.Write("Enter Name: ");
                 string prodToSearch = Console.ReadLine();
-                foreach (Product x in _products)
+                foreach (Product x in catalog)
                 {
                     string test;
                     test = x.Name.Replace(prodToSearch, " ");
                     if (test != x.Name)
+                    {
+                        Head();
                         Product.Show(x);
+                    }
                 }
             }
             else if (quest == 2)
             {
                 Console.Write("Enter Description: ");
                 string prodToSearch = Console.ReadLine();
-                foreach (Product x in _products)
+                foreach (Product x in catalog)
                 {
                     string test;
                     test = x.Description.Replace(prodToSearch, " ");
                     if (test != x.Description)
+                    {
+                        Head();
                         Product.Show(x);
+                    }
                 }
             }
         }
@@ -169,13 +187,6 @@ namespace Task__2
         }
         public void AddFromCatalog()
         {
-            List<Product> catalog = new List<Product>();
-            catalog.Add(new Product("Iphone SE 32gb", "Black", "Smartphone", 7999));
-            catalog.Add(new Product("Ipad PRO", "Silver", "Tablet", 50499));
-            catalog.Add(new Product("AirPods", "Black", "Headphones", 9749));
-            catalog.Add(new Product("Iphone XS MAX 512gb", "White", "Smartphone", 46999));
-            catalog.Add(new Product("Sennheiser MOMENTUM M2", "White", "Headphones", 6999));
-            catalog.Add(new Product("SAMSUNG Galaxy Tab", "Black", "Tablet", 5999));
             while (true)
             {
                 int i = 1;
