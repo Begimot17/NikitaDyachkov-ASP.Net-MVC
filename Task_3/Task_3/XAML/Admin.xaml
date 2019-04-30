@@ -1,0 +1,19 @@
+﻿<Window x:Class="Task_3.XAML.Admin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Task_3.XAML"
+        mc:Ignorable="d"
+        Title="Admin" Height="450" Width="600">
+    <Grid>
+        <Menu HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="600" Margin="0,0,-0.4,0">
+            <MenuItem Height="50" Width="195" Header="Shop" FontSize="24">
+                <MenuItem Header="Cart"/>
+                <MenuItem Header="Catalog"/>
+            </MenuItem>
+            <MenuItem Height="50" Width="195" Header="Exit" FontSize="24" Click="MenuItem_Click"/>
+            <Label x:Name="lab" Height="50" Width="195" Content="            Hello Admin" FontSize="20" FontFamily="Showcard Gothic"/>
+        </Menu>
+    </Grid>
+</Window>

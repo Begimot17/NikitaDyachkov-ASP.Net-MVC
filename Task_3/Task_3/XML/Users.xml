@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Employees>
+  <Employee Name="Nikita">
+    <Email>nikita@gmail.com</Email>
+    <PassWord>123</PassWord>
+  </Employee>
+  <Employee Name="Alex">
+    <Email>Alex@mail.ru</Email>
+    <PassWord>123321</PassWord>
+  </Employee>
+  <Employee Name="Yana">
+    <Email>yanana@gmail.com</Email>
+    <PassWord>228228</PassWord>
+  </Employee>
+  <Employee Name="Maxsim">
+    <Email>lalala@gmail.com</Email>
+    <PassWord>123321</PassWord>
+  </Employee>
+  <Employee Name="123">
+    <Email>123123123@gmail.com</Email>
+    <PassWord>123123</PassWord>
+  </Employee>
+  <Employee Name="312">
+    <Email>312@gmail.com</Email>
+    <PassWord>123</PassWord>
+  </Employee>
+  <Employee Name="222">
+    <Email>22@gmail.com</Email>
+    <PassWord>321</PassWord>
+  </Employee>
+  <Employee Name="312">
+    <Email>321@gmail.com</Email>
+    <PassWord>123</PassWord>
+  </Employee>
+  <Employee Name="131">
+    <Email>123@gmail.com</Email>
+    <PassWord>123</PassWord>
+  </Employee>
+  <Employee Name="Vanya">
+    <Email>avokado@gmail.com</Email>
+    <PassWord>123123</PassWord>
+  </Employee>
+  <Employee Name="Lesha">
+    <Email>Lesha@gmail.com</Email>
+    <PassWord>123123</PassWord>
+  </Employee>
+</Employees>
