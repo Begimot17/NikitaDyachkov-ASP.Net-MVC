@@ -1,0 +1,21 @@
+﻿<Window x:Class="Task_3.XAML.AddToCatalog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Task_3.XAML"
+        mc:Ignorable="d"
+        Title="AddToCatalog" Height="267.188" Width="339.063">
+    <Grid>
+        <TextBox x:Name="namebox" HorizontalAlignment="Left" Height="23" Margin="10,26,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="descbox" HorizontalAlignment="Left" Height="23" Margin="10,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="typebox" HorizontalAlignment="Left" Height="23" Margin="10,133,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="pricebox" HorizontalAlignment="Left" Height="23" Margin="10,180,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Add" HorizontalAlignment="Left" Margin="166,26,0,0" VerticalAlignment="Top" Width="138" Height="177" Click="Button_Click"/>
+        <Label Content="Name" HorizontalAlignment="Left" Margin="33,0,0,0" VerticalAlignment="Top" Width="82"/>
+        <Label Content="Description" HorizontalAlignment="Left" Margin="33,53,0,0" VerticalAlignment="Top" Width="82"/>
+        <Label Content="Type" HorizontalAlignment="Left" Margin="33,107,0,0" VerticalAlignment="Top" Width="82"/>
+        <Label Content="Price" HorizontalAlignment="Left" Margin="33,156,0,0" VerticalAlignment="Top" Width="82"/>
+
+    </Grid>
+</Window>

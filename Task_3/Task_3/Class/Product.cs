@@ -12,9 +12,9 @@ namespace Task_3.Class
         public string Name { get; set; }
         public string Description { get; set; }
         public string Type { get; set; }
-        public string Price { get; set; }
+        public int Price { get; set; }
         public Product() { }
-        public Product(string Name, string Description, string Type, string Price)
+        public Product(string Name, string Description, string Type, int Price)
         {
             this.Name = Name;
             this.Description = Description;
@@ -34,7 +34,7 @@ namespace Task_3.Class
                 XElement prodPrice = user.Element("Price");
                 if (prodName != null && prodDesc != null && prodType != null && prodPrice != null)
                 {
-                    users.Add(new Product(prodName.Value, prodDesc.Value, prodType.Value, prodPrice.Value));
+                    users.Add(new Product(prodName.Value, prodDesc.Value, prodType.Value, Convert.ToInt32(prodPrice.Value)));
                 }
             }
         }

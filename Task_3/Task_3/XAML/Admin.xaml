@@ -9,11 +9,13 @@
     <Grid>
         <Menu HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="600" Margin="0,0,-0.4,0">
             <MenuItem Height="50" Width="195" Header="Shop" FontSize="24">
-                <MenuItem Header="Cart"/>
-                <MenuItem Header="Catalog"/>
+                <MenuItem Header="Catalog" Click="MenuItem_Click_1"/>
+                <MenuItem Header="AddToCatalog" Click="MenuItem_Click_2"/>
+                <MenuItem Header="Remove" Click="MenuItem_Click_3"/>
             </MenuItem>
             <MenuItem Height="50" Width="195" Header="Exit" FontSize="24" Click="MenuItem_Click"/>
             <Label x:Name="lab" Height="50" Width="195" Content="            Hello Admin" FontSize="20" FontFamily="Showcard Gothic"/>
         </Menu>
+        <DataGrid x:Name="datagrid" HorizontalAlignment="Left" Height="365" Margin="0,55,-0.4,0" VerticalAlignment="Top" Width="594"/>
     </Grid>
 </Window>
