@@ -48,7 +48,7 @@ namespace Task__2
             _products = collection.ToList();
         }
         public string SortBy { get; private set; }
-        public void Add(params Product[] prod)
+        public void AddToCatalog(params Product[] prod)
         {
             for (int i = 0; i < prod.Length; i++)
             {
@@ -148,10 +148,10 @@ namespace Task__2
         {
             switch (SortBy)
             {
-                case "Name": _products = _products.OrderBy(x => x.Name).ToList(); break;
-                case "Description": _products = _products.OrderBy(x => x.Description).ToList(); break;
-                case "Type": _products = _products.OrderBy(x => x.Type).ToList(); break;
-                case "Price": _products = _products.OrderBy(x => x.Price).ToList(); break;
+                case "Name": catalog = catalog.OrderBy(x => x.Name).ToList(); break;
+                case "Description": catalog = catalog.OrderBy(x => x.Description).ToList(); break;
+                case "Type": catalog = catalog.OrderBy(x => x.Type).ToList(); break;
+                case "Price": catalog = catalog.OrderBy(x => x.Price).ToList(); break;
             }
         }
         public void SortToСhange()
@@ -185,17 +185,22 @@ namespace Task__2
         {
             throw new NotImplementedException();
         }
-        public void AddFromCatalog()
+        public void CatalogShow()
+        {
+            int i = 1;
+            Console.WriteLine($"{"ID",-3} {"Name",-25}  {"Description",-11}  {"Type",-10}  {"Price",-5}");
+            foreach (Product x in catalog)
+            {
+                Console.WriteLine($"{i,-3} {x.Name,-25}  {x.Description,-11}  {x.Type,-10}  {x.Price,-5}");
+                i++;
+            }
+        }
+        public void AddToCart()
         {
             while (true)
             {
-                int i = 1;
-                Console.WriteLine($"{"ID",-3} {"Name",-25}  {"Description",-11}  {"Type",-10}  {"Price",-5}");
-                foreach (Product x in catalog)
-                {
-                    Console.WriteLine($"{i,-3} {x.Name,-25}  {x.Description,-11}  {x.Type,-10}  {x.Price,-5}");
-                    i++;
-                }
+                CatalogShow();
+                
                 int quest = Convert.ToInt32(Console.ReadLine());
                 switch (quest)
                 {

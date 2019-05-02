@@ -17,17 +17,19 @@ namespace Task__2
             };*/
             while (true)
             {
-                Console.WriteLine("1=Catalog\n2=Add\n3=Contains\n4=Remove\n5=Update\n6=Sort\n7=Search");
+                Console.WriteLine("1=AddToCatalog\n2=AddToCart\n3=ShowCart\n4=Remove\n5=Update\n6=Sort\n7=Search\n8=ShowCatalog\n9=Exit");
                 short i = Convert.ToInt16(Console.ReadLine());
                 switch (i)
                 {
-                    case 1: cart.AddFromCatalog(); break;
-                    case 2: cart.Add(prod); break;
+                    
+                    case 1: cart.AddToCart(); break;
+                    case 2: cart.AddToCatalog(prod); break;
                     case 3: cart.Contains(); break;
                     case 4: cart.Remove(); break;
                     case 5: cart.Update(); break;
                     case 6: cart.SortToСhange(); break;
                     case 7: cart.Search(); break;
+                    case 8: cart.CatalogShow(); break;
                     case 9: return;
                     default: Console.WriteLine("Wrong input"); break;
                 }
