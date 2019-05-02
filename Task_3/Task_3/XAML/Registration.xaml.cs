@@ -31,7 +31,7 @@ namespace Task_3.XAML
             bool name = Regex.IsMatch(namebox.Text, @"^\w+");
             bool email = Regex.IsMatch(emailbox.Text, @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
          @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" + @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
-            bool pass = Regex.IsMatch(passbox.Text, "^[0-9.,:!?]{1,8}$");
+            bool pass = Regex.IsMatch(passbox.Password.ToString(), "^[0-9.,:!?]{1,8}$");
             if (name && email && pass)
             {
                 regbut.IsEnabled = true;
@@ -57,7 +57,7 @@ namespace Task_3.XAML
         public void Registr()
         {
             string spath = @"C:\Users\Хозяйн\source\repos\Task_3\Task_3\XML\Users.xml";
-            UserReg user = new UserReg(namebox.Text, emailbox.Text, passbox.Text);
+            UserReg user = new UserReg(namebox.Text, emailbox.Text, passbox.Password.ToString());
             XDocument doc = XDocument.Load(spath);
             XElement root = new XElement("Employee");
             root.Add(new XAttribute("Name", user.name));

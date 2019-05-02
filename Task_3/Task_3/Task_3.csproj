@@ -141,7 +141,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Resource Include="XML\Cart.xml" />
     <Resource Include="XML\Catalog.xml" />
     <Resource Include="XML\Users.xml" />
   </ItemGroup>

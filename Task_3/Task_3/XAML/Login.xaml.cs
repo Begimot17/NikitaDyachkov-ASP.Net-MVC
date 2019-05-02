@@ -24,7 +24,7 @@ namespace Task_3.XAML
 
         private void Regbut_Click(object sender, RoutedEventArgs e)
         {
-            if (emailbox.Text == "nikita@gmail.com" && passbox.Text == "123456")
+            if (emailbox.Text == "nikita@gmail.com" && passbox.Password.ToString() == "123456")
             {
                 Admin admin = new Admin();
                 admin.Show();
@@ -36,7 +36,7 @@ namespace Task_3.XAML
                 users = UserReg.UserList();
                 foreach (UserReg x in users)
                 {
-                    if (x.pass == passbox.Text && x.email == emailbox.Text)
+                    if (x.pass == passbox.Password.ToString() && x.email == emailbox.Text)
                     {
                         string name = x.name;
                         User user = new User(name);
