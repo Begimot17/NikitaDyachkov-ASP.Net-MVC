@@ -37,6 +37,8 @@ namespace Task__2
                 }
             }
         }
+
+
         public Cart()
         {
             _products = new List<Product>();
@@ -47,7 +49,11 @@ namespace Task__2
             SortBy = sortBy;
             _products = collection.ToList();
         }
+
+
         public string SortBy { get; private set; }
+
+
         public void AddToCatalog(params Product[] prod)
         {
             for (int i = 0; i < prod.Length; i++)
@@ -59,20 +65,22 @@ namespace Task__2
                 Console.Write("Enter Type:");
                 string Type = Console.ReadLine();
                 Console.Write("Enter Price:");
-                int Price = Convert.ToInt32(Console.ReadLine());
-                prod[i] = new Product(Name, Description, Type, Price);
-                Console.WriteLine("1=Add more\n2=Сonfirm");
-                int quest = Convert.ToInt16(Console.ReadLine());
-                if (quest == 2)
+                if (int.TryParse(Console.ReadLine(), out int Price))
                 {
-                    foreach (Product x in prod)
-                    {
-                        if (x != null) catalog.Add(x);
-                    }
-                    break;
+                    prod[i] = new Product(Name, Description, Type, Price);
+                    Console.WriteLine("1=Add more\n2=Сonfirm");
+                    int quest = 1;
+                    if(int.TryParse(Console.ReadLine(), out quest) && quest == 2)
+                        foreach (Product x in prod)
+                        {
+                            if (x != null) catalog.Add(x);
+                        }
+                        break;
                 }
             }
         }
+
+
         public void Remove()
         {
             Console.Write("Enter Name: ");
@@ -89,39 +97,45 @@ namespace Task__2
                 }
             }
         }
+
+
         public void Update()
         {
             Sort();
             Total();
         }
+
+
         public void Head()
         {
             Console.WriteLine($"{"Name",-25}  {"Description",-11}  {"Type",-10}  {"Price",-5}");
         }
-        public void Contains()
+
+
+        public void CartShow()
         {
             Update();
             Head();
             foreach (Product x in _products)
             {
-
                 Console.WriteLine($"{x.Name,-25}  {x.Description,-11}  {x.Type,-10}  {x.Price,-5}");
             }
             Console.WriteLine($"TotalPrice={TotalPrice}");
         }
+
+
         public void Search()
         {
             Console.WriteLine("Search by 1=Name 2=Description");
-            int quest = Convert.ToInt16(Console.ReadLine());
+            bool isNum = int.TryParse(Console.ReadLine(), out int quest);
+
             if (quest == 1)
             {
                 Console.Write("Enter Name: ");
                 string prodToSearch = Console.ReadLine();
                 foreach (Product x in catalog)
                 {
-                    string test;
-                    test = x.Name.Replace(prodToSearch, " ");
-                    if (test != x.Name)
+                    if (x.Name.Replace(prodToSearch, " ") != x.Name)
                     {
                         Head();
                         Product.Show(x);
@@ -134,9 +148,7 @@ namespace Task__2
                 string prodToSearch = Console.ReadLine();
                 foreach (Product x in catalog)
                 {
-                    string test;
-                    test = x.Description.Replace(prodToSearch, " ");
-                    if (test != x.Description)
+                    if (x.Description.Replace(prodToSearch, " ") != x.Description)
                     {
                         Head();
                         Product.Show(x);
@@ -144,6 +156,8 @@ namespace Task__2
                 }
             }
         }
+
+
         public void Sort()
         {
             switch (SortBy)
@@ -154,20 +168,26 @@ namespace Task__2
                 case "Price": catalog = catalog.OrderBy(x => x.Price).ToList(); break;
             }
         }
+
+
         public void SortToСhange()
         {
             Console.WriteLine("Sort by 1=Name/2=Description/3=Type/4=Price");
-            int quest = Convert.ToInt16(Console.ReadLine());
+            bool isNum = int.TryParse(Console.ReadLine(), out int quest);
+
             switch (quest)
             {
                 case 1: SortBy = "Name"; break;
                 case 2: SortBy = "Description"; break;
                 case 3: SortBy = "Type"; break;
                 case 4: SortBy = "Price"; break;
+                default:return;
             }
             Sort();
-
+            CatalogShow();
         }
+
+
         public void Total()
         {
             int total = 0;
@@ -177,6 +197,8 @@ namespace Task__2
             }
             TotalPrice = total;
         }
+
+
         public void CopyTo(Array array, int index)
         {
             throw new NotImplementedException();
@@ -185,6 +207,8 @@ namespace Task__2
         {
             throw new NotImplementedException();
         }
+
+
         public void CatalogShow()
         {
             int i = 1;
@@ -195,25 +219,17 @@ namespace Task__2
                 i++;
             }
         }
+
+
         public void AddToCart()
         {
             while (true)
             {
                 CatalogShow();
-                
-                int quest = Convert.ToInt32(Console.ReadLine());
-                switch (quest)
-                {
-                    case 1: _products.Add(catalog[0]); break;
-                    case 2: _products.Add(catalog[1]); break;
-                    case 3: _products.Add(catalog[2]); break;
-                    case 4: _products.Add(catalog[3]); break;
-                    case 5: _products.Add(catalog[4]); break;
-                    case 6: _products.Add(catalog[5]); break;
-                    default: Console.WriteLine("Wrong input"); break;
-                }
+                bool isNum = int.TryParse(Console.ReadLine(), out int quest);
+                _products.Add(catalog[quest-1]); 
                 Console.WriteLine("1=Add more\n2=Сonfirm");
-                int quest2 =Convert.ToInt32(Console.ReadLine());
+                bool isNum1 = int.TryParse(Console.ReadLine(), out int quest2);
                 if (quest2 == 2)
                 {
                     break;

@@ -7,33 +7,23 @@ namespace Task__2
         {
             Product[] prod = new Product[100];
             Cart cart = new Cart();
-           /* {
-                [0] = new Product("Лимон", "Жёлтый", "Фрукт", 15),
-                [1] = new Product("Яблоко", "Красное", "Фрукт", 20),
-                [2] = new Product("Лимон", "Жёлтый", "Фрукт", 5),
-                [3] = new Product("Киви", "Зелёное", "Фрукт", 10),
-                [4] = new Product("Лимон", "Оранжевая", "Фрукт", 432),
-                [5] = new Product("Лук", "Зелёный", "Овощь", 23)
-            };*/
             while (true)
             {
-                Console.WriteLine("1=AddToCatalog\n2=AddToCart\n3=ShowCart\n4=Remove\n5=Update\n6=Sort\n7=Search\n8=ShowCatalog\n9=Exit");
-                short i = Convert.ToInt16(Console.ReadLine());
+                Console.WriteLine("1=CatalogShow\n2=CartShow\n3=AddToCatalog\n4=AddToCart\n5=Remove\n6=Sort\n7=Search\n8=Update\n9=Exit");
+                if(int.TryParse(Console.ReadLine(), out int i))
                 switch (i)
                 {
-                    
-                    case 1: cart.AddToCart(); break;
-                    case 2: cart.AddToCatalog(prod); break;
-                    case 3: cart.Contains(); break;
-                    case 4: cart.Remove(); break;
-                    case 5: cart.Update(); break;
+                    case 1: cart.CatalogShow(); break;
+                    case 2: cart.CartShow(); break;
+                    case 3: cart.AddToCatalog(prod); break;
+                    case 4: cart.AddToCart(); break;
+                    case 5: cart.Remove(); break;
                     case 6: cart.SortToСhange(); break;
                     case 7: cart.Search(); break;
-                    case 8: cart.CatalogShow(); break;
+                    case 8: cart.Update(); break;
                     case 9: return;
                     default: Console.WriteLine("Wrong input"); break;
                 }
-                Console.WriteLine(cart.SortBy);
             }
         }
     }

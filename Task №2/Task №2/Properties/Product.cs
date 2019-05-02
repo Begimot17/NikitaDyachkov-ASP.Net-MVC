@@ -17,7 +17,7 @@ namespace Task__2
         }
         static public void Show(Product x)
         {
-            Console.WriteLine($"{x.Name,-25}  {x.Description,-6}  {x.Type,-10}  {x.Price,-5}");
+            Console.WriteLine($"{x.Name,-25}  {x.Description,-11}  {x.Type,-10}  {x.Price,-5}");
         }
     }
 }
