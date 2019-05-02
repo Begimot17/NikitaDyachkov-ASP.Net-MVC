@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 using Task_3.Class;
 
 namespace Task_3.XAML
@@ -50,11 +52,23 @@ namespace Task_3.XAML
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             List <Product>prod = Product.ProdList();
+            
+
             foreach(Product x in prod)
             {
                 if (x.Name == namebox.Text)
                 {
-
+                    
+                        string spath = @"C:\Users\Хозяйн\source\repos\Task_3\Task_3\XML\Cart.xml";
+                        XDocument doc = XDocument.Load(spath);
+                        XElement root = new XElement("Employee");
+                        root.Add(new XAttribute("Name", x.Name));
+                        root.Add(new XElement("Description", x.Description));
+                        root.Add(new XElement("Type", x.Type));
+                        root.Add(new XElement("Price", x.Price));
+                        doc.Element("Employees").Add(root);
+                        doc.Save(spath);
+                    
                 }
             }
         }
