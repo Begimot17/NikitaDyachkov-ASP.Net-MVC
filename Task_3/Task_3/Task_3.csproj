@@ -140,11 +140,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="XML\Cart.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="XML\Catalog.xml" />
-    <Resource Include="XML\Users.xml" />
+    <Resource Include="XML\Catalog.xml">
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="XML\Users.xml">
+      <SubType>Designer</SubType>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

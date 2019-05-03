@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,13 +13,15 @@ namespace Task_3.XAML
         public Registration()
         {
             InitializeComponent();
+            regbut.IsEnabled = false;
+
         }
         public void PassIsEnabled()
         {
-            bool name = Regex.IsMatch(namebox.Text, @"^\w+");
+            bool name = Regex.IsMatch(namebox.Text, @"^[\p{L} \.\-]+$");
             bool email = Regex.IsMatch(emailbox.Text, @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
          @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" + @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
-            bool pass = Regex.IsMatch(passbox.Password.ToString(), "^[0-9.,:!?]{1,8}$");
+            bool pass = Regex.IsMatch(passbox.Password.ToString(), @"[0-9a-zA-Z!@#$%^&*]{6,}");
             if (name && email && pass)
             {
                 regbut.IsEnabled = true;
@@ -31,27 +34,24 @@ namespace Task_3.XAML
         {
             PassIsEnabled();
         }
-
         private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
         {
             PassIsEnabled();
         }
-
-        private void Passbox_TextChanged(object sender, TextChangedEventArgs e)
+        private void Passbox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             PassIsEnabled();
         }
         public void Registr()
         {
-            string spath = @"C:\Users\Хозяйн\source\repos\Task_3\Task_3\XML\Users.xml";
-            UserReg user = new UserReg(namebox.Text, emailbox.Text, passbox.Password.ToString());
-            XDocument doc = XDocument.Load(spath);
-            XElement root = new XElement("Employee");
-            root.Add(new XAttribute("Name", user.name));
-            root.Add(new XElement("Email", user.email));
-            root.Add(new XElement("PassWord", user.pass));
-            doc.Element("Employees").Add(root);
-            doc.Save(spath);
+            string path = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3\Task_3\XML\Users.xml";
+            XDocument xDoc = XDocument.Load(path);
+            XNode xNewNode = new XElement("Employee", new XAttribute("Name", namebox.Text),
+                new XElement("Email", emailbox.Text),
+                new XElement("PassWord", passbox.Password.ToString()));
+            xDoc.Root.Add(xNewNode);
+            MessageBox.Show(xNewNode.ToString());
+            xDoc.Save(path);
         }
         private void Regbut_Click(object sender, RoutedEventArgs e)
         {
@@ -82,5 +82,7 @@ namespace Task_3.XAML
                 this.Close();
             }
         }
+
+        
     }
 }

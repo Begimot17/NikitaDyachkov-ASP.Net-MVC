@@ -13,7 +13,7 @@
         <TextBox x:Name="namebox" HorizontalAlignment="Left" Height="25" Margin="119,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" TextChanged="TextBox_TextChanged"/>
         <TextBox x:Name="emailbox" HorizontalAlignment="Left" Height="25" Margin="119,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" TextChanged="TextBox_TextChanged_1"/>
         <Button x:Name="regbut" Content="To register" HorizontalAlignment="Left" Margin="119,189,0,0" VerticalAlignment="Top" Width="150" Height="30" Click="Regbut_Click"/>
-        <PasswordBox x:Name="passbox" HorizontalAlignment="Left" Margin="119,139,0,0" VerticalAlignment="Top" Height="23" Width="220"/>
+        <PasswordBox x:Name="passbox" HorizontalAlignment="Left" Margin="119,139,0,0" VerticalAlignment="Top" Height="23" Width="220" PasswordChanged="Passbox_PasswordChanged"/>
 
     </Grid>
 </Window>

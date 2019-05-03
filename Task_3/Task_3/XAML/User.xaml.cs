@@ -37,7 +37,7 @@ namespace Task_3.XAML
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string spath = @"C:\Users\Хозяйн\source\repos\Task_3\Task_3\XML\Cart.xml";
+            /*string spath = @"C:\Users\Хозяйн\source\repos\Task_3\Task_3\XML\Cart.xml";
             List <Product>prod = Product.ProdList();
             foreach(Product x in prod)
             {
@@ -45,7 +45,7 @@ namespace Task_3.XAML
                 {
                     using (XmlReader reader = XmlReader.Create(spath))
                     {
-                        XDocument doc = reader.Read();
+                        //XDocument doc = reader.Read();
 
                         XElement root = new XElement("Employee");
                         root.Add(new XAttribute("Name", x.Name));
@@ -57,7 +57,7 @@ namespace Task_3.XAML
                     }
                     
                 }
-            }
+            }*/
         }
     }
 }

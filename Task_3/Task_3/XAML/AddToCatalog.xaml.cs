@@ -16,14 +16,14 @@ namespace Task_3.XAML
         {
             string spath = @"C:\Users\Хозяйн\source\repos\Task_3\Task_3\XML\Catalog.xml";
             Product prod = new Product(namebox.Text, descbox.Text, typebox.Text, Convert.ToInt32(pricebox.Text));
-            XDocument doc = XDocument.Load(spath);
-            XElement root = new XElement("Employee");
-            root.Add(new XAttribute("Name", prod.Name));
-            root.Add(new XElement("Description", prod.Description));
-            root.Add(new XElement("Type", prod.Type));
-            root.Add(new XElement("Price", prod.Price));
-            doc.Element("Employees").Add(root);
-            doc.Save(spath);
+            XDocument xDoc = XDocument.Load(spath);
+            XNode xNewNode = new XElement("Employee", new XAttribute("Name", prod.Name),
+                new XElement("Description", prod.Description),
+                new XElement("Type", prod.Type),
+                new XElement("Price",prod.Price));
+            xDoc.Root.Add(xNewNode);
+            MessageBox.Show(xNewNode.ToString());
+            xDoc.Save(spath);
 
         }
     }

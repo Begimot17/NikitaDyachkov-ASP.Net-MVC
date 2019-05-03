@@ -38,7 +38,7 @@ namespace Task_3.Class
         public static List<UserReg> UserList()
         {
             List<UserReg> users = new List<UserReg>();
-            string file = @"C:\Users\Хозяйн\Documents\Институт\Lecture 3\xDoc.xml";
+            string file = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3\Task_3\XML\Users.xml";
             ToList(file, out users);
             return users;
         }

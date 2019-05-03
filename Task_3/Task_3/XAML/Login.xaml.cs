@@ -21,14 +21,11 @@ namespace Task_3.XAML
             }
             else
             {
-                List<UserReg> users = new List<UserReg>();
-                users = UserReg.UserList();
-                foreach (UserReg x in users)
+                foreach (UserReg x in UserReg.UserList())
                 {
                     if (x.pass == passbox.Password.ToString() && x.email == emailbox.Text)
                     {
-                        string name = x.name;
-                        User user = new User(name);
+                        User user = new User(x.name);
                         user.Show();
                         Close();
                         return;

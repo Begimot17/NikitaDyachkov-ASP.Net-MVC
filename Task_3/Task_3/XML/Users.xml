@@ -44,4 +44,24 @@
     <Email>Lesha@gmail.com</Email>
     <PassWord>123123</PassWord>
   </Employee>
+  <Employee Name="csdcsd">
+    <Email>csdcsd@gmail.com</Email>
+    <Password>System.Windows.Controls.PasswordBox</Password>
+  </Employee>
+  <Employee Name="test">
+    <Email>test@gmail.com</Email>
+    <Password>123123</Password>
+  </Employee>
+  <Employee Name="tes">
+    <Email>test@gmail.com</Email>
+    <PassWord>123123</PassWord>
+  </Employee>
+  <Employee Name="test">
+    <Email>test1@gmail.com</Email>
+    <PassWord>123123</PassWord>
+  </Employee>
+  <Employee Name="dsfsd">
+    <Email>sdf@gmail.com</Email>
+    <PassWord>2342442</PassWord>
+  </Employee>
 </Employees>

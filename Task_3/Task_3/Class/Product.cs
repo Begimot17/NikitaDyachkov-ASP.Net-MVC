@@ -8,10 +8,10 @@ namespace Task_3.Class
 
     class Product
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Type { get; set; }
-        public int Price { get; set; }
+        public string Name;
+        public string Description;
+        public string Type;
+        public int Price;
         public Product() { }
         public Product(string Name, string Description, string Type, int Price)
         {
