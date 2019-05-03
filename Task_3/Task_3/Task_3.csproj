@@ -139,7 +139,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="XML\Cart.xml" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="XML\Catalog.xml" />
     <Resource Include="XML\Users.xml" />

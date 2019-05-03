@@ -19,7 +19,9 @@
             </MenuItem>
             <MenuItem VerticalAlignment="Center" Header="Exit" Height="58" Width="198" FontSize="24" Click="MenuItem_Click_3"/>
         </Menu>
-        <DataGrid x:Name="datagrid" HorizontalAlignment="Left" Height="272" Margin="0,63,0,-0.2" VerticalAlignment="Top" Width="590" AutoGenerateColumns="true" />
+        <DataGrid x:Name="datagrid" HorizontalAlignment="Left" Height="181" Margin="0,63,0,0" VerticalAlignment="Top" Width="590" AutoGenerateColumns="true" />
+        <Button Content="Admin" HorizontalAlignment="Left" Margin="72,266,0,0" VerticalAlignment="Top" Width="142" Height="39" Click="Button_Click"/>
+        <Button Content="User" HorizontalAlignment="Left" Margin="344,266,0,0" VerticalAlignment="Top" Width="142" Height="39" Click="Button_Click_1"/>
     </Grid>
 </Window>
 

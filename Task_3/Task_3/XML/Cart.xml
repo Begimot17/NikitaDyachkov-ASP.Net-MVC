@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Employees>
+  <Employee Name="Name">
+    <Description>Name</Description>
+    <Type>Name</Type>
+    <Price>12345</Price>
+  </Employee>
+</Employees>

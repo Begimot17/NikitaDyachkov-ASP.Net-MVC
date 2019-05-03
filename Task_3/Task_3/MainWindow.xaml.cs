@@ -51,5 +51,17 @@ namespace Task_3
         {
             this.Close();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Admin admin = new Admin();
+            admin.Show();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            User user = new User("User");
+            user.Show();
+        }
     }
 }
