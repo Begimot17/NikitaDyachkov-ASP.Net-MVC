@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Products>
+  <Product Name="Iphone SE 32gb">
+    <Description>Black</Description>
+    <Type>Smartphone</Type>
+    <Price>7999</Price>
+  </Product>
+  <Product Name="Ipad PRO">
+    <Description>Silver</Description>
+    <Type>Tablet</Type>
+    <Price>50499</Price>
+  </Product>
+  <Product Name="AirPods">
+    <Description>Black</Description>
+    <Type>Headphones</Type>
+    <Price>9749</Price>
+  </Product>
+  <Product Name="Iphone XS MAX 512gb">
+    <Description>White</Description>
+    <Type>Smartphone</Type>
+    <Price>46999</Price>
+  </Product>
+  <Product Name="Sennheiser MOMENTUM M2">
+    <Description>White</Description>
+    <Type>Headphones</Type>
+    <Price>6999</Price>
+  </Product>
+  <Product Name="SAMSUNG Galaxy Tab">
+    <Description>Black</Description>
+    <Type>Tablet</Type>
+    <Price>5999</Price>
+  </Product>
+  <Product Name="Meizu">
+    <Description>M6 Note</Description>
+    <Type>Silver</Type>
+    <Price>10000</Price>
+  </Product>
+</Products>

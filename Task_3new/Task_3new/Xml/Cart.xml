@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Carts>
+  <User NameUser="Iphone SE 32gb">
+    <UserCart Name="Iphone SE 32gb">
+      <Description>Black</Description>
+      <Type>Smartphone</Type>
+      <Price>7999</Price>
+    </UserCart>
+  </User>
+  <User NameUser="Test" />
+</Carts>
