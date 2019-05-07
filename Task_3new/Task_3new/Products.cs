@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace Task_3new
+
 {
-    class Products : IRepository
+    public class Products : IRepository
     {
         public string Name { get; set; }
         public string Description{ get; set; }
         public string Type{ get; set; }
         public int Price{ get; set; }
-        public string SortBy { get; private set; }
+        string SortBy { get; set; }
         public List<Products> ProdList ;
-        string path = @"C:\Users\Хозяйн\source\repos\Task_3new\Task_3new\Xml\Product.xml";
+        readonly string path = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3new\Task_3new\Xml\Product.xml";
         public Products() { }
         public Products(string Name, string Description, string Type, int Price)
         {

@@ -1,11 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Carts>
-  <User NameUser="Iphone SE 32gb">
-    <UserCart Name="Iphone SE 32gb">
-      <Description>Black</Description>
-      <Type>Smartphone</Type>
-      <Price>7999</Price>
-    </UserCart>
-  </User>
-  <User NameUser="Test" />
+  <Cart NameUser="Ostapov">
+    <Name>Iphone XS MAX 512gb</Name>
+    <Discription>White</Discription>
+    <Type>Smartphone</Type>
+    <Price>46999</Price>
+  </Cart>
+  <Cart NameUser="Sergey">
+    <Name>Iphone SE 32gb</Name>
+    <Discription>Black</Discription>
+    <Type>Smartphone</Type>
+    <Price>7999</Price>
+  </Cart>
 </Carts>

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Task_3new
 {
@@ -11,7 +7,7 @@ namespace Task_3new
     {
         static void Main(string[] args)
         {
-            /*while (true)
+            while (true)
             {
                 Products p = new Products();
                 Console.WriteLine("1=Registration\n2=Log in\n3=Products\n4=Exit");
@@ -23,10 +19,7 @@ namespace Task_3new
                     case 4: return;
                     default: Console.WriteLine("Неверный ввод!!!"); break;
                 }
-            }*/
-            UserConsole("Test");
-            Console.ReadLine();
-
+            }
 
         }
         static void Registration()
@@ -50,12 +43,12 @@ namespace Task_3new
                     {
                         if (x.Name == newUser.Name)
                         {
-                            Console.WriteLine("Пользователь с таким именем уже существует");
+                            Console.WriteLine("A user with the same name already exists");
                             break;
                         }
                         if (x.Email == newUser.Email)
                         {
-                            Console.WriteLine("Пользователь с таким email уже существует");
+                            Console.WriteLine("A user with the same email already exists");
                             break;
                         }
                     }
@@ -65,7 +58,7 @@ namespace Task_3new
                 }
                 else
                 {
-                    Console.WriteLine("Неверный ввод");
+                    Console.WriteLine("WRONG ENTRY");
                 }
             }
         }
@@ -89,16 +82,27 @@ namespace Task_3new
                         UserConsole(x.Name);
                     }
                 }
-                Console.WriteLine("Неверный email или пароль");
+                Console.WriteLine("Invalid email or password");
             }
         }
         static void UserConsole(string Name)
         {
             Cart cart = new Cart();
             Console.WriteLine($"Hello {Name}");
-            cart.AddProduct();
-            Console.ReadLine();
-
+            while (true)
+            {
+                Console.WriteLine("1=CatalogShow\n2=CartShow\n3=AddProduct\n4=Delete\n5=Search\n6=Exit");
+                switch (Convert.ToInt32(Console.ReadLine()))
+                {
+                    case 1: cart.CatalogShow(); break;
+                    case 2: cart.CartShow(Name); break;
+                    case 3: cart.AddProduct(Name); break;
+                    case 4: cart.Delete(Name); break;
+                    case 5: cart.Search(); break;
+                    case 6: return;
+                    default: Console.WriteLine("WRONG ENTRY!!!"); break;
+                }
+            }
         }
         static void AdminConsole()
         {
@@ -106,7 +110,7 @@ namespace Task_3new
             while (true)
             {
                 Products prod = new Products();
-                Console.WriteLine("1=CatalogShow\n2=AddProduct\n3=Delete\n4=Sort\n5=Search");
+                Console.WriteLine("1=CatalogShow\n2=AddProduct\n3=Delete\n4=Sort\n5=Search\n6=Exit");
                 switch (Convert.ToInt32(Console.ReadLine()))
                 {
                     case 1: prod.CatalogShow(); break;
@@ -115,7 +119,7 @@ namespace Task_3new
                     case 4: prod.SortChange(); break;
                     case 5: prod.Search(); break;
                     case 6: return;
-                    default: Console.WriteLine("Неверный ввод!!!"); break;
+                    default: Console.WriteLine("WRONG ENTRY!!!"); break;
 
                 }
             }

@@ -1,95 +1,118 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Linq;
 
 namespace Task_3new
 {
-    class Cart : IRepository
+    public class Cart
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Type { get; set; }
-        public int Price { get; set; }
-        string path = @"C:\Users\Хозяйн\source\repos\Task_3new\Task_3new\Xml\Cart.xml";
-        public Cart() { }
-        public Cart(int Id,string Name, string Description, string Type, int Price)
-        {   this.Id = Id;
-            this.Name = Name;
-            this.Description = Description;
-            this.Type = Type;
-            this.Price = Price;
-        }
-        public void Create(string Name)
-        {
-            bool check = true;
-            XDocument xDoc = XDocument.Load(path);
-            foreach (XElement cart in xDoc.Element("Carts").Elements("User"))
-            {
-                XAttribute username = cart.Attribute("NameUser");
-                if (username.ToString() == Name)
-                    check = false;
-            }
-            if (check)
-            {
-                XNode xNewNode = new XElement("User", new XAttribute("NameUser", Name));
-                xDoc.Root.Add(xNewNode);
-                xDoc.Save(path);
-            }
-        }
-        public List<Cart> CatalogToList()
-        {
-            Products temp = new Products();
-            List<Cart> catalog = new List<Cart>();
+        public string NameUser { get; set; }
+        public string NameProd { get; set; }
+        public string DiscProd { get; set; }
+        public string TypeProd { get; set; }
+        public decimal PriceProd { get; set; }
 
-            foreach (Products x in temp.ProductList())
-            {
-                catalog.Add(new Cart(catalog.Count + 1, x.Name, x.Description, x.Type, x.Price));
-            }
-            return catalog;
+        readonly string path = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3new\Task_3new\Xml\Cart.xml";
+        public Cart( ) { }
+        public Cart(string NameUser) { }
+        Cart(string NameUser, string NameProd, string DiscProd, string TypeProd, decimal PriceProd)
+        {
+            this.NameUser = NameUser;
+            this.NameProd = NameProd;
+            this.DiscProd = DiscProd;
+            this.TypeProd = TypeProd;
+            this.PriceProd = PriceProd;
         }
-        
-        public void AddProduct()
+        public void AddProduct(string Name)
         {
             CatalogShow();
-            
-            int quest=Convert.ToInt16(Console.ReadLine());
-            foreach(Cart x in CatalogToList())
+            Products prod = new Products();
+            Console.WriteLine("Enter number product");
+            int numProd=Convert.ToInt16(Console.ReadLine());
+            int counter=1;
+            foreach(Products x in prod.ProductList())
             {
-                
+                if (counter == numProd)
+                    prod = (new Products(x.Name, x.Description, x.Type, x.Price));
+                    counter++;
             }
-        }
+            XDocument xdoc = XDocument.Load(path);
+            xdoc.Root.Add(new XElement("Cart",
+            new XAttribute("NameUser", Name),
+            new XElement("Name", prod.Name),
+            new XElement("Discription", prod.Description),
+            new XElement("Type", prod.Type),
+            new XElement("Price", prod.Price)));
+            xdoc.Save(path);
 
+        }
+        public List<Cart> CartsList(string NameUs)
+        {
+            List<Cart> cart = new List<Cart>();
+            XDocument xdoc = XDocument.Load(path);
+            foreach (XElement prod in xdoc.Element("Carts").Elements("Cart"))
+            {
+                XAttribute NameUser = prod.Attribute("NameUser");
+                XElement Name = prod.Element("Name");
+                XElement Discription = prod.Element("Discription");
+                XElement Type = prod.Element("Type");
+                XElement Price = prod.Element("Price");
+                if (NameUser.Value == NameUs)
+                    cart.Add(new Cart(NameUser.Value, Name.Value, Discription.Value, Type.Value,  Convert.ToDecimal(Price.Value)));
+            }
+                return cart;
+        }
         public void CatalogShow()
         {
-            foreach (Cart x in CatalogToList())
+            Products prod = new Products();
+            int i = 1;
+            foreach (Products x in prod.ProductList())
             {
-                Console.WriteLine("{0,-3}{1,-25}{2,-17}{3,-13}{4}", x.Id, x.Name, x.Description, x.Type, x.Price);
+                Console.WriteLine("{0,-3}{1,-25}{2,-17}{3,-13}{4}", i++, x.Name, x.Description, x.Type, x.Price);
+            }
+        }
+        public void CartShow(string Name)
+        {
+            decimal AllPrice=0;
+            Console.WriteLine("Your Cart");
+            foreach (Cart x in CartsList(Name))
+            {
+                Console.WriteLine("{0,-25}{1,-25}{2,-17}{3,-13}", x.NameProd, x.DiscProd, x.TypeProd, x.PriceProd);
+                AllPrice += x.PriceProd;
+            }
+            Console.WriteLine($"AllPrice={AllPrice}");
+        }
+
+        public void Delete(string Name)
+        {
+            Console.WriteLine("Enter name delete");
+            string nameDelete = Console.ReadLine();
+            XDocument xDoc = XDocument.Load(path);
+            foreach (XElement xNode in xDoc.Root.Nodes())
+            {
+                if (xNode.Element("Name").Value == nameDelete&& xNode.Attribute("NameUser").Value == Name)
+                {
+                    xNode.Remove();
+                    break;
+                }
+            }
+            xDoc.Save(path);
+        }
+        public void Search()
+        {
+            Products prod = new Products();
+            Console.WriteLine("Enter name to search");
+            string namesearch = Console.ReadLine();
+            int num = 1;
+            foreach (Products x in prod.ProductList())
+            {
+                if (x.Name == namesearch)
+                {
+                    Console.WriteLine("{0} {1} {2} {3}",num, x.Name, x.Description, x.Type, x.Price);
+                }
+                num++;
             }
         }
 
-        public void Delete()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Search()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Sort()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

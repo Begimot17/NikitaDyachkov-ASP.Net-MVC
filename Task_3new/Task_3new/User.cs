@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace Task_3new
@@ -12,7 +8,7 @@ namespace Task_3new
         public string Name;
         public string Email;
         public string Pass;
-        string file = @"C:\Users\Хозяйн\source\repos\Task_3new\Task_3new\Xml\User.xml";
+        readonly string file = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3new\Task_3new\Xml\User.xml";
         public User()
         {
         }

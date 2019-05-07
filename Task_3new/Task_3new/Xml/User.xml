@@ -12,4 +12,12 @@
     <Email>Test@gmail.com</Email>
     <Password>123456</Password>
   </User>
+  <User Name="Sergey">
+    <Email>Sergey@gmail.com</Email>
+    <Password>123456</Password>
+  </User>
+  <User Name="Ostapov">
+    <Email>Dima@gmail.com</Email>
+    <Password>123456</Password>
+  </User>
 </Users>
