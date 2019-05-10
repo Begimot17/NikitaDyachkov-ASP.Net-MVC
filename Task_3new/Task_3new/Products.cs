@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
-
 namespace Task_3new
 
 {
@@ -35,13 +33,8 @@ namespace Task_3new
             product.Type = Console.ReadLine();
             Console.Write("Enter Price->");
             product.Price = Convert.ToInt16(Console.ReadLine());
-            XDocument xDoc = XDocument.Load(path);
-            XNode xNewNode = new XElement("Product", new XAttribute("Name", product.Name),
-                new XElement("Description", product.Description),
-                new XElement("Type", product.Type),
-                new XElement("Price", product.Price));
-            xDoc.Root.Add(xNewNode);
-            xDoc.Save(path);
+            if (XmlManager.AddProduct(path, product))
+                Console.WriteLine("Product Added");
             Update();
 
         }
@@ -51,15 +44,8 @@ namespace Task_3new
             Update();
             Console.WriteLine("Enter name delete");
             string nameDelete = Console.ReadLine();
-            XDocument xDoc = XDocument.Load(path);
-            foreach (XElement xNode in xDoc.Root.Nodes())
-            {
-                if (xNode.Attribute("Name").Value == nameDelete)
-                {
-                    xNode.Remove();
-                }
-            }
-            xDoc.Save(path);
+            if(XmlManager.Remove(path , nameDelete))
+                Console.WriteLine("Product Removed");
             Update();
 
         }
@@ -69,7 +55,7 @@ namespace Task_3new
             Update();
             Console.WriteLine("Enter name to search");
             string namesearch=Console.ReadLine();
-            foreach(Products x in ProductList())
+            foreach(Products x in XmlManager.ProductList(path))
             {
                 if (x.Name == namesearch)
                 {
@@ -108,28 +94,9 @@ namespace Task_3new
         }
         public void Update()
         {
-            ProdList = ProductList();
+            ProdList = XmlManager.ProductList(path);
         }
 
-        public List<Products> ProductList()
-        {
-            List<Products> product = new List<Products>();
-            XDocument xdoc = XDocument.Load(path);
-            foreach (XElement prod in xdoc.Element("Products").Elements("Product"))
-            {
-                XAttribute Name = prod.Attribute("Name");
-                XElement Description = prod.Element("Description");
-                XElement Type = prod.Element("Type");
-                XElement Price = prod.Element("Price");
-
-
-                if (Name != null && Description != null && Type != null&& Price != null)
-                {
-                    product.Add(new Products(Name.Value, Description.Value, Type.Value, Convert.ToInt32(Price.Value)));
-                }
-            }
-            return product;
-        }
         public void CatalogShow()
         {
             Update();

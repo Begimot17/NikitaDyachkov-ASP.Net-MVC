@@ -5,6 +5,7 @@ namespace Task_3new
 {
     class Program
     {
+        static string file = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3new\Task_3new\Xml\User.xml";
         static void Main(string[] args)
         {
             while (true)
@@ -39,7 +40,7 @@ namespace Task_3new
                 bool pass = Regex.IsMatch(newUser.Pass, @"[0-9a-zA-Z!@#$%^&*]{6,}");
                 if (name && email && pass)
                 {
-                    foreach (User x in newUser.ListUsers())
+                    foreach (User x in XmlManager.ListUsers(file))
                     {
                         if (x.Name == newUser.Name)
                         {
@@ -52,7 +53,7 @@ namespace Task_3new
                             break;
                         }
                     }
-                    newUser.NewUser();
+                    XmlManager.NewUser(file , newUser);
                     UserConsole(newUser.Name);
 
                 }
@@ -75,7 +76,7 @@ namespace Task_3new
             }
             else
             {
-                foreach (User x in temp.ListUsers())
+                foreach (User x in XmlManager.ListUsers(file))
                 {
                     if (x.Pass == Pass && x.Email == Email)
                     {
@@ -87,6 +88,7 @@ namespace Task_3new
         }
         static void UserConsole(string Name)
         {
+            string path = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3new\Task_3new\Xml\Cart.xml";
             Cart cart = new Cart();
             Console.WriteLine($"Hello {Name}");
             while (true)
@@ -97,7 +99,7 @@ namespace Task_3new
                     case 1: cart.CatalogShow(); break;
                     case 2: cart.CartShow(Name); break;
                     case 3: cart.AddProduct(Name); break;
-                    case 4: cart.Delete(Name); break;
+                    case 4: XmlManager.RemoveProduct(Name , path); break;
                     case 5: cart.Search(); break;
                     case 6: return;
                     default: Console.WriteLine("WRONG ENTRY!!!"); break;
