@@ -3,17 +3,17 @@ namespace Task__2
 {
     class Product
     {
-        public string Name;
-        public string Description;
-        public string Type;
-        public int Price;
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Type { get; set; }
+        public int Price { get; set; }
         public Product() { }
-        public Product(string Name , string Description , string Type,int Price)
+        public Product(string name , string description , string type,int price)
         {
-            this.Name = Name;
-            this.Description = Description;
-            this.Type = Type;
-            this.Price = Price;
+            Name = name;
+            Description = description;
+            Type = type;
+            Price = price;
         }
         static public void Show(Product x)
         {
