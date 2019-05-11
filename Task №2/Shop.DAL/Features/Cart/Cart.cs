@@ -47,7 +47,7 @@ namespace Shop.DAL.Features.Cart
 
         public SortBy SortBy { get; private set; }
 
-        public List<Product> ListCart()
+        public List<Product> Contains()
         {
             return _products;
         }
@@ -72,22 +72,7 @@ namespace Shop.DAL.Features.Cart
 
         public void SetSort(SortBy sortType)
         {
-            //Console.WriteLine("Sort by 1=Name/2=Description/3=Type/4=Price");
-            //SortBy sort;
-            //Enum.TryParse("from readline", true, out sort);
-            // bool isNum = int.TryParse(Console.ReadLine(), out int quest);
-
-
-            //switch (quest)
-            //{
-            //    case 1: SortBy = "Name"; break;
-            //    case 2: SortBy = "Description"; break;
-            //    case 3: SortBy = "Type"; break;
-            //    case 4: SortBy = "Price"; break;
-            //    default: return;
-            //}
             SortBy = sortType;
-
             Sort();
         }
 
@@ -111,20 +96,10 @@ namespace Shop.DAL.Features.Cart
             throw new NotImplementedException();
         }
 
-        //public void CatalogShow()
-        //{
-        //    int i = 1;
-        //    Console.WriteLine($"{"ID",-3} {"Name",-25}  {"Description",-11}  {"Type",-10}  {"Price",-5}");
-        //    foreach (Product x in catalog)
-        //    {
-        //        Console.WriteLine($"{i,-3} {x.Name,-25}  {x.Description,-11}  {x.Type,-10}  {x.Price,-5}");
-        //        i++;
-        //    }
-        //}
-
-        public void Add(Product product)
+        public bool Add(Product product)
         {
             _products.Add(product);
+            return true;
         }
 
         public bool Remove(string prodToDelete)
@@ -143,56 +118,14 @@ namespace Shop.DAL.Features.Cart
             return false;
         }
 
-        public bool Update()
-        {
-            Sort();
-            Total();
-            return true;
-        }
-
-        public bool Search(string prodToSearch)
-        {
-            Console.WriteLine("Search by 1=Name 2=Description");
-            bool isNum = int.TryParse(Console.ReadLine(), out int quest);
-
-            if (quest == 1)
-            {
-                Console.Write("Enter Name: ");
-                prodToSearch = Console.ReadLine();
-                foreach (Product x in _products)
-                {
-                    if (x.Name.Replace(prodToSearch, " ") != x.Name)
-                    {
-                        //ConsoleOutput.ShowProduct(x);
-                    }
-                }
-            }
-            else if (quest == 2)
-            {
-                Console.Write("Enter Description: ");
-                prodToSearch = Console.ReadLine();
-                //foreach (Product x in catalog)
-                //{
-                //    if (x.Description.Replace(prodToSearch, " ") != x.Description)
-                //    {
-                //        ConsoleOutput.ShowProduct(x);
-                //    }
-                //}
-            }
-            return true;
-        }
+        
 
         public bool Search()
         {
             throw new NotImplementedException();
         }
 
-        public bool Add()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Remove()
+        public bool Update()
         {
             throw new NotImplementedException();
         }

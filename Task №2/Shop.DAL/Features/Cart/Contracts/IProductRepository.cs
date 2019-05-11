@@ -1,11 +1,13 @@
-﻿namespace Shop.DAL.Features.Cart.Contracts
+﻿using System.Collections.Generic;
+
+namespace Shop.DAL.Features.Cart.Contracts
 {
     interface IProductRepository
     {
-        bool Add();
-        bool Remove();
+        bool Add(Product prod);
+        bool Remove(string x);
         bool Update();
-        bool Contains();
+        List<Product> Contains();
         bool Search();
     }
 }

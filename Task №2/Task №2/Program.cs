@@ -20,18 +20,18 @@ namespace Task__2
             Cart cart = new Cart();
             while (true)
             {
-                Console.WriteLine("1=CatalogShow\n2=CartShow\n3=AddToCatalog\n4=AddToCart\n5=Remove\n6=Sort\n7=Search\n8=Update\n9=Exit");
+                Console.WriteLine("1=CatalogShow\n2=CartShow\n3=AddToCatalog\n4=AddToCart\n5=Remove\n6=SortCart\n7=SortCatalog\n8=Search\n9=Exit");
                 if(int.TryParse(Console.ReadLine(), out int i))
                 switch (i)
                 {
                     case 1: CartManager.ShowProd(catalog); break;
                     case 2: CartManager.ShowCart(cart,cart.Total()); break;
-                    case 3: CartManager.AddToCatalog(catalog); break;
+                    case 3: CartManager.AddToCatalog(catalog, prod); break;
                     case 4: CartManager.Add(catalog,cart); break;
                     case 5: CartManager.RemoveProd(cart); break;
-                    //case 6: cart.SetSort(); break;
-                    //case 7: cart.Search(); break;
-                    //case 8: cart.Update(); break;
+                    case 6: CartManager.Sort(cart); break;
+                    case 7: CartManager.Sort(catalog); break;
+                    case 8: CartManager.Search(catalog); break;
                     case 9: return;
                     default: Console.WriteLine("Wrong input"); break;
                 }
