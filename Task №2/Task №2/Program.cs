@@ -28,7 +28,7 @@ namespace Task__2
                     case 3: cart.AddToCatalog(prod); break;
                     case 4: cart.Add(); break;
                     case 5: cart.Remove(); break;
-                    case 6: cart.SortToСhange(); break;
+                    case 6: cart.SetSort(); break;
                     case 7: cart.Search(); break;
                     case 8: cart.Update(); break;
                     case 9: return;

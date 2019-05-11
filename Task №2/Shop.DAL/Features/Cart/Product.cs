@@ -1,7 +1,7 @@
 ﻿using System;
-namespace Task__2
+namespace Shop.DAL.Features.Cart
 {
-    public class Product
+    class Product
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -14,6 +14,10 @@ namespace Task__2
             Description = description;
             Type = type;
             Price = price;
+        }
+        static public void Show(Product x)
+        {
+            Console.WriteLine($"{x.Name,-25}  {x.Description,-11}  {x.Type,-10}  {x.Price,-5}");
         }
     }
 }
