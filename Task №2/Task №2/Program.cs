@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shop.DAL.Features.Cart;
+using System;
 using System.Collections.Generic;
 
 namespace Task__2
@@ -7,7 +8,7 @@ namespace Task__2
     {
         static void Main(string[] args)
         {
-            Cart.catalog=new List <Product>{
+            List<Product>catalog=new List <Product>{
                 new Product("Iphone SE 32gb", "Black", "Smartphone", 7999),
                 new Product("Ipad PRO", "Silver", "Tablet", 50499),
                 new Product("AirPods", "Black", "Headphones", 9749),
@@ -23,14 +24,14 @@ namespace Task__2
                 if(int.TryParse(Console.ReadLine(), out int i))
                 switch (i)
                 {
-                    case 1: cart.CatalogShow(); break;
-                    case 2: cart.CartShow(); break;
-                    case 3: cart.AddToCatalog(prod); break;
-                    case 4: cart.Add(); break;
-                    case 5: cart.Remove(); break;
-                    case 6: cart.SetSort(); break;
-                    case 7: cart.Search(); break;
-                    case 8: cart.Update(); break;
+                    case 1: CartManager.ShowProd(catalog); break;
+                    case 2: CartManager.ShowCart(cart,cart.Total()); break;
+                    case 3: CartManager.AddToCatalog(catalog); break;
+                    case 4: CartManager.Add(catalog,cart); break;
+                    case 5: CartManager.RemoveProd(cart); break;
+                    //case 6: cart.SetSort(); break;
+                    //case 7: cart.Search(); break;
+                    //case 8: cart.Update(); break;
                     case 9: return;
                     default: Console.WriteLine("Wrong input"); break;
                 }

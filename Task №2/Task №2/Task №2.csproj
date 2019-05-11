@@ -46,13 +46,15 @@
     <Compile Include="CartManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Cart.cs" />
-    <Compile Include="Properties\Console_Output.cs" />
-    <Compile Include="Properties\IProductRepository.cs" />
-    <Compile Include="Properties\Product.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shop.DAL\Shop.DAL.csproj">
+      <Project>{ae01bade-92ac-4cd2-8839-8eb2e6ac4e91}</Project>
+      <Name>Shop.DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

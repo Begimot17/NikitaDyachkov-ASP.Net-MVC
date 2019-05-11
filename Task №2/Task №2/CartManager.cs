@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Shop.DAL.Features.Cart;
 
 namespace Task__2
 {
@@ -35,18 +33,38 @@ namespace Task__2
                 }
             }
         }
-
-
-        public void Show()
+        public static void Add(List <Product>catalog, Cart cart)
         {
-            Update();
+                ShowProd(catalog);
+                bool isNum = int.TryParse(Console.ReadLine(), out int quest);
+                cart.Add(catalog[quest - 1]);
+        }
+
+
+        public static void ShowCart(Cart cart, int TotalPrice)
+        {
+            Console.WriteLine($"{"Name",-25}  {"Description",-11}  {"Type",-10}  {"Price",-5}");
+
+            foreach (Product x in cart.ListCart())
+            {
+                Console.WriteLine($"{x.Name,-25}  {x.Description,-11}  {x.Type,-10}  {x.Price,-5}");
+            }
+            Console.WriteLine($"TotalPrice={TotalPrice}");
+        }
+
+        public static void ShowProd(List<Product> _products)
+        {
             Console.WriteLine($"{"Name",-25}  {"Description",-11}  {"Type",-10}  {"Price",-5}");
 
             foreach (Product x in _products)
             {
                 Console.WriteLine($"{x.Name,-25}  {x.Description,-11}  {x.Type,-10}  {x.Price,-5}");
             }
-            Console.WriteLine($"TotalPrice={TotalPrice}");
+        }
+        public static void RemoveProd(Cart cart)
+        {
+            Console.Write("Enter Name: ");
+            cart.Remove(Console.ReadLine());
         }
     }
 }
