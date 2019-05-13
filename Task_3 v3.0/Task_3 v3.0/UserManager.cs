@@ -74,7 +74,7 @@ namespace Task_3_v3._0
             Console.WriteLine($"Hello {Name}");
             while (true)
             {
-                Console.WriteLine("1=CatalogShow\n2=CartShow\n3=AddProduct\n4=Delete\n5=Search\n6=Exit");
+                Console.WriteLine("1=CatalogShow\n2=CartShow\n3=AddProduct\n4=Delete\n5=Search\n6=Sort\n7=Exit");
                 switch (Convert.ToInt32(Console.ReadLine()))
                 {
                     case 1: CartManager.CatalogShow(); break;
@@ -82,7 +82,8 @@ namespace Task_3_v3._0
                     case 3: CartManager.Add(Name); break;
                     case 4: CartManager.RemoveProd(Name); break;
                     case 5: CartManager.Search(); break;
-                    case 6: return;
+                    case 6: CartManager.Sort(XmlManager.ProductList()); break;
+                    case 7: return;
                     default: Console.WriteLine("WRONG ENTRY!!!"); break;
                 }
             }

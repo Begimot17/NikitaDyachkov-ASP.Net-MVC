@@ -76,6 +76,7 @@ namespace Shop.DAL.Models
             }
         }
 
+
         public void SetSort(SortBy sortType)
         {
             SortBy = sortType;

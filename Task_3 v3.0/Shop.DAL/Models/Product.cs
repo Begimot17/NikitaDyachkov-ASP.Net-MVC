@@ -14,8 +14,8 @@ namespace Shop.DAL.Models
         public string Type { get; set; }
         public int Price { get; set; }
         public Product() { }
-        public SortBy SortBy { get; private set; }
-        public void Sort(List<Product> prod)
+        static public SortBy SortBy { get; private set; }
+        public static void Sort(List<Product> prod)
         {
             switch (SortBy)
             {
@@ -32,9 +32,11 @@ namespace Shop.DAL.Models
                     prod = prod.OrderBy(x => x.Price).ToList();
                     break;
             }
+            CartManager.ShowProd(prod);
+
 
         }
-        public void SetSort(SortBy sortType, List<Product> prod)
+        public static void SetSort(SortBy sortType, List<Product> prod)
         {
             SortBy = sortType;
             Sort(prod);

@@ -24,7 +24,8 @@ namespace Shop.DAL.Contracts
             }
             SortBy sort;
             Enum.TryParse(sortby, true, out sort);
-            prod[0].SetSort(sort, prod);
+            Product.SetSort(sort, prod);
+
         }
         public static void Sort(Cart cart)
         {
@@ -134,7 +135,6 @@ namespace Shop.DAL.Contracts
 
         public static void ShowProd(List<Product> _products)
         {
-            _products[0].Sort(_products);
             Console.WriteLine($"{"Name",-25}  {"Description",-11}  {"Type",-10}  {"Price",-5}");
 
             foreach (Product x in _products)
