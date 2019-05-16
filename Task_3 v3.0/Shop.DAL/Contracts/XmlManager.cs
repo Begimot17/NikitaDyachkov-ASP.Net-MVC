@@ -1,18 +1,20 @@
 ﻿using Shop.DAL.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace Shop.DAL.Contracts
 {
     public class XmlManager
     {
         public const string fileCart= @"C:\Users\Хозяйн\source\repos\Task_3 v3.0\Shop.DAL\Repositories\Cart.xml";
-        public const string fileProduct= @"C:\Users\Хозяйн\source\repos\Task_3 v3.0\Shop.DAL\Repositories\Product.xml";
-        public const string fileUser= @"C:\Users\Хозяйн\source\repos\Task_3 v3.0\Shop.DAL\Repositories\User.xml";
+        public const string fileProduct= @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Products.xml";
+        public const string fileUser= @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Users.xml";
         public static bool AddProduct(string Name, Product prod)
         {
             XDocument xdoc = XDocument.Load(fileCart);
@@ -27,26 +29,25 @@ namespace Shop.DAL.Contracts
         }
         public static bool AddProduct(Product product)
         {
-            XDocument xDoc = XDocument.Load(fileProduct);
-            XNode xNewNode = new XElement("Product", new XAttribute("Name", product.Name),
-                new XElement("Description", product.Description),
-                new XElement("Type", product.Type),
-                new XElement("Price", product.Price));
-            xDoc.Root.Add(xNewNode);
-            xDoc.Save(fileProduct);
+            List<Product> ProdList = XmlManager.DisProd().ToList();
+            ProdList.Add(product);
+            SerProd(ProdList.ToArray());
             return true;
         }
         public static bool Remove(string nameDelete)
         {
-            XDocument xDoc = XDocument.Load(fileProduct);
-            foreach (XElement xNode in xDoc.Root.Nodes())
+            XDocument xdoc = XDocument.Load(fileProduct);
+            foreach (XElement product in xdoc.Element("ArrayOfProduct").Elements("Product"))
             {
-                if (xNode.Attribute("Name").Value == nameDelete)
+                
+                XElement NameElement = product.Element("Name");
+
+                if (NameElement.Value == nameDelete)
                 {
-                    xNode.Remove();
+                    product.Remove();
                 }
             }
-            xDoc.Save(fileProduct);
+            xdoc.Save(fileProduct);
             return true;
         }
         public static List<Cart> CartsList(string NameUs)
@@ -80,51 +81,45 @@ namespace Shop.DAL.Contracts
             return true;
 
         }
-        public static List<Product> ProductList()
+        public static void SerUser(User[] people)
         {
-            List<Product> product = new List<Product>();
-            XDocument xdoc = XDocument.Load(fileProduct);
-            foreach (XElement prod in xdoc.Element("Products").Elements("Product"))
+            XmlSerializer formatter = new XmlSerializer(typeof(User[]));
+
+            using (FileStream fs = new FileStream(fileUser, FileMode.OpenOrCreate))
             {
-                XAttribute Name = prod.Attribute("Name");
-                XElement Description = prod.Element("Description");
-                XElement Type = prod.Element("Type");
-                XElement Price = prod.Element("Price");
-
-
-                if (Name != null && Description != null && Type != null && Price != null)
-                {
-                    product.Add(new Product(Name.Value, Description.Value, Type.Value, Convert.ToInt32(Price.Value)));
-                }
+                formatter.Serialize(fs, people);
             }
-            return product;
         }
-        public static void NewUser(User newUser)
+        public static User[] DisUser()
         {
-            XDocument xDoc = XDocument.Load(fileUser);
-            XNode xNewNode = new XElement("User", new XAttribute("Name", newUser.Name),
-                new XElement("Email", newUser.Email),
-                new XElement("Password", newUser.Pass));
-            xDoc.Root.Add(xNewNode);
-            xDoc.Save(fileUser);
-        }
-        public static List<User> ListUsers()
-        {
-            List<User> users = new List<User>();
-            XDocument xdoc = XDocument.Load(fileUser);
-            foreach (XElement user in xdoc.Element("Users").Elements("User"))
+            XmlSerializer formatter = new XmlSerializer(typeof(User[]));
+
+            using (FileStream fs = new FileStream(fileUser, FileMode.OpenOrCreate))
             {
-                XAttribute username = user.Attribute("Name");
-                XElement useremail = user.Element("Email");
-                XElement userpass = user.Element("Password");
-
-                if (username != null && useremail != null && userpass != null)
-                {
-                    users.Add(new User(username.Value, useremail.Value, userpass.Value));
-                }
+                User[] newpeople = (User[])formatter.Deserialize(fs);
+                return newpeople;
             }
-            return users;
         }
+        public static void SerProd(Product[] product)
+        {
+            XmlSerializer formatter = new XmlSerializer(typeof(Product[]));
+
+            using (FileStream fs = new FileStream(fileProduct, FileMode.OpenOrCreate))
+            {
+                formatter.Serialize(fs, product);
+            }
+        }
+        public static Product[] DisProd()
+        {
+            XmlSerializer formatter = new XmlSerializer(typeof(Product[]));
+
+            using (FileStream fs = new FileStream(fileProduct, FileMode.OpenOrCreate))
+            {
+                Product[] newpeople = (Product[])formatter.Deserialize(fs);
+                return newpeople;
+            }
+        }
+        
     }
 }
 

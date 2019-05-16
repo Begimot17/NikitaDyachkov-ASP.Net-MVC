@@ -71,25 +71,27 @@ namespace Shop.DAL.Contracts
         public static void Add(string Name)
         {
             CatalogShow();
-            Product prod=null;
+            Product prod = null;
+            List<Product> ProdList = XmlManager.DisProd().ToList();
             int i = 1;
             int quest = Convert.ToInt32(Console.ReadLine());
-            foreach (Product x in XmlManager.ProductList())
+            foreach (Product x in ProdList)
             {
-                if(i==quest)
-                 prod= new Product(x.Name, x.Description, x.Type, x.Price);
+                if (i == quest)
+                    prod = new Product(x.Name, x.Description, x.Type, x.Price);
                 i++;
             }
             if (prod == null)
                 return;
-            XmlManager.AddProduct(Name, prod);
+            XmlManager.AddProduct(Name,prod);
         }
 
         public static void CatalogShow()
         {
             Product prod = new Product();
             int i = 1;
-            foreach (Product x in XmlManager.ProductList())
+            List<Product> ProdList = XmlManager.DisProd().ToList();
+            foreach (Product x in ProdList)
             {
                 Console.WriteLine("{0,-3}{1,-25}{2,-17}{3,-13}{4}", i++, x.Name, x.Description, x.Type, x.Price);
             }
@@ -98,7 +100,8 @@ namespace Shop.DAL.Contracts
         {
             decimal AllPrice = 0;
             Console.WriteLine("Your Cart");
-            foreach (Cart x in XmlManager.CartsList(Name))
+            List<Cart> CartList = XmlManager.CartsList(Name);
+            foreach (Cart x in CartList)
             {
                 Console.WriteLine("{0,-25}{1,-25}{2,-17}{3,-13}", x.product.Name, x.product.Description, x.product.Type, x.product.Price);
                 AllPrice += x.product.Price;
@@ -112,7 +115,9 @@ namespace Shop.DAL.Contracts
             Console.WriteLine("Enter name to search");
             string namesearch = Console.ReadLine();
             int num = 1;
-            foreach (Product x in XmlManager.ProductList())
+            List<Product> ProdList = XmlManager.DisProd().ToList();
+
+            foreach (Product x in ProdList)
             {
                 if (x.Name == namesearch)
                 {
@@ -152,7 +157,7 @@ namespace Shop.DAL.Contracts
         {
             CartShow(Name);
             Console.Write("Enter Name: ");
-            XmlManager.RemoveProduct(Name,Console.ReadLine());
+            XmlManager.RemoveProduct(Name, Console.ReadLine());
         }
         public static bool Search(List<Product> _products)
         {

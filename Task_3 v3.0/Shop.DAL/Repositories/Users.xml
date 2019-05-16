@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <User>
+    <Name>Tom</Name>
+    <Email>Tom@gmail.com</Email>
+    <Pass>123456</Pass>
+  </User>
+  <User>
+    <Name>Bill</Name>
+    <Email>Bill@gmail.com</Email>
+    <Pass>123456</Pass>
+  </User>
+  <User>
+    <Name>Test</Name>
+    <Email>Test@gmail.com</Email>
+    <Pass>123456</Pass>
+  </User>
+  <User>
+    <Name>Test</Name>
+    <Email>Test@gmail.com</Email>
+    <Pass>123456</Pass>
+  </User>
+  <User>
+    <Name>Nikita</Name>
+    <Email>Nikita@gmail.com</Email>
+    <Pass>123456</Pass>
+  </User>
+  <User>
+    <Name>Nikita</Name>
+    <Email>Nikita@gmail.com</Email>
+    <Pass>123456</Pass>
+  </User>
+</ArrayOfUser>

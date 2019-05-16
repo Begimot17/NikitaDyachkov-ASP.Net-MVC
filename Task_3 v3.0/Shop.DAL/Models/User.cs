@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shop.DAL.Models
 {
+    [Serializable]
     public class User
     {
         public string Name { get; set; }

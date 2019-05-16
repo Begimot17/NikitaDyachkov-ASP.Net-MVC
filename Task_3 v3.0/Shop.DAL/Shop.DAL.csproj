@@ -55,9 +55,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Repositories\Cart.xml" />
-    <Content Include="Repositories\Product.xml" />
-    <Content Include="Repositories\User.xml" />
+    <Content Include="Repositories\Carts.xml" />
+    <Content Include="Repositories\Products.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Repositories\Users.xml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

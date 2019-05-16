@@ -28,20 +28,22 @@ namespace Task_3_v3._0
                 bool pass = Regex.IsMatch(newUser.Pass, @"[0-9a-zA-Z!@#$%^&*]{6,}");
                 if (name && email && pass)
                 {
-                    foreach (User x in XmlManager.ListUsers())
+                    foreach (User x in XmlManager.DisUser())
                     {
                         if (x.Name == newUser.Name)
                         {
                             Console.WriteLine("A user with the same name already exists");
-                            break;
+                            return;
                         }
                         if (x.Email == newUser.Email)
                         {
                             Console.WriteLine("A user with the same email already exists");
-                            break;
+                            return;
                         }
                     }
-                    XmlManager.NewUser( newUser);
+                    List<User> newUserList = XmlManager.DisUser().ToList();
+                    newUserList.Add(newUser);
+                    XmlManager.SerUser(newUserList.ToArray());
                     UserConsole(newUser.Name);
 
                 }
@@ -58,7 +60,9 @@ namespace Task_3_v3._0
             string Email = Console.ReadLine();
             Console.Write("Enter (min 6 chars) Password->");
             string Pass = Console.ReadLine();
-                foreach (User x in XmlManager.ListUsers())
+            List<User> newUserList = XmlManager.DisUser().ToList();
+
+            foreach (User x in newUserList)
                 {
                     if (x.Pass == Pass && x.Email == Email)
                     {
@@ -74,6 +78,7 @@ namespace Task_3_v3._0
             Console.WriteLine($"Hello {Name}");
             while (true)
             {
+                List<Product> Prods = XmlManager.DisProd().ToList();
                 Console.WriteLine("1=CatalogShow\n2=CartShow\n3=AddProduct\n4=Delete\n5=Search\n6=Sort\n7=Exit");
                 switch (Convert.ToInt32(Console.ReadLine()))
                 {
@@ -82,7 +87,7 @@ namespace Task_3_v3._0
                     case 3: CartManager.Add(Name); break;
                     case 4: CartManager.RemoveProd(Name); break;
                     case 5: CartManager.Search(); break;
-                    case 6: CartManager.Sort(XmlManager.ProductList()); break;
+                    case 6: CartManager.Sort(Prods); break;
                     case 7: return;
                     default: Console.WriteLine("WRONG ENTRY!!!"); break;
                 }

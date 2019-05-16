@@ -14,8 +14,8 @@ namespace Shop.DAL.Models
         Type = 3,
         Price = 4
     }
-
-    public class Cart : IEnumerable
+    
+    public class Cart 
     {
         public string NameUser { get; set; }
         private List<Product> _products;
@@ -35,6 +35,9 @@ namespace Shop.DAL.Models
                     _products.Add(value);
             }
         }
+        public SortBy SortBy { get; private set; }
+
+
         public Cart()
         {
             _products = new List<Product>();
@@ -50,8 +53,6 @@ namespace Shop.DAL.Models
             NameUser = Name;
             product = prod;
         }
-
-        public SortBy SortBy { get; private set; }
 
         public List<Product> Contains()
         {

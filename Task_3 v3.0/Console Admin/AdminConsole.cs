@@ -22,7 +22,7 @@ namespace Console_Admin
                     case 1: CartManager.CatalogShow(); break;
                     case 2: Product.AddProduct(); break;
                     case 3: Product.Delete(); break;
-                    case 4: CartManager.Sort(XmlManager.ProductList()); break;
+                    case 4: CartManager.Sort(XmlManager.DisProd().ToList()); break;
                     case 5: Product.Search(); break;
                     case 6: return;
                     default: Console.WriteLine("WRONG ENTRY!!!"); break;

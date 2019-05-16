@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Shop.DAL.Models
-{
+{[Serializable]
     public class Product
     {
         public string Name { get; set; }
@@ -105,18 +105,19 @@ namespace Shop.DAL.Models
         }
         public static bool Search()
         {
+            List <Product> ProdList= XmlManager.DisProd().ToList();
             Console.WriteLine("Search by 1=Name 2=Description");
             bool isNum = int.TryParse(Console.ReadLine(), out int quest);
 
             if (quest == 1)
             {
                 Console.Write("Enter Name: ");
-                Console.WriteLine(Product.Search(XmlManager.ProductList(), Console.ReadLine(), quest));
+                Console.WriteLine(Product.Search(ProdList, Console.ReadLine(), quest));
             }
             else if (quest == 2)
             {
                 Console.Write("Enter Description: ");
-                Console.WriteLine(Product.Search(XmlManager.ProductList(), Console.ReadLine(), quest));
+                Console.WriteLine(Product.Search(ProdList, Console.ReadLine(), quest));
             }
             return true;
 
