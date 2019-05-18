@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task_4
+namespace Task_3_v3._0
 {
     class UserConsole
     {
@@ -20,7 +20,7 @@ namespace Task_4
                 {
                     case 1: UserManager.Registration(); break;
                     case 2: UserManager.Login(); break;
-                    //case 3: CartManager.CatalogShow(); break;
+                    case 3: CartManager.CatalogShow(); break;
                     case 4: return;
                     default: Console.WriteLine("Неверный ввод!!!"); break;
                 }

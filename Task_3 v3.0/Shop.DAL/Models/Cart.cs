@@ -11,11 +11,11 @@ namespace Shop.DAL.Models
     {
         Name = 1,
         Description = 2,
-      //  Type = 3,
-        Price = 3
+        Type = 3,
+        Price = 4
     }
-
-    public class Cart : IEnumerable
+    
+    public class Cart 
     {
         public string NameUser { get; set; }
         private List<Product> _products;
@@ -35,6 +35,9 @@ namespace Shop.DAL.Models
                     _products.Add(value);
             }
         }
+        public SortBy SortBy { get; private set; }
+
+
         public Cart()
         {
             _products = new List<Product>();
@@ -51,8 +54,6 @@ namespace Shop.DAL.Models
             product = prod;
         }
 
-        public SortBy SortBy { get; private set; }
-
         public List<Product> Contains()
         {
             return _products;
@@ -67,9 +68,9 @@ namespace Shop.DAL.Models
                 case SortBy.Description:
                     _products = _products.OrderBy(x => x.Description).ToList();
                     break;
-               // case SortBy.Type:
-              //      _products = _products.OrderBy(x => x.Type).ToList();
-                    //break;
+                case SortBy.Type:
+                    _products = _products.OrderBy(x => x.Type).ToList();
+                    break;
                 case SortBy.Price:
                     _products = _products.OrderBy(x => x.Price).ToList();
                     break;
