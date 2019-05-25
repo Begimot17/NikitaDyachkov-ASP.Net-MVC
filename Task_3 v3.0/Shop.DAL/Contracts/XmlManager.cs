@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
@@ -27,14 +25,16 @@ namespace Shop.DAL.Contracts
             xdoc.Save(fileCart);
             return true;
         }
-        public static bool AddProduct(Product product)
+        public  bool AddProduct(Product product)
         {
-            List<Product> ProdList = XmlManager.DisProd().ToList();
+            XmlManager xmlman = new XmlManager();
+
+            List<Product> ProdList = xmlman.DisProd().ToList();
             ProdList.Add(product);
             SerProd(ProdList.ToArray());
             return true;
         }
-        public static bool Remove(string nameDelete)
+        public  bool Remove(string nameDelete)
         {
             XDocument xdoc = XDocument.Load(fileProduct);
             foreach (XElement product in xdoc.Element("ArrayOfProduct").Elements("Product"))
@@ -50,7 +50,7 @@ namespace Shop.DAL.Contracts
             xdoc.Save(fileProduct);
             return true;
         }
-        public static List<Cart> CartsList(string NameUs)
+        public  List<Cart> CartsList(string NameUs)
         {
             List<Cart> cart = new List<Cart>();
             XDocument xdoc = XDocument.Load(fileCart);
@@ -66,7 +66,7 @@ namespace Shop.DAL.Contracts
             }
             return cart;
         }
-        public static bool RemoveProduct(string Name, string namedelete)
+        public  bool RemoveProduct(string Name, string namedelete)
         {
             XDocument xDoc = XDocument.Load(fileCart);
             foreach (XElement xNode in xDoc.Root.Nodes())
@@ -81,7 +81,7 @@ namespace Shop.DAL.Contracts
             return true;
 
         }
-        public static void SerUser(User[] people)
+        public  void SerUser(User[] people)
         {
             XmlSerializer formatter = new XmlSerializer(typeof(User[]));
 
@@ -90,7 +90,7 @@ namespace Shop.DAL.Contracts
                 formatter.Serialize(fs, people);
             }
         }
-        public static User[] DisUser()
+        public  User[] DisUser()
         {
             XmlSerializer formatter = new XmlSerializer(typeof(User[]));
 
@@ -100,7 +100,7 @@ namespace Shop.DAL.Contracts
                 return newpeople;
             }
         }
-        public static void SerProd(Product[] product)
+        public  void SerProd(Product[] product)
         {
             XmlSerializer formatter = new XmlSerializer(typeof(Product[]));
 
@@ -109,7 +109,7 @@ namespace Shop.DAL.Contracts
                 formatter.Serialize(fs, product);
             }
         }
-        public static Product[] DisProd()
+        public  Product[] DisProd()
         {
             XmlSerializer formatter = new XmlSerializer(typeof(Product[]));
 
