@@ -9,7 +9,9 @@ namespace Task_3_v3._0
 {
     public class UserManager
     {
-       public  User NewUser()
+        string fileProduct = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Products.xml";
+
+        public User NewUser()
         {
             User newUser = new User();
             Console.Write("Enter Name->");
@@ -91,7 +93,7 @@ namespace Task_3_v3._0
                 ProductManager prodman = new ProductManager();
                 CartManager cartman = new CartManager();
 
-                List<Product> Prods = xmlman.DisProd().ToList();
+                List<Product> Prods = xmlman.DisProd(fileProduct).ToList();
                 Console.WriteLine("1=CatalogShow\n2=CartShow\n3=AddProduct\n4=Delete\n5=Search\n6=Sort\n7=Exit");
                 switch (Convert.ToInt32(Console.ReadLine()))
                 {
@@ -100,7 +102,7 @@ namespace Task_3_v3._0
                     case 3: cartman.Add(Name); break;
                     case 4: cartman.RemoveProd(Name); break;
                     case 5: prodman.Search(); break;
-                    case 6: prodman.Sort(Prods); break;
+                    case 6: prodman.Sort(); break;
                     case 7: return;
                     default: Console.WriteLine("WRONG ENTRY!!!"); break;
                 }

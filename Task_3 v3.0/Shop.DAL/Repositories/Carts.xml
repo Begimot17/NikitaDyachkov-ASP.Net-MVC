@@ -18,4 +18,10 @@
     <Type>Smartphone</Type>
     <Price>7999</Price>
   </Cart>
+  <Cart NameUser="Nikita">
+    <Name>IPad Pro</Name>
+    <Discription>Silver</Discription>
+    <Type>Tablet</Type>
+    <Price>50499</Price>
+  </Cart>
 </Carts>

@@ -6,9 +6,48 @@ using System.Linq;
 
 namespace Shop.DAL.Contracts
 {
-    public class ProductManager
+    public class ProductManager:Product
     {
         string fileProduct = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Products.xml";
+        public void Sort()
+        {
+            XmlManager xmlman = new XmlManager();
+            List<Product> prod = xmlman.DisProd(fileProduct).ToList();
+            switch (Product.SortBy)
+            {
+                case SortBy.Name:
+                    prod = prod.OrderBy(x => x.Name).ToList();
+                    break;
+                case SortBy.Description:
+                    prod = prod.OrderBy(x => x.Description).ToList();
+                    break;
+                case SortBy.Type:
+                    prod = prod.OrderBy(x => x.Type).ToList();
+                    break;
+                case SortBy.Price:
+                    prod = prod.OrderBy(x => x.Price).ToList();
+                    break;
+            }
+            ShowProd(prod);
+
+
+        }
+        public void SetSort(SortBy sortType)
+        {
+            SortBy = sortType;
+            Sort();
+        }
+        
+        public void Add(Product[] catalog)
+        {
+            XmlManager xmlman = new XmlManager();
+            List<Product> prod = xmlman.DisProd(fileProduct).ToList();
+            foreach (Product item in catalog)
+            {
+                if (item != null)
+                    prod.Add(item);
+            }
+        }
         public void Add()
         {
             XmlManager xmlman = new XmlManager();
@@ -25,7 +64,7 @@ namespace Shop.DAL.Contracts
             if (xmlman.AddProduct(product, fileProduct))
                 Console.WriteLine("Product Added");
         }
-        public  void Sort(List<Product> prod)
+        public  void Sorttt()
         {
             Product product = new Product();
             Console.WriteLine("Sort by 1=Name/2=Description/3=Type/4=Price");
@@ -41,7 +80,7 @@ namespace Shop.DAL.Contracts
             }
             SortBy sort;
             Enum.TryParse(sortby, true, out sort);
-            product.SetSort(sort, prod);
+            SetSort(sort);
 
         }
         public  void AddToCatalog(List<Product> products, Product[] prod)
@@ -63,7 +102,7 @@ namespace Shop.DAL.Contracts
                     int quest = 1;
                     if (int.TryParse(Console.ReadLine(), out quest) && quest == 2)
                     {
-                        product.Add(prod, products);
+                        Add(prod);
                         break;
                     }
                 }

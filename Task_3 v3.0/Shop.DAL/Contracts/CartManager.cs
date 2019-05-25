@@ -9,7 +9,7 @@ namespace Shop.DAL.Contracts
     public class CartManager
     {
         string fileProduct = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Products.xml";
-        string fileCart = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Products.xml";
+        string fileCart = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Carts.xml";
         public  void Sort(Cart cart)
         {
             Console.WriteLine("Sort by 1=Name/2=Description/3=Type/4=Price");
