@@ -13,7 +13,7 @@ namespace Shop.DAL.Contracts
         public const string fileCart= @"C:\Users\Хозяйн\source\repos\Task_3 v3.0\Shop.DAL\Repositories\Cart.xml";
         public const string fileProduct= @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Products.xml";
         public const string fileUser= @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Users.xml";
-        public static bool AddProduct(string Name, Product prod)
+        public  bool AddProduct(string Name, Product prod)
         {
             XDocument xdoc = XDocument.Load(fileCart);
             xdoc.Root.Add(new XElement("Cart",
@@ -119,7 +119,6 @@ namespace Shop.DAL.Contracts
                 return newpeople;
             }
         }
-        
     }
 }
 
