@@ -19,7 +19,7 @@ namespace Shop.DAL.Models
     {
         public string NameUser { get; set; }
         private List<Product> _products;
-        public Product product { get; set; }
+        public Product Product { get; set; }
         public static int TotalPrice { get; set; }
         public Product this[int index]
         {
@@ -51,7 +51,7 @@ namespace Shop.DAL.Models
         public Cart(string Name, Product prod)
         {
             NameUser = Name;
-            product = prod;
+            Product = prod;
         }
 
         public List<Product> Contains()
@@ -93,15 +93,6 @@ namespace Shop.DAL.Models
             }
             TotalPrice = total;
             return TotalPrice;
-        }
-
-        public void CopyTo(Array array, int index)
-        {
-            throw new NotImplementedException();
-        }
-        public IEnumerator GetEnumerator()
-        {
-            throw new NotImplementedException();
         }
 
         public bool Add(Product product)

@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\CartManager.cs" />
+    <Compile Include="Contracts\ProductManager.cs" />
     <Compile Include="Contracts\XmlManager.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Product.cs" />

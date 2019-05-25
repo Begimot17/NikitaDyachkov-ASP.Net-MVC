@@ -14,13 +14,12 @@ namespace Task_3_v3._0
         {
             while (true)
             {
-                Product p = new Product();
                 Console.WriteLine("1=Registration\n2=Log in\n3=Products\n4=Exit");
                 switch (Convert.ToInt32(Console.ReadLine()))
                 {
                     case 1: UserManager.Registration(); break;
                     case 2: UserManager.Login(); break;
-                    case 3: CartManager.CatalogShow(); break;
+                    case 3: ProductManager.CatalogShow(); break;
                     case 4: return;
                     default: Console.WriteLine("Неверный ввод!!!"); break;
                 }

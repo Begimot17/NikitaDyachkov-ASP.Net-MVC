@@ -11,17 +11,23 @@ namespace Task_3_v3._0
 {
     public class UserManager
     {
+       public static User NewUser()
+        {
+            User newUser = new User();
+            Console.Write("Enter Name->");
+            newUser.Name = Console.ReadLine();
+            Console.Write("Enter Email->");
+            newUser.Email = Console.ReadLine();
+            Console.Write("Enter (min 6 chars) Password->");
+            newUser.Pass = Console.ReadLine();
+            return newUser;
+        }
+       
        public  static void Registration()
         {
             while (true)
             {
-                User newUser = new User();
-                Console.Write("Enter Name->");
-                newUser.Name = Console.ReadLine();
-                Console.Write("Enter Email->");
-                newUser.Email = Console.ReadLine();
-                Console.Write("Enter (min 6 chars) Password->");
-                newUser.Pass = Console.ReadLine();
+                User newUser = NewUser();
                 bool name = Regex.IsMatch(newUser.Name, @"^[\p{L} \.\-]+$");
                 bool email = Regex.IsMatch(newUser.Email, @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
              @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" + @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
@@ -72,7 +78,7 @@ namespace Task_3_v3._0
                 Console.WriteLine("Invalid email or password");
             
         }
-        static void UserConsole(string Name)
+        public static void UserConsole(string Name)
         {
             Cart cart = new Cart();
             Console.WriteLine($"Hello {Name}");
@@ -82,12 +88,12 @@ namespace Task_3_v3._0
                 Console.WriteLine("1=CatalogShow\n2=CartShow\n3=AddProduct\n4=Delete\n5=Search\n6=Sort\n7=Exit");
                 switch (Convert.ToInt32(Console.ReadLine()))
                 {
-                    case 1: CartManager.CatalogShow(); break;
+                    case 1: ProductManager.CatalogShow(); break;
                     case 2: CartManager.CartShow(Name); break;
                     case 3: CartManager.Add(Name); break;
                     case 4: CartManager.RemoveProd(Name); break;
-                    case 5: CartManager.Search(); break;
-                    case 6: CartManager.Sort(Prods); break;
+                    case 5: ProductManager.Search(); break;
+                    case 6: ProductManager.Sort(Prods); break;
                     case 7: return;
                     default: Console.WriteLine("WRONG ENTRY!!!"); break;
                 }

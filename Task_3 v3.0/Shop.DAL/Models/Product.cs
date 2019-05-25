@@ -32,7 +32,7 @@ namespace Shop.DAL.Models
                     prod = prod.OrderBy(x => x.Price).ToList();
                     break;
             }
-            CartManager.ShowProd(prod);
+            ProductManager.ShowProd(prod);
 
 
         }
@@ -55,72 +55,8 @@ namespace Shop.DAL.Models
                 if (item != null)
                     products.Add(item);
             }
-
         }
-        public static void Delete()
-        {
-            Console.WriteLine("Enter name delete");
-            string nameDelete = Console.ReadLine();
-            if (XmlManager.Remove(nameDelete))
-                Console.WriteLine("Product Removed");
-
-        }
-        public static void AddProduct()
-        {
-            Product product = new Product();
-            Console.Write("Enter Name->");
-            product.Name = Console.ReadLine();
-            Console.Write("Enter Description->");
-            product.Description = Console.ReadLine();
-            Console.Write("Enter Type->");
-            product.Type = Console.ReadLine();
-            Console.Write("Enter Price->");
-            product.Price = Convert.ToInt32(Console.ReadLine());
-            if (XmlManager.AddProduct(product))
-                Console.WriteLine("Product Added");
-        }
-        public static string Search(List<Product> prod, string prodToSearch, int quest)
-        {
-            switch (quest)
-            {
-                case 1:
-                    foreach (Product x in prod)
-                    {
-                        if (x.Name == prodToSearch)
-                            return $"{x.Name,-25}  {x.Description,-11}  {x.Type,-10}  {x.Price,-5}";
-                    };
-                    break;
-                case 2:
-                    foreach (Product x in prod)
-                    {
-                        if (x.Description == prodToSearch)
-                            return $"{x.Name,-25}  {x.Description,-11}  {x.Type,-10}  {x.Price,-5}";
-                    };
-                    break;
-                default:
-                    return "Sorry";
-
-            }
-            return "";
-        }
-        public static bool Search()
-        {
-            List <Product> ProdList= XmlManager.DisProd().ToList();
-            Console.WriteLine("Search by 1=Name 2=Description");
-            bool isNum = int.TryParse(Console.ReadLine(), out int quest);
-
-            if (quest == 1)
-            {
-                Console.Write("Enter Name: ");
-                Console.WriteLine(Product.Search(ProdList, Console.ReadLine(), quest));
-            }
-            else if (quest == 2)
-            {
-                Console.Write("Enter Description: ");
-                Console.WriteLine(Product.Search(ProdList, Console.ReadLine(), quest));
-            }
-            return true;
-
-        }
+        
+        
     }
 }
