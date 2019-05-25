@@ -2,15 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Shop.DAL.Contracts
 {
     public class CartManager
     {
-        
-        public static void Sort(Cart cart)
+        public  void Sort(Cart cart)
         {
             Console.WriteLine("Sort by 1=Name/2=Description/3=Type/4=Price");
             string sortby = "Name";
@@ -27,12 +25,14 @@ namespace Shop.DAL.Contracts
             Enum.TryParse(sortby, true, out sort);
             cart.SetSort(sort);
         }
-        
-        public static void Add(string Name)
+        public  void Add(string Name)
         {
-            ProductManager.CatalogShow();
+            XmlManager xmlman = new XmlManager();
+
+            ProductManager prodman = new ProductManager();
+            prodman.CatalogShow();
             Product prod = null;
-            List<Product> ProdList = XmlManager.DisProd().ToList();
+            List<Product> ProdList = xmlman.DisProd().ToList();
             int i = 1;
             int quest = Convert.ToInt32(Console.ReadLine());
             foreach (Product x in ProdList)
@@ -43,13 +43,14 @@ namespace Shop.DAL.Contracts
             }
             if (prod == null)
                 return;
-            XmlManager.AddProduct(Name,prod);
+            xmlman.AddProduct(Name,prod);
         }
-        public static void CartShow(string Name)
+        public  void CartShow(string Name)
         {
+            XmlManager xmlman = new XmlManager();
             decimal AllPrice = 0;
             Console.WriteLine("Your Cart");
-            List<Cart> CartList = XmlManager.CartsList(Name);
+            List<Cart> CartList = xmlman.CartsList(Name);
             foreach (Cart x in CartList)
             {
                 Console.WriteLine("{0,-25}{1,-25}{2,-17}{3,-13}", x.Product.Name, x.Product.Description, x.Product.Type, x.Product.Price);
@@ -57,8 +58,7 @@ namespace Shop.DAL.Contracts
             }
             Console.WriteLine($"AllPrice={AllPrice}");
         }
-
-        public static void ShowCart(Cart cart, int TotalPrice)
+        public  void ShowCart(Cart cart, int TotalPrice)
         {
             Console.WriteLine($"{"Name",-25}  {"Description",-11}  {"Type",-10}  {"Price",-5}");
 
@@ -68,20 +68,18 @@ namespace Shop.DAL.Contracts
             }
             Console.WriteLine($"TotalPrice={TotalPrice}");
         }
-
-        
-        public static void RemoveProd(Cart cart)
+        public  void RemoveProd(Cart cart)
         {
 
             Console.Write("Enter Name: ");
             cart.Remove(Console.ReadLine());
         }
-        public static void RemoveProd(string Name)
+        public  void RemoveProd(string Name)
         {
+            XmlManager xmlman = new XmlManager();
             CartShow(Name);
             Console.Write("Enter Name: ");
-            XmlManager.RemoveProduct(Name, Console.ReadLine());
+            xmlman.RemoveProduct(Name, Console.ReadLine());
         }
-       
     }
 }

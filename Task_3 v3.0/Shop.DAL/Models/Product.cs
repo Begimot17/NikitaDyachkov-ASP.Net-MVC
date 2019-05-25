@@ -15,8 +15,9 @@ namespace Shop.DAL.Models
         public int Price { get; set; }
         public Product() { }
         static public SortBy SortBy { get; private set; }
-        public static void Sort(List<Product> prod)
+        public  void Sort(List<Product> prod)
         {
+            ProductManager prodman=new ProductManager();
             switch (SortBy)
             {
                 case SortBy.Name:
@@ -32,11 +33,11 @@ namespace Shop.DAL.Models
                     prod = prod.OrderBy(x => x.Price).ToList();
                     break;
             }
-            ProductManager.ShowProd(prod);
+            prodman.ShowProd(prod);
 
 
         }
-        public static void SetSort(SortBy sortType, List<Product> prod)
+        public  void SetSort(SortBy sortType, List<Product> prod)
         {
             SortBy = sortType;
             Sort(prod);
@@ -48,7 +49,7 @@ namespace Shop.DAL.Models
             Type = type;
             Price = price;
         }
-        public static void Add(Product[] catalog, List<Product> products)
+        public  void Add(Product[] catalog, List<Product> products)
         {
             foreach (Product item in catalog)
             {

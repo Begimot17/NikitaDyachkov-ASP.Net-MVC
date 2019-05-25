@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Shop.DAL.Contracts
 {
     public class ProductManager
     {
-        public static void Add()
+        public  void Add()
         {
+            XmlManager xmlman = new XmlManager();
+
             Product product = new Product();
             Console.Write("Enter Name->");
             product.Name = Console.ReadLine();
@@ -20,11 +21,12 @@ namespace Shop.DAL.Contracts
             product.Type = Console.ReadLine();
             Console.Write("Enter Price->");
             product.Price = Convert.ToInt32(Console.ReadLine());
-            if (XmlManager.AddProduct(product))
+            if (xmlman.AddProduct(product))
                 Console.WriteLine("Product Added");
         }
-        public static void Sort(List<Product> prod)
+        public  void Sort(List<Product> prod)
         {
+            Product product = new Product();
             Console.WriteLine("Sort by 1=Name/2=Description/3=Type/4=Price");
             string sortby = "Name";
             bool isNum = int.TryParse(Console.ReadLine(), out int quest);
@@ -38,13 +40,14 @@ namespace Shop.DAL.Contracts
             }
             SortBy sort;
             Enum.TryParse(sortby, true, out sort);
-            Product.SetSort(sort, prod);
+            product.SetSort(sort, prod);
 
         }
-        public static void AddToCatalog(List<Product> products, Product[] prod)
+        public  void AddToCatalog(List<Product> products, Product[] prod)
         {
             for (int i = 0; i < prod.Length; i++)
             {
+                Product product = new Product();
                 Console.Write("Enter Name: ");
                 string Name = Console.ReadLine();
                 Console.Write("Enter Description:");
@@ -59,24 +62,25 @@ namespace Shop.DAL.Contracts
                     int quest = 1;
                     if (int.TryParse(Console.ReadLine(), out quest) && quest == 2)
                     {
-                        Product.Add(prod, products);
+                        product.Add(prod, products);
                         break;
                     }
                 }
             }
         }
-
-        public static void CatalogShow()
+        public  void CatalogShow()
         {
+            XmlManager xmlman = new XmlManager();
+
             Product prod = new Product();
             int i = 1;
-            List<Product> ProdList = XmlManager.DisProd().ToList();
+            List<Product> ProdList = xmlman.DisProd().ToList();
             foreach (Product x in ProdList)
             {
                 Console.WriteLine("{0,-3}{1,-25}{2,-17}{3,-13}{4}", i++, x.Name, x.Description, x.Type, x.Price);
             }
         }
-        public static void ShowProd(List<Product> _products)
+        public  void ShowProd(List<Product> _products)
         {
             Console.WriteLine($"{"Name",-25}  {"Description",-11}  {"Type",-10}  {"Price",-5}");
 
@@ -85,7 +89,7 @@ namespace Shop.DAL.Contracts
                 Console.WriteLine($"{x.Name,-25}  {x.Description,-11}  {x.Type,-10}  {x.Price,-5}");
             }
         }
-        public static string SearchProd(List<Product> prod, string prodToSearch, int quest)
+        public  string SearchProd(List<Product> prod, string prodToSearch, int quest)
         {
             switch (quest)
             {
@@ -109,29 +113,33 @@ namespace Shop.DAL.Contracts
             }
             return "";
         }
-        public static bool Search()
+        public  bool Search()
         {
-            List<Product> ProdList = XmlManager.DisProd().ToList();
+            XmlManager xmlman = new XmlManager();
+
+            List<Product> ProdList = xmlman.DisProd().ToList();
             Console.WriteLine("Search by 1=Name 2=Description");
             bool isNum = int.TryParse(Console.ReadLine(), out int quest);
 
             if (quest == 1)
             {
                 Console.Write("Enter Name: ");
-                Console.WriteLine(ProductManager.SearchProd(ProdList, Console.ReadLine(), quest));
+                Console.WriteLine(SearchProd(ProdList, Console.ReadLine(), quest));
             }
             else if (quest == 2)
             {
                 Console.Write("Enter Description: ");
-                Console.WriteLine(ProductManager.SearchProd(ProdList, Console.ReadLine(), quest));
+                Console.WriteLine(SearchProd(ProdList, Console.ReadLine(), quest));
             }
             return true;
         }
-        public static void Delete()
+        public  void Delete()
         {
+            XmlManager xmlman = new XmlManager();
+
             Console.WriteLine("Enter name delete");
             string nameDelete = Console.ReadLine();
-            if (XmlManager.Remove(nameDelete))
+            if (xmlman.Remove(nameDelete))
                 Console.WriteLine("Product Removed");
 
         }
