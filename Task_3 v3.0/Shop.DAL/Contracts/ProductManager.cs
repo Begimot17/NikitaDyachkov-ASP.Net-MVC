@@ -8,7 +8,8 @@ namespace Shop.DAL.Contracts
 {
     public class ProductManager
     {
-        public  void Add()
+        string fileProduct = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Products.xml";
+        public void Add()
         {
             XmlManager xmlman = new XmlManager();
 
@@ -21,7 +22,7 @@ namespace Shop.DAL.Contracts
             product.Type = Console.ReadLine();
             Console.Write("Enter Price->");
             product.Price = Convert.ToInt32(Console.ReadLine());
-            if (xmlman.AddProduct(product))
+            if (xmlman.AddProduct(product, fileProduct))
                 Console.WriteLine("Product Added");
         }
         public  void Sort(List<Product> prod)
@@ -74,7 +75,7 @@ namespace Shop.DAL.Contracts
 
             Product prod = new Product();
             int i = 1;
-            List<Product> ProdList = xmlman.DisProd().ToList();
+            List<Product> ProdList = xmlman.DisProd(fileProduct).ToList();
             foreach (Product x in ProdList)
             {
                 Console.WriteLine("{0,-3}{1,-25}{2,-17}{3,-13}{4}", i++, x.Name, x.Description, x.Type, x.Price);
@@ -117,7 +118,7 @@ namespace Shop.DAL.Contracts
         {
             XmlManager xmlman = new XmlManager();
 
-            List<Product> ProdList = xmlman.DisProd().ToList();
+            List<Product> ProdList = xmlman.DisProd(fileProduct).ToList();
             Console.WriteLine("Search by 1=Name 2=Description");
             bool isNum = int.TryParse(Console.ReadLine(), out int quest);
 
@@ -139,7 +140,7 @@ namespace Shop.DAL.Contracts
 
             Console.WriteLine("Enter name delete");
             string nameDelete = Console.ReadLine();
-            if (xmlman.Remove(nameDelete))
+            if (xmlman.Remove(nameDelete, fileProduct))
                 Console.WriteLine("Product Removed");
 
         }

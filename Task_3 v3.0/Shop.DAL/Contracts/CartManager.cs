@@ -8,6 +8,8 @@ namespace Shop.DAL.Contracts
 {
     public class CartManager
     {
+        string fileProduct = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Products.xml";
+        string fileCart = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Products.xml";
         public  void Sort(Cart cart)
         {
             Console.WriteLine("Sort by 1=Name/2=Description/3=Type/4=Price");
@@ -27,12 +29,14 @@ namespace Shop.DAL.Contracts
         }
         public  void Add(string Name)
         {
+            
+
             XmlManager xmlman = new XmlManager();
 
             ProductManager prodman = new ProductManager();
             prodman.CatalogShow();
             Product prod = null;
-            List<Product> ProdList = xmlman.DisProd().ToList();
+            List<Product> ProdList = xmlman.DisProd(fileProduct).ToList();
             int i = 1;
             int quest = Convert.ToInt32(Console.ReadLine());
             foreach (Product x in ProdList)
@@ -43,14 +47,14 @@ namespace Shop.DAL.Contracts
             }
             if (prod == null)
                 return;
-            xmlman.AddProduct(Name,prod);
+            xmlman.AddProduct(Name,prod,fileCart);
         }
         public  void CartShow(string Name)
         {
             XmlManager xmlman = new XmlManager();
             decimal AllPrice = 0;
             Console.WriteLine("Your Cart");
-            List<Cart> CartList = xmlman.CartsList(Name);
+            List<Cart> CartList = xmlman.CartsList(Name, fileCart);
             foreach (Cart x in CartList)
             {
                 Console.WriteLine("{0,-25}{1,-25}{2,-17}{3,-13}", x.Product.Name, x.Product.Description, x.Product.Type, x.Product.Price);
@@ -79,7 +83,7 @@ namespace Shop.DAL.Contracts
             XmlManager xmlman = new XmlManager();
             CartShow(Name);
             Console.Write("Enter Name: ");
-            xmlman.RemoveProduct(Name, Console.ReadLine());
+            xmlman.RemoveProduct(Name, Console.ReadLine(), fileCart);
         }
     }
 }

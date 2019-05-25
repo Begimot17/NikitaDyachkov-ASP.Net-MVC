@@ -9,6 +9,7 @@ namespace Console_Admin
     {
         static void Main(string[] args)
         {
+            string fileProduct = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Products.xml";
             Console.WriteLine("Hello Admin");
             while (true)
             {
@@ -22,7 +23,7 @@ namespace Console_Admin
                     case 1: prodman.CatalogShow(); break;
                     case 2: prodman.Add(); break;
                     case 3: prodman.Delete(); break;
-                    case 4: prodman.Sort(xmlman.DisProd().ToList()); break;
+                    case 4: prodman.Sort(xmlman.DisProd(fileProduct).ToList()); break;
                     case 5: prodman.Search(); break;
                     case 6: return;
                     default: Console.WriteLine("WRONG ENTRY!!!"); break;
