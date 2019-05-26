@@ -26,7 +26,7 @@ namespace Task_3_v3._0
        public   void Registration()
         {
             XmlManager xmlman = new XmlManager();
-
+            string fileUser = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Users.xml";
             while (true)
             {
                 User newUser = NewUser();
@@ -36,7 +36,7 @@ namespace Task_3_v3._0
                 bool pass = Regex.IsMatch(newUser.Pass, @"[0-9a-zA-Z!@#$%^&*]{6,}");
                 if (name && email && pass)
                 {
-                    foreach (User x in xmlman.DisUser())
+                    foreach (User x in xmlman.DisUser(fileUser))
                     {
                         if (x.Name == newUser.Name)
                         {
@@ -49,9 +49,9 @@ namespace Task_3_v3._0
                             return;
                         }
                     }
-                    List<User> newUserList = xmlman.DisUser().ToList();
+                    List<User> newUserList = xmlman.DisUser(fileUser).ToList();
                     newUserList.Add(newUser);
-                    xmlman.SerUser(newUserList.ToArray());
+                    xmlman.SerUser(newUserList.ToArray(), fileUser);
                     UserConsole(newUser.Name);
 
                 }
@@ -64,13 +64,13 @@ namespace Task_3_v3._0
         public  void Login()
         {
             XmlManager xmlman = new XmlManager();
-
+            string fileUser = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Users.xml";
             User temp = new User();
             Console.Write("Enter Email->");
             string Email = Console.ReadLine();
             Console.Write("Enter (min 6 chars) Password->");
             string Pass = Console.ReadLine();
-            List<User> newUserList = xmlman.DisUser().ToList();
+            List<User> newUserList = xmlman.DisUser(fileUser).ToList();
 
             foreach (User x in newUserList)
                 {
@@ -98,11 +98,11 @@ namespace Task_3_v3._0
                 switch (Convert.ToInt32(Console.ReadLine()))
                 {
                     case 1: prodman.CatalogShow(); break;
-                    case 2: cartman.CartShow(Name); break;
+                    case 2: cartman.ShowCarts(Name); break;
                     case 3: cartman.Add(Name); break;
                     case 4: cartman.RemoveProd(Name); break;
                     case 5: prodman.Search(); break;
-                    case 6: prodman.Sort(); break;
+                    case 6: prodman.SortProd(); break;
                     case 7: return;
                     default: Console.WriteLine("WRONG ENTRY!!!"); break;
                 }

@@ -11,11 +11,9 @@ namespace Shop.DAL
     {
         static void Main(string[] args)
         {
-            XmlManager xmlman = new XmlManager();
-            User[] people = xmlman.DisUser();
-            List <User> newpeople =people.ToList();
-            newpeople.Add(new User ("Test","Test@gmail.com","123456" ));
-            xmlman.SerUser(newpeople.ToArray());
+            CartManager cart = new CartManager();
+            cart.ShowCarts("Nikita");
+            
             Console.ReadLine();
         }
     }

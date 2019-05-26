@@ -9,7 +9,6 @@ namespace Shop.DAL.Models
 {[Serializable]
     public class Product
     {
-        string fileProduct = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Products.xml";
         public string Name { get; set; }
         public string Description { get; set; }
         public string Type { get; set; }

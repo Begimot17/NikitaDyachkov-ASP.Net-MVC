@@ -49,29 +49,48 @@ namespace Shop.DAL.Contracts
                 return;
             xmlman.AddProduct(Name,prod,fileCart);
         }
-        public  void CartShow(string Name)
+        //public  void CartShow(string Name)
+        //{
+        //    XmlManager xmlman = new XmlManager();
+        //    decimal AllPrice = 0;
+        //    Console.WriteLine("Your Cart");
+        //    //List<Cart> CartList = xmlman.CartsList(Name, fileCart);
+        //    //foreach (Cart x in CartList)
+        //    //{
+        //    //    Console.WriteLine("{0,-25}{1,-25}{2,-17}{3,-13}", x.Product.Name, x.Product.Description, x.Product.Type, x.Product.Price);
+        //    //    AllPrice += x.Product.Price;
+        //    //}
+        //    //Console.WriteLine($"AllPrice={AllPrice}");
+        //}
+        public void ShowCarts(string user)
         {
             XmlManager xmlman = new XmlManager();
             decimal AllPrice = 0;
-            Console.WriteLine("Your Cart");
-            List<Cart> CartList = xmlman.CartsList(Name, fileCart);
-            foreach (Cart x in CartList)
+            var carts = xmlman.Test(user);
+            foreach (var product in carts)
             {
-                Console.WriteLine("{0,-25}{1,-25}{2,-17}{3,-13}", x.Product.Name, x.Product.Description, x.Product.Type, x.Product.Price);
-                AllPrice += x.Product.Price;
+                foreach (var param in product)
+                {
+                    Console.Write($"{ param.Value,-24}");
+                    if (param.Key == "Price")
+                        AllPrice += Convert.ToDecimal(param.Value);
+                }
+                Console.WriteLine();
             }
-            Console.WriteLine($"AllPrice={AllPrice}");
-        }
-        public  void ShowCart(Cart cart, int TotalPrice)
-        {
-            Console.WriteLine($"{"Name",-25}  {"Description",-11}  {"Type",-10}  {"Price",-5}");
+            Console.WriteLine("AllPrice=" + AllPrice);
+            
 
-            foreach (Product x in cart.Contains())
-            {
-                Console.WriteLine($"{x.Name,-25}  {x.Description,-11}  {x.Type,-10}  {x.Price,-5}");
-            }
-            Console.WriteLine($"TotalPrice={TotalPrice}");
         }
+        //public  void ShowCart(Cart cart, int TotalPrice)
+        //{
+        //    Console.WriteLine($"{"Name",-25}  {"Description",-11}  {"Type",-10}  {"Price",-5}");
+
+        //    foreach (Product x in cart.Contains())
+        //    {
+        //        Console.WriteLine($"{x.Name,-25}  {x.Description,-11}  {x.Type,-10}  {x.Price,-5}");
+        //    }
+        //    Console.WriteLine($"TotalPrice={TotalPrice}");
+        //}
         public  void RemoveProd(Cart cart)
         {
 
@@ -81,7 +100,7 @@ namespace Shop.DAL.Contracts
         public  void RemoveProd(string Name)
         {
             XmlManager xmlman = new XmlManager();
-            CartShow(Name);
+            ShowCarts(Name);
             Console.Write("Enter Name: ");
             xmlman.RemoveProduct(Name, Console.ReadLine(), fileCart);
         }

@@ -13,7 +13,7 @@ namespace Shop.DAL.Contracts
         {
             XmlManager xmlman = new XmlManager();
             List<Product> prod = xmlman.DisProd(fileProduct).ToList();
-            switch (Product.SortBy)
+            switch (SortBy)
             {
                 case SortBy.Name:
                     prod = prod.OrderBy(x => x.Name).ToList();
@@ -64,7 +64,7 @@ namespace Shop.DAL.Contracts
             if (xmlman.AddProduct(product, fileProduct))
                 Console.WriteLine("Product Added");
         }
-        public  void Sorttt()
+        public  void SortProd()
         {
             Product product = new Product();
             Console.WriteLine("Sort by 1=Name/2=Description/3=Type/4=Price");

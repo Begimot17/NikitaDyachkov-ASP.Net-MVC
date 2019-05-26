@@ -3,14 +3,6 @@ using System.Linq;
 
 namespace Shop.DAL.Models
 {
-    public enum SortBy : byte
-    {
-        Name = 1,
-        Description = 2,
-        Type = 3,
-        Price = 4
-    }
-    
     public class Cart 
     {
         public string NameUser { get; set; }

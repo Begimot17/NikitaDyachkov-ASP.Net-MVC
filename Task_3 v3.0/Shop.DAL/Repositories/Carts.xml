@@ -19,9 +19,39 @@
     <Price>7999</Price>
   </Cart>
   <Cart NameUser="Nikita">
+    <Name>Iphone SE 32gb</Name>
+    <Discription>Black</Discription>
+    <Type>Smartphone</Type>
+    <Price>7999</Price>
+  </Cart>
+  <Cart NameUser="Chmo">
+    <Name>Iphone SE 32gb</Name>
+    <Discription>Black</Discription>
+    <Type>Smartphone</Type>
+    <Price>7999</Price>
+  </Cart>
+  <Cart NameUser="Chmo">
     <Name>IPad Pro</Name>
     <Discription>Silver</Discription>
     <Type>Tablet</Type>
     <Price>50499</Price>
+  </Cart>
+  <Cart NameUser="Chmo">
+    <Name>AirPods</Name>
+    <Discription>Black</Discription>
+    <Type>Headphones</Type>
+    <Price>9749</Price>
+  </Cart>
+  <Cart NameUser="Chmo">
+    <Name>Iphone XS MAX 512gb</Name>
+    <Discription>White</Discription>
+    <Type>Smartphone</Type>
+    <Price>46999</Price>
+  </Cart>
+  <Cart NameUser="Chmo">
+    <Name>Sennheiser MOMENTUM M2</Name>
+    <Discription>White</Discription>
+    <Type>Headphones</Type>
+    <Price>6999</Price>
   </Cart>
 </Carts>

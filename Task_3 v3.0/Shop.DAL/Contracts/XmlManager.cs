@@ -10,9 +10,6 @@ namespace Shop.DAL.Contracts
 {
     public class XmlManager
     {
-        
-        
-        public const string fileUser= @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Users.xml";
         public void AddProduct(string Name, Product prod, string fileCart)
         {
             XDocument xdoc = XDocument.Load(fileCart);
@@ -23,7 +20,7 @@ namespace Shop.DAL.Contracts
             new XElement("Type", prod.Type),
             new XElement("Price", prod.Price)));
             xdoc.Save(fileCart);
-            return ;
+            return;
         }
         public bool AddProduct(Product product, string fileProduct)
         {
@@ -39,7 +36,7 @@ namespace Shop.DAL.Contracts
             XDocument xdoc = XDocument.Load(fileProduct);
             foreach (XElement product in xdoc.Element("ArrayOfProduct").Elements("Product"))
             {
-                
+
                 XElement NameElement = product.Element("Name");
 
                 if (NameElement.Value == nameDelete)
@@ -50,22 +47,59 @@ namespace Shop.DAL.Contracts
             xdoc.Save(fileProduct);
             return true;
         }
-        public  List<Cart> CartsList(string NameUs, string fileCart)
+        public  List<IDictionary<string, string>> Test(string user)
         {
-            List<Cart> cart = new List<Cart>();
-            XDocument xdoc = XDocument.Load(fileCart);
-            foreach (XElement prod in xdoc.Element("Carts").Elements("Cart"))
+            var param = new XmlRequestParams()
             {
-                XAttribute NameUser = prod.Attribute("NameUser");
-                XElement Name = prod.Element("Name");
-                XElement Discription = prod.Element("Discription");
-                XElement Type = prod.Element("Type");
-                XElement Price = prod.Element("Price");
-                if (NameUser.Value == NameUs)
-                    cart.Add(new Cart(NameUser.Value, new Product(Name.Value, Discription.Value, Type.Value, Convert.ToInt32(Price.Value))));
-            }
-            return cart;
+                Attributes = new string[] { "NameUser" },
+                RootNode = "Carts",
+                ItemNode = "Cart",
+                ItemNodeNames = new string[] { "Name", "Discription", "Type", "Price" }
+            };
+            string path = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Carts.xml";
+            
+            var result = Read(path, param,user);
+            return result;
         }
+
+        public  List<IDictionary<string, string>> Read(string path, XmlRequestParams parameters,string user)
+        {
+            XDocument xdoc = XDocument.Load(path);
+            var result = new List<IDictionary<string, string>>();
+            var elements = xdoc.Element(parameters.RootNode).Elements(parameters.ItemNode);
+            foreach (var item in elements)
+            {
+                if (item.FirstAttribute.Value == user)
+                {
+                    var dict = new Dictionary<string, string>();
+                    foreach (var field in parameters.ItemNodeNames)
+                    {
+                        dict.Add(field, item.Element(field).Value);
+                    }
+
+                    result.Add(dict);
+                }
+            }
+
+            return result;
+        }
+
+        //public List<Cart> CartsList(string NameUs, string fileCart)
+        //{
+        //    List<Cart> cart = new List<Cart>();
+        //    XDocument xdoc = XDocument.Load(fileCart);
+        //    foreach (XElement prod in xdoc.Element("Carts").Elements("Cart"))
+        //    {
+        //        XAttribute NameUser = prod.Attribute("NameUser");
+        //        XElement Name = prod.Element("Name");
+        //        XElement Discription = prod.Element("Discription");
+        //        XElement Type = prod.Element("Type");
+        //        XElement Price = prod.Element("Price");
+        //        if (NameUser.Value == NameUs)
+        //            cart.Add(new Cart(NameUser.Value, new Product(Name.Value, Discription.Value, Type.Value, Convert.ToInt32(Price.Value))));
+        //    }
+        //    return cart;
+        //}
         public void RemoveProduct(string Name, string namedelete, string fileCart)
         {
             XDocument xDoc = XDocument.Load(fileCart);
@@ -81,7 +115,7 @@ namespace Shop.DAL.Contracts
             return;
 
         }
-        public  void SerUser(User[] people)
+        public void SerUser(User[] people, string fileUser)
         {
             XmlSerializer formatter = new XmlSerializer(typeof(User[]));
 
@@ -90,7 +124,7 @@ namespace Shop.DAL.Contracts
                 formatter.Serialize(fs, people);
             }
         }
-        public  User[] DisUser()
+        public User[] DisUser(string fileUser)
         {
             XmlSerializer formatter = new XmlSerializer(typeof(User[]));
 
@@ -100,7 +134,7 @@ namespace Shop.DAL.Contracts
                 return newpeople;
             }
         }
-        public  void SerProd(Product[] product, string fileProduct)
+        public void SerProd(Product[] product, string fileProduct)
         {
             XmlSerializer formatter = new XmlSerializer(typeof(Product[]));
 
@@ -109,7 +143,7 @@ namespace Shop.DAL.Contracts
                 formatter.Serialize(fs, product);
             }
         }
-        public  Product[] DisProd(string fileProduct)
+        public Product[] DisProd(string fileProduct)
         {
             XmlSerializer formatter = new XmlSerializer(typeof(Product[]));
 
