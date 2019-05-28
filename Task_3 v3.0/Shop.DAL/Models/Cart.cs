@@ -1,25 +1,13 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shop.DAL.Models
 {
-    public enum SortBy : byte
-    {
-        Name = 1,
-        Description = 2,
-        Type = 3,
-        Price = 4
-    }
-    
     public class Cart 
     {
         public string NameUser { get; set; }
         private List<Product> _products;
-        public Product product { get; set; }
+        public Product Product { get; set; }
         public static int TotalPrice { get; set; }
         public Product this[int index]
         {
@@ -51,7 +39,7 @@ namespace Shop.DAL.Models
         public Cart(string Name, Product prod)
         {
             NameUser = Name;
-            product = prod;
+            Product = prod;
         }
 
         public List<Product> Contains()
@@ -93,15 +81,6 @@ namespace Shop.DAL.Models
             }
             TotalPrice = total;
             return TotalPrice;
-        }
-
-        public void CopyTo(Array array, int index)
-        {
-            throw new NotImplementedException();
-        }
-        public IEnumerator GetEnumerator()
-        {
-            throw new NotImplementedException();
         }
 
         public bool Add(Product product)

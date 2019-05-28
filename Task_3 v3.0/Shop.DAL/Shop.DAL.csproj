@@ -44,9 +44,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\CartManager.cs" />
+    <Compile Include="Contracts\ProductManager.cs" />
     <Compile Include="Contracts\XmlManager.cs" />
+    <Compile Include="Contracts\XmlRegPar.cs" />
     <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\Product children\Phones.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Products.cs" />
+    <Compile Include="Models\SortBy.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shop.DAL.cs" />
@@ -55,7 +60,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Repositories\Carts.xml" />
+    <Content Include="Repositories\Carts.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Repositories\Products.xml">
       <SubType>Designer</SubType>
     </Content>

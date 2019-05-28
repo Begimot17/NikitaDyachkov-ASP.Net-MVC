@@ -1,12 +1,10 @@
 ﻿using Shop.DAL.Contracts;
 using Shop.DAL.Models;
+using Shop.DAL.Models.Product_children;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+
 
 namespace Shop.DAL
 {
@@ -14,10 +12,12 @@ namespace Shop.DAL
     {
         static void Main(string[] args)
         {
-            User[] people = XmlManager.DisUser();
-            List <User> newpeople =people.ToList();
-            newpeople.Add(new User ("Test","Test@gmail.com","123456" ));
-            XmlManager.SerUser(newpeople.ToArray());
+            Phones phone = new Phones("name","description","type",123,"manufact",5);
+            Products<Phones> products = new Products<Phones>(phone);
+            foreach (Phones ph in products)
+            {
+                Console.WriteLine(ph.Description );
+            }
             Console.ReadLine();
         }
     }
