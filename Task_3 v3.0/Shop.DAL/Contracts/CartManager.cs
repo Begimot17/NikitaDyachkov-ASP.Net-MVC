@@ -28,13 +28,5 @@ namespace Shop.DAL.Contracts
             Console.WriteLine("Enter Delete Product");
             xml.RemoveProduct(name, Console.ReadLine());
         }
-        public void InfoId(string name)
-        {
-            XmlManager xml = new XmlManager();
-            Cart cart = new Cart();
-            Console.WriteLine("Enter Delete Product");
-            xml.RemoveProduct(name, Console.ReadLine());
-        }
-
     }
 }

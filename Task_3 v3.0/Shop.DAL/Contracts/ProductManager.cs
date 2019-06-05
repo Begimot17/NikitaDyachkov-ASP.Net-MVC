@@ -9,14 +9,13 @@ namespace Shop.DAL.Contracts
 {
     public class ProductManager : Product
     {
-        string fileProduct = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Products.xml";
-        public void Add()
+        public new void Add()
         {
             XmlManager xml = new XmlManager();
             Car car = new Car();
             Phone phone = new Phone();
             Sneakers sneakers = new Sneakers();
-            Console.WriteLine("Какой продукт хотите добавить\n1=Car\n2=Phone\n3=Sneakers");
+            Console.WriteLine("Enter number\n1=Car\n2=Phone\n3=Sneakers");
             int quest = Int32.Parse(Console.ReadLine());
             switch (quest)
             {
@@ -42,7 +41,7 @@ namespace Shop.DAL.Contracts
             string delete = Console.ReadLine();
             xml.Remove(delete);
         }
-        public void Show()
+        public new void Show()
         {
             XmlManager xml = new XmlManager();
             ProductsList productsList = ProductsList.ProductListIni();
@@ -51,6 +50,39 @@ namespace Shop.DAL.Contracts
             {
                 item.Show();
             }
+        }
+        public void ShowCategory()
+        {
+            XmlManager xml = new XmlManager();
+            ProductsList productsList = ProductsList.ProductListIni();
+            productsList = xml.GetProducts(productsList);
+            Console.WriteLine("1=Car\n2=Phone\n3=Sneakers\n4=AllProducts");
+            switch (Int32.Parse(Console.ReadLine()))
+            {
+                case 1:
+                    foreach (var item in productsList.cars)
+                    {
+                        item.Show();
+                    }; break;
+                case 2:
+                    foreach (var item in productsList.phones)
+                    {
+                        item.Show();
+                    }; break;
+                case 3:
+                    foreach (var item in productsList.sneakers)
+                    {
+                        item.Show();
+                    }; break;
+                case 4:
+                    foreach (var item in productsList.products)
+                    {
+                        item.Show();
+                    }; break;
+
+            }
+            
+            
         }
         public void Search()
         {
@@ -75,5 +107,6 @@ namespace Shop.DAL.Contracts
                     item.Show();
             }
         }
+
     }    
 }

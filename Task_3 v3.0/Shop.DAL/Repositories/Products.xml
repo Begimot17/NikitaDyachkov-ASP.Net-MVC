@@ -24,4 +24,12 @@
     <Size>45</Size>
     <Sex>M</Sex>
   </Sneakers>
+  <Phone Name="Xiaomi">
+    <Manufactur>China</Manufactur>
+    <Description>A6</Description>
+    <Currency>UAH</Currency>
+    <Price>4000</Price>
+    <Ram>2</Ram>
+    <Color>White</Color>
+  </Phone>
 </Products>
