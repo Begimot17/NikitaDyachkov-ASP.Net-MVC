@@ -1,4 +1,5 @@
 ﻿using Shop.DAL.Models;
+using Shop.DAL.Models.Product_children;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,184 +7,73 @@ using System.Linq;
 
 namespace Shop.DAL.Contracts
 {
-    public class ProductManager:Product
+    public class ProductManager : Product
     {
         string fileProduct = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Products.xml";
-        public void Sort()
-        {
-            XmlManager xmlman = new XmlManager();
-            List<Product> prod = xmlman.DisProd(fileProduct).ToList();
-            switch (SortBy)
-            {
-                case SortBy.Name:
-                    prod = prod.OrderBy(x => x.Name).ToList();
-                    break;
-                case SortBy.Description:
-                    prod = prod.OrderBy(x => x.Description).ToList();
-                    break;
-                case SortBy.Type:
-                    prod = prod.OrderBy(x => x.Type).ToList();
-                    break;
-                case SortBy.Price:
-                    prod = prod.OrderBy(x => x.Price).ToList();
-                    break;
-            }
-            ShowProd(prod);
-
-
-        }
-        public void SetSort(SortBy sortType)
-        {
-            SortBy = sortType;
-            Sort();
-        }
-        
-        public void Add(Product[] catalog)
-        {
-            XmlManager xmlman = new XmlManager();
-            List<Product> prod = xmlman.DisProd(fileProduct).ToList();
-            foreach (Product item in catalog)
-            {
-                if (item != null)
-                    prod.Add(item);
-            }
-        }
         public void Add()
         {
-            XmlManager xmlman = new XmlManager();
-
-            Product product = new Product();
-            Console.Write("Enter Name->");
-            product.Name = Console.ReadLine();
-            Console.Write("Enter Description->");
-            product.Description = Console.ReadLine();
-            Console.Write("Enter Type->");
-            product.Type = Console.ReadLine();
-            Console.Write("Enter Price->");
-            product.Price = Convert.ToInt32(Console.ReadLine());
-            if (xmlman.AddProduct(product, fileProduct))
-                Console.WriteLine("Product Added");
-        }
-        public  void SortProd()
-        {
-            Product product = new Product();
-            Console.WriteLine("Sort by 1=Name/2=Description/3=Type/4=Price");
-            string sortby = "Name";
-            bool isNum = int.TryParse(Console.ReadLine(), out int quest);
-            switch (quest)
-            {
-                case 1: sortby = "Name"; break;
-                case 2: sortby = "Description"; break;
-                case 3: sortby = "Type"; break;
-                case 4: sortby = "Price"; break;
-                default: return;
-            }
-            SortBy sort;
-            Enum.TryParse(sortby, true, out sort);
-            SetSort(sort);
-
-        }
-        public  void AddToCatalog(List<Product> products, Product[] prod)
-        {
-            for (int i = 0; i < prod.Length; i++)
-            {
-                Product product = new Product();
-                Console.Write("Enter Name: ");
-                string Name = Console.ReadLine();
-                Console.Write("Enter Description:");
-                string Description = Console.ReadLine();
-                Console.Write("Enter Type:");
-                string Type = Console.ReadLine();
-                Console.Write("Enter Price:");
-                if (int.TryParse(Console.ReadLine(), out int Price))
-                {
-                    prod[i] = new Product(Name, Description, Type, Price);
-                    Console.WriteLine("1=Add more\n2=Сonfirm");
-                    int quest = 1;
-                    if (int.TryParse(Console.ReadLine(), out quest) && quest == 2)
-                    {
-                        Add(prod);
-                        break;
-                    }
-                }
-            }
-        }
-        
-
-        public void CatalogShow()
-        {
-            XmlManager xmlman = new XmlManager();
-
-            Product prod = new Product();
-            int i = 1;
-            List<Product> ProdList = xmlman.DisProd(fileProduct).ToList();
-            foreach (Product x in ProdList)
-            {
-                Console.WriteLine("{0,-3}{1,-25}{2,-17}{3,-13}{4}", i++, x.Name, x.Description, x.Type, x.Price);
-            }
-        }
-        public  void ShowProd(List<Product> _products)
-        {
-            Console.WriteLine($"{"Name",-25}  {"Description",-11}  {"Type",-10}  {"Price",-5}");
-
-            foreach (Product x in _products)
-            {
-                Console.WriteLine($"{x.Name,-25}  {x.Description,-11}  {x.Type,-10}  {x.Price,-5}");
-            }
-        }
-        public  string SearchProd(List<Product> prod, string prodToSearch, int quest)
-        {
+            XmlManager xml = new XmlManager();
+            Car car = new Car();
+            Phone phone = new Phone();
+            Sneakers sneakers = new Sneakers();
+            Console.WriteLine("Какой продукт хотите добавить\n1=Car\n2=Phone\n3=Sneakers");
+            int quest = Int32.Parse(Console.ReadLine());
             switch (quest)
             {
                 case 1:
-                    foreach (Product x in prod)
-                    {
-                        if (x.Name == prodToSearch)
-                            return $"{x.Name,-25}  {x.Description,-11}  {x.Type,-10}  {x.Price,-5}";
-                    };
+                    car.Add();
+                    xml.SetProducts(car);
                     break;
                 case 2:
-                    foreach (Product x in prod)
-                    {
-                        if (x.Description == prodToSearch)
-                            return $"{x.Name,-25}  {x.Description,-11}  {x.Type,-10}  {x.Price,-5}";
-                    };
+                    phone.Add();
+                    xml.SetProducts(phone);
                     break;
-                default:
-                    return "Sorry";
-
+                case 3:
+                    sneakers.Add();
+                    xml.SetProducts(sneakers);
+                    break;
+                default:; break;
             }
-            return "";
         }
-        public  bool Search()
+        public void Remove()
         {
-            XmlManager xmlman = new XmlManager();
-
-            List<Product> ProdList = xmlman.DisProd(fileProduct).ToList();
-            Console.WriteLine("Search by 1=Name 2=Description");
-            bool isNum = int.TryParse(Console.ReadLine(), out int quest);
-
-            if (quest == 1)
-            {
-                Console.Write("Enter Name: ");
-                Console.WriteLine(SearchProd(ProdList, Console.ReadLine(), quest));
-            }
-            else if (quest == 2)
-            {
-                Console.Write("Enter Description: ");
-                Console.WriteLine(SearchProd(ProdList, Console.ReadLine(), quest));
-            }
-            return true;
+            XmlManager xml = new XmlManager();
+            Console.WriteLine("Enter name Product");
+            string delete = Console.ReadLine();
+            xml.Remove(delete);
         }
-        public  void Delete()
+        public void Show()
         {
-            XmlManager xmlman = new XmlManager();
-
-            Console.WriteLine("Enter name delete");
-            string nameDelete = Console.ReadLine();
-            if (xmlman.Remove(nameDelete, fileProduct))
-                Console.WriteLine("Product Removed");
-
+            XmlManager xml = new XmlManager();
+            ProductsList productsList = ProductsList.ProductListIni();
+            productsList = xml.GetProducts(productsList);
+            foreach(var item in productsList.products)
+            {
+                item.Show();
+            }
         }
-    }
+        public void Search()
+        {
+            Console.WriteLine("Enter name Product");
+            var search = Console.ReadLine();
+            XmlManager xml = new XmlManager();
+            var productsList = ProductsList.ProductListIni();
+             productsList = xml.GetProducts(productsList);
+            foreach (var item in productsList.cars)
+            {
+                if (item.Name == search)
+                    item.Show();
+            }
+            foreach (var item in productsList.phones)
+            {
+                if (item.Name == search)
+                    item.Show();
+            }
+            foreach (var item in productsList.sneakers)
+            {
+                if (item.Name == search)
+                    item.Show();
+            }
+        }
+    }    
 }

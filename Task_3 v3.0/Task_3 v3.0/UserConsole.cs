@@ -16,7 +16,7 @@ namespace Task_3_v3._0
                 {
                     case 1: userman.Registration(); break;
                     case 2: userman.Login(); break;
-                    case 3: prodman.CatalogShow(); break;
+                    case 3: prodman.Show(); break;
                     case 4: return;
                     default: Console.WriteLine("Неверный ввод!!!"); break;
                 }

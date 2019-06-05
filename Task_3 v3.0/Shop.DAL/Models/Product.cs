@@ -6,24 +6,54 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Shop.DAL.Models
-{[Serializable]
+{
     public class Product
     {
         public string Name { get; set; }
+        public string Manufactur { get; set; }
         public string Description { get; set; }
-        public string Type { get; set; }
+        public string Currency { get; set; }
         public int Price { get; set; }
         public Product() { }
-        static public SortBy SortBy { get; protected set; }
-        public Product(string name, string description, string type, int price)
+        public Product(string name, string manufactur, string description, string сurrency, int price)
         {
             Name = name;
+            Manufactur = manufactur;
             Description = description;
-            Type = type;
+            Currency = сurrency;
             Price = price;
         }
+        public virtual void Show()
+        {
+            Console.WriteLine($"{Name,-15}{Manufactur,-15}{Description,-15}{Price,-15}{Currency,-15}");
+        }
+        public virtual void Add()
+        {
+            Console.WriteLine("Name->>>");
+            Name = Console.ReadLine();
+            Console.WriteLine("Manufactur->>>");
+            Manufactur = Console.ReadLine();
+            Console.WriteLine("Description->>>");
+            Description = Console.ReadLine();
+            Console.WriteLine("Сurrency->>>");
+            Currency = CurrencySet();
+            Console.WriteLine("Price->>>");
+            Price = Int32.Parse(Console.ReadLine());
+        }
+        public string CurrencySet()
+        {
+            Console.WriteLine("1=UAH\n2=USD\n3=EUR");
+            int quest = Convert.ToInt32(Console.ReadLine());
 
-
+            switch (quest)
+            {
+                case 1: return "UAH";
+                case 2: return "USD";
+                case 3: return "EUR";
+                default: Console.WriteLine("Not Found"); break;
+            }
+            return "ХЗ";
+        }
 
     }
 }

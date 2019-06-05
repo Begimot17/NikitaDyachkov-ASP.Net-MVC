@@ -93,17 +93,15 @@ namespace Task_3_v3._0
                 ProductManager prodman = new ProductManager();
                 CartManager cartman = new CartManager();
 
-                List<Product> Prods = xmlman.DisProd(fileProduct).ToList();
-                Console.WriteLine("1=CatalogShow\n2=CartShow\n3=AddProduct\n4=Delete\n5=Search\n6=Sort\n7=Exit");
+                Console.WriteLine("1=CatalogShow\n2=CartShow\n3=AddProduct\n4=Delete\n5=Search\n6=Exit");
                 switch (Convert.ToInt32(Console.ReadLine()))
                 {
-                    case 1: prodman.CatalogShow(); break;
-                    case 2: cartman.ShowCarts(Name); break;
+                    case 1: prodman.Show(); break;
+                    case 2: cartman.Show(Name); break;
                     case 3: cartman.Add(Name); break;
-                    case 4: cartman.RemoveProd(Name); break;
+                    case 4: cartman.Remove(Name); break;
                     case 5: prodman.Search(); break;
-                    case 6: prodman.SortProd(); break;
-                    case 7: return;
+                    case 6: return;
                     default: Console.WriteLine("WRONG ENTRY!!!"); break;
                 }
             }

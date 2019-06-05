@@ -1,45 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Product>
-    <Name>Iphone SE 32gb</Name>
-    <Description>Black</Description>
-    <Type>Smartphone</Type>
-    <Price>7999</Price>
-  </Product>
-  <Product>
-    <Name>IPad Pro</Name>
-    <Description>Silver</Description>
-    <Type>Tablet</Type>
-    <Price>50499</Price>
-  </Product>
-  <Product >
-    <Name>AirPods</Name>
-    <Description>Black</Description>
-    <Type>Headphones</Type>
-    <Price>9749</Price>
-  </Product>
-  <Product>
-    <Name>Iphone XS MAX 512gb</Name>
-    <Description>White</Description>
-    <Type>Smartphone</Type>
-    <Price>46999</Price>
-  </Product>
-  <Product >
-    <Name>Sennheiser MOMENTUM M2</Name>
-    <Description>White</Description>
-    <Type>Headphones</Type>
-    <Price>6999</Price>
-  </Product>
-  <Product >
-    <Name>SAMSUNG Galaxy Tab</Name>
-    <Description>Black</Description>
-    <Type>Tablet</Type>
-    <Price>5999</Price>
-  </Product>
-  <Product>
-    <Name>Samsung S8</Name>
-    <Description>Green</Description>
-    <Type>SmartPhone</Type>
+<Products>
+  <Car Name="BMW">
+    <Manufactur>Germany</Manufactur>
+    <Description>X5</Description>
     <Price>100000</Price>
-  </Product>
-</ArrayOfProduct>
+    <Currency>USD</Currency>
+    <Horsepower>500</Horsepower>
+    <NumbOfWhel>4</NumbOfWhel>
+  </Car>
+  <Phone Name="Iphone">
+    <Manufactur>XS</Manufactur>
+    <Description>America</Description>
+    <Currency>EUR</Currency>
+    <Price>1000</Price>
+    <Ram>3</Ram>
+    <Color>Black</Color>
+  </Phone>
+  <Sneakers Name="New Balance">
+    <Manufactur>America</Manufactur>
+    <Description>Cool</Description>
+    <Currency>UAH</Currency>
+    <Price>1200</Price>
+    <Size>45</Size>
+    <Sex>M</Sex>
+  </Sneakers>
+</Products>

@@ -10,7 +10,7 @@ namespace Shop.DAL.Models
     {
         Name = 1,
         Description = 2,
-        Type = 3,
+        Currency = 3,
         Price = 4
     }
 }

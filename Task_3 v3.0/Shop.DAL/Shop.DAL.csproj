@@ -48,7 +48,10 @@
     <Compile Include="Contracts\XmlManager.cs" />
     <Compile Include="Contracts\XmlRegPar.cs" />
     <Compile Include="Models\Cart.cs" />
-    <Compile Include="Models\Product children\Phones.cs" />
+    <Compile Include="Models\Product children\Car.cs" />
+    <Compile Include="Models\Product children\Phone.cs" />
+    <Compile Include="Models\Product children\ProductsList.cs" />
+    <Compile Include="Models\Product children\Sneakers.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\SortBy.cs" />

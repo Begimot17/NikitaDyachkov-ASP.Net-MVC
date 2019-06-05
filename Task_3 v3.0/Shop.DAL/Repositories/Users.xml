@@ -40,4 +40,9 @@
     <Email>Chmo@gmail.com</Email>
     <Pass>123456</Pass>
   </User>
+  <User>
+    <Name>Anton</Name>
+    <Email>Anton@gmail.com</Email>
+    <Pass>123321</Pass>
+  </User>
 </ArrayOfUser>

@@ -1,4 +1,5 @@
 ﻿using Shop.DAL.Models;
+using Shop.DAL.Models.Product_children;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,99 +12,51 @@ namespace Shop.DAL.Contracts
 {
     public class XmlManager
     {
-        public void AddProduct(string Name, Product prod, string fileCart)
+        string xmlprod = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Products.xml";
+        string xmlcart = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Carts.xml";
+        public void setCart(string nameuser, Product prod)
         {
-            XDocument xdoc = XDocument.Load(fileCart);
-            xdoc.Root.Add(new XElement("Cart",
-            new XAttribute("NameUser", Name),
+            XDocument xdoc = XDocument.Load(xmlcart);
+            XElement root = xdoc.Element("Carts");
+            root.Add(new XElement("Cart",
+            new XAttribute("NameUser", nameuser),
             new XElement("Name", prod.Name),
-            new XElement("Discription", prod.Description),
-            new XElement("Type", prod.Type),
-            new XElement("Price", prod.Price)));
-            xdoc.Save(fileCart);
-            return;
+            new XElement("Manufactur", prod.Manufactur),
+            new XElement("Description", prod.Description),
+            new XElement("Currency", prod.Currency),
+            new XElement("Price", prod.Price)
+            ));
+            xdoc.Save(xmlcart);
         }
-        public bool AddProduct(Product product, string fileProduct)
+        public Cart getCarts (string name)
         {
-            XmlManager xmlman = new XmlManager();
-
-            List<Product> ProdList = xmlman.DisProd(fileProduct).ToList();
-            ProdList.Add(product);
-            SerProd(ProdList.ToArray(), fileProduct);
-            return true;
-        }
-        public bool Remove(string nameDelete, string fileProduct)
-        {
-            XDocument xdoc = XDocument.Load(fileProduct);
-            foreach (XElement product in xdoc.Element("ArrayOfProduct").Elements("Product"))
-            {
-
-                XElement NameElement = product.Element("Name");
-
-                if (NameElement.Value == nameDelete)
-                {
-                    product.Remove();
-                }
-            }
-            xdoc.Save(fileProduct);
-            return true;
-        }
-        public  List<IDictionary<string, string>> Test(string user)
-        {
-            var param = new XmlRequestParams()
-            {
-                Attributes = new string[] { "NameUser" },
-                RootNode = "Carts",
-                ItemNode = "Cart",
-                ItemNodeNames = new string[] { "Name", "Discription", "Type", "Price" }
-            };
-            string path = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Carts.xml";
+            XDocument xdoc = XDocument.Load(xmlcart);
+            Cart cart = new Cart();
+            cart.ProdList = new List<Product>();
             
-            var result = Read(path, param,user);
-            return result;
-        }
-
-        public  List<IDictionary<string, string>> Read(string path, XmlRequestParams parameters,string user)
-        {
-            XDocument xdoc = XDocument.Load(path);
-            var result = new List<IDictionary<string, string>>();
-            var elements = xdoc.Element(parameters.RootNode).Elements(parameters.ItemNode);
-            foreach (var item in elements)
+            foreach (XElement prodElement in xdoc.Element("Carts").Elements())
             {
-                if (item.FirstAttribute.Value == user)
+                Product product = new Product();
+                XAttribute nameAttribute = prodElement.Attribute("NameUser");
+                XElement nameElement = prodElement.Element("Name");
+                XElement manElement = prodElement.Element("Manufactur");
+                XElement descElement = prodElement.Element("Description");
+                XElement priceElement = prodElement.Element("Price");
+                XElement currElement = prodElement.Element("Currency");
+                if (nameAttribute.Value==name)
                 {
-                    var dict = new Dictionary<string, string>();
-                    foreach (var field in parameters.ItemNodeNames)
-                    {
-                        dict.Add(field, item.Element(field).Value);
-                    }
-
-                    result.Add(dict);
+                    cart.NameUser = nameAttribute.Value;
+                    cart.ProdList.Add(new Product(nameElement.Value, manElement.Value,
+                          descElement.Value, currElement.Value,
+                          Convert.ToInt32(priceElement.Value)));
                 }
             }
-
-            return result;
+            return cart;
         }
-
-        //public List<Cart> CartsList(string NameUs, string fileCart)
-        //{
-        //    List<Cart> cart = new List<Cart>();
-        //    XDocument xdoc = XDocument.Load(fileCart);
-        //    foreach (XElement prod in xdoc.Element("Carts").Elements("Cart"))
-        //    {
-        //        XAttribute NameUser = prod.Attribute("NameUser");
-        //        XElement Name = prod.Element("Name");
-        //        XElement Discription = prod.Element("Discription");
-        //        XElement Type = prod.Element("Type");
-        //        XElement Price = prod.Element("Price");
-        //        if (NameUser.Value == NameUs)
-        //            cart.Add(new Cart(NameUser.Value, new Product(Name.Value, Discription.Value, Type.Value, Convert.ToInt32(Price.Value))));
-        //    }
-        //    return cart;
-        //}
-        public void RemoveProduct(string Name, string namedelete, string fileCart)
+        
+        public void RemoveProduct(string Name, string namedelete)
         {
-            XDocument xDoc = XDocument.Load(fileCart);
+            XDocument xDoc = XDocument.Load(xmlcart);
             foreach (XElement xNode in xDoc.Root.Nodes())
             {
                 if (xNode.Element("Name").Value == namedelete && xNode.Attribute("NameUser").Value == Name)
@@ -112,7 +65,7 @@ namespace Shop.DAL.Contracts
                     break;
                 }
             }
-            xDoc.Save(fileCart);
+            xDoc.Save(xmlcart);
             return;
 
         }
@@ -135,25 +88,187 @@ namespace Shop.DAL.Contracts
                 return newpeople;
             }
         }
-        public void SerProd(Product[] product, string fileProduct)
+        public void SetProducts<T>(T obj) where T : Product
         {
-            BinaryFormatter formatter = new BinaryFormatter();
+            Car car = new Car();
+            Phone phone = new Phone();
+            Sneakers sneak = new Sneakers();
 
-            using (FileStream fs = new FileStream(fileProduct, FileMode.OpenOrCreate))
+            XDocument xdoc = XDocument.Load(xmlprod);
+            if (obj.GetType() == car.GetType())
             {
-                formatter.Serialize(fs, product);
+                setCar(xdoc, (Car)(object)obj);
             }
+            else if (obj.GetType() == phone.GetType())
+            {
+                setPhone(xdoc, (Phone)(object)obj);
+            }
+            else if (obj.GetType() == sneak.GetType())
+            {
+                setSneak(xdoc, (Sneakers)(object)obj);
+            }
+            xdoc.Save(xmlprod);
+
         }
-        public Product[] DisProd(string fileProduct)
+        public ProductsList GetProducts(ProductsList productsList)
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-
-            using (FileStream fs = new FileStream(fileProduct, FileMode.OpenOrCreate))
+            
+            XDocument xdoc = XDocument.Load(xmlprod);
+            
+            foreach (XElement prodElement in xdoc.Element("Products").Elements())
             {
-                Product[] newpeople = (Product[])formatter.Deserialize(fs);
-                return newpeople;
+                if (prodElement.Name == "Car")
+                {
+                    Car car = new Car();
+                    car = getCar(prodElement);
+                    productsList.cars.Add(car);
+                    productsList.products.Add(car);
+
+                }
+                else if (prodElement.Name == "Phone")
+                {
+                    Phone phone = new Phone();
+                    phone = getPhone(prodElement);
+                    productsList.phones.Add(phone);
+                    productsList.products.Add(phone);
+                }
+                else if (prodElement.Name == "Sneakers")
+                {
+                    Sneakers sneakers = new Sneakers();
+                    sneakers = getSneak(prodElement);
+                    productsList.sneakers.Add(sneakers);
+                    productsList.products.Add(sneakers);
+                }
             }
+            return productsList;
         }
+        public void Remove(string nameDelete)
+        {
+            XDocument xdoc = XDocument.Load(xmlprod);
+            foreach (XElement product in xdoc.Element("Products").Elements())
+            {
+                XAttribute nameAttribute = product.Attribute("Name");
+                if (nameAttribute.Value == nameDelete)
+                {
+                    product.Remove();
+                }
+            }
+            xdoc.Save(xmlprod);
+        }
+        public void setCar(XDocument xdoc, Car car)
+        {
+
+            XElement root = xdoc.Element("Products");
+            root.Add(new XElement("Car",
+            new XAttribute("Name", car.Name),
+            new XElement("Manufactur", car.Manufactur),
+            new XElement("Description", car.Description),
+            new XElement("Price", car.Price),
+            new XElement("Currency", car.Currency),
+            new XElement("Horsepower", car.Horsepower),
+            new XElement("NumbOfWhel", car.NumbOfWhel)
+            ));
+        }
+        public Car getCar(XElement prodElement)
+        {
+            Car car = new Car();
+            XAttribute nameAttribute = prodElement.Attribute("Name");
+            XElement manElement = prodElement.Element("Manufactur");
+            XElement descElement = prodElement.Element("Description");
+            XElement priceElement = prodElement.Element("Price");
+            XElement currElement = prodElement.Element("Currency");
+            XElement horseElement = prodElement.Element("Horsepower");
+            XElement numbElement = prodElement.Element("NumbOfWhel");
+
+            if (nameAttribute != null)
+            {
+                car = new Car(nameAttribute.Value, manElement.Value,
+                    descElement.Value, currElement.Value,
+                    Convert.ToInt32(priceElement.Value),
+                    Convert.ToInt32(horseElement.Value),
+                    Convert.ToInt32(numbElement.Value));
+                return car;
+            }
+            return car;
+
+        }
+        public void setPhone(XDocument xdoc, Phone phone)
+        {
+
+            XElement root = xdoc.Element("Products");
+            root.Add(new XElement("Phone",
+            new XAttribute("Name", phone.Name),
+            new XElement("Manufactur", phone.Manufactur),
+            new XElement("Description", phone.Description),
+            new XElement("Currency", phone.Currency),
+            new XElement("Price", phone.Price),
+            new XElement("Ram", phone.Ram),
+            new XElement("Color", phone.Color)
+            ));
+        }
+        public Phone getPhone(XElement prodElement)
+        {
+            Phone phone = new Phone();
+            XAttribute nameAttribute = prodElement.Attribute("Name");
+            XElement manElement = prodElement.Element("Manufactur");
+            XElement descElement = prodElement.Element("Description");
+            XElement currElement = prodElement.Element("Currency");
+            XElement priceElement = prodElement.Element("Price");
+            XElement horseElement = prodElement.Element("Ram");
+            XElement numbElement = prodElement.Element("Color");
+
+            if (nameAttribute != null)
+            {
+                phone = new Phone(nameAttribute.Value, manElement.Value,
+                   descElement.Value, currElement.Value,
+                   Convert.ToInt32(priceElement.Value),
+
+                   numbElement.Value,
+                   Convert.ToInt32(horseElement.Value));
+                return phone;
+            }
+            return phone;
+
+        }
+        public void setSneak(XDocument xdoc, Sneakers sneak)
+        {
+
+
+            XElement root = xdoc.Element("Products");
+            root.Add(new XElement("Sneakers",
+            new XAttribute("Name", sneak.Name),
+            new XElement("Manufactur", sneak.Manufactur),
+            new XElement("Description", sneak.Description),
+            new XElement("Currency", sneak.Currency),
+            new XElement("Price", sneak.Price),
+            new XElement("Size", sneak.Size),
+            new XElement("Sex", sneak.Sex)
+            ));
+        }
+        public Sneakers getSneak(XElement prodElement)
+        {
+            Sneakers sneakers = new Sneakers();
+            XAttribute nameAttribute = prodElement.Attribute("Name");
+            XElement manElement = prodElement.Element("Manufactur");
+            XElement descElement = prodElement.Element("Description");
+            XElement currElement = prodElement.Element("Currency");
+            XElement priceElement = prodElement.Element("Price");
+            XElement horseElement = prodElement.Element("Size");
+            XElement numbElement = prodElement.Element("Sex");
+
+            if (nameAttribute != null)
+            {
+                sneakers = new Sneakers(nameAttribute.Value, manElement.Value,
+                   descElement.Value, currElement.Value,
+                   Convert.ToInt32(priceElement.Value),
+                   Convert.ToInt16(horseElement.Value),
+                   Convert.ToChar(numbElement.Value));
+                return sneakers;
+            }
+            return sneakers;
+
+        }
+
     }
 }
 

@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Shop.DAL.Contracts;
+using Shop.DAL.Models.Product_children;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Shop.DAL.Models
@@ -6,103 +9,68 @@ namespace Shop.DAL.Models
     public class Cart 
     {
         public string NameUser { get; set; }
-        private List<Product> _products;
-        public Product Product { get; set; }
+        
+        public Product Prod { get; set; }
+        public List<Product> ProdList { get; set; }
         public static int TotalPrice { get; set; }
-        public Product this[int index]
-        {
-            get
-            {
-                return _products[index];
-            }
-            set
-            {
-                if (_products.Count < index)
-                    _products[index] = value;
-                else
-                    _products.Add(value);
-            }
-        }
-        public SortBy SortBy { get; private set; }
-
-
         public Cart()
         {
-            _products = new List<Product>();
+            
         }
-
-        public Cart(SortBy sortBy, IEnumerable<Product> collection)
+        public Cart(string NameUser, List<Product> ProdList)
         {
-            SortBy = sortBy;
-            _products = collection.ToList();
+            this.NameUser = NameUser;
+            this.ProdList = ProdList;
         }
-        public Cart(string Name, Product prod)
+        public Product SelectProd()
         {
-            NameUser = Name;
-            Product = prod;
-        }
-
-        public List<Product> Contains()
-        {
-            return _products;
-        }
-        public void Sort()
-        {
-            switch (SortBy)
+            XmlManager xml = new XmlManager();
+            ProductsList productsList = new ProductsList();
+            productsList = ProductsList.ProductListIni();
+            productsList = xml.GetProducts(productsList);
+            var i = 0;
+            foreach (var item in productsList.products)
             {
-                case SortBy.Name:
-                    _products = _products.OrderBy(x => x.Name).ToList();
-                    break;
-                case SortBy.Description:
-                    _products = _products.OrderBy(x => x.Description).ToList();
-                    break;
-                case SortBy.Type:
-                    _products = _products.OrderBy(x => x.Type).ToList();
-                    break;
-                case SortBy.Price:
-                    _products = _products.OrderBy(x => x.Price).ToList();
-                    break;
+                i++;
+                Console.WriteLine($"{i,-3}{item.Name,-15}"+
+                    $"{item.Manufactur,-15}{item.Description,-15}"+
+                    $"{item.Price,-15}{item.Currency,-15}");
             }
-        }
-
-
-        public void SetSort(SortBy sortType)
-        {
-            SortBy = sortType;
-            Sort();
-        }
-
-        public int Total()
-        {
-            int total = 0;
-            foreach (Product x in _products)
+            Console.WriteLine("Enter id Product");
+            var quest=Int32.Parse(Console.ReadLine());
+            var a = 0;
+            foreach (var item in productsList.products)
             {
-                total += x.Price;
+                a++;
+                if (a == quest)
+                    return item;
             }
-            TotalPrice = total;
-            return TotalPrice;
+            return null;
+            
         }
-
-        public bool Add(Product product)
+        public void Show()
         {
-            _products.Add(product);
-            return true;
-        }
-
-        public bool Remove(string prodToDelete)
-        {
-            for (int i = 0; i < _products.Count; i++)
+            Cart car = new Cart();
+            foreach (var item in ProdList)
             {
-                foreach (Product x in _products)
+                item.Show();
+            }
+            Console.WriteLine(TotalPriceCount()+"---UAH");
+        }
+        public int TotalPriceCount()
+        {
+            foreach (var item in ProdList)
+            {
+                switch (item.Currency)
                 {
-                    if (x.Name == prodToDelete)
-                    {
-                        _products.Remove(x);
-                        return true;
-                    }
+                    case "UAH": TotalPrice += item.Price; ; break;
+                    case "USD": TotalPrice += item.Price*26; ; break;
+                    case "EUR": TotalPrice += item.Price*30; ; break;
                 }
             }
-            return false;
+            int total = TotalPrice;
+            TotalPrice = 0;
+            return total;
         }
     }
 }

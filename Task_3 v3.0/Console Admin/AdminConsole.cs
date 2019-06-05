@@ -16,15 +16,14 @@ namespace Console_Admin
 
                 ProductManager prodman = new ProductManager();
                 Product prod = new Product();
-                Console.WriteLine("1=CatalogShow\n2=AddProduct\n3=Delete\n4=Sort\n5=Search\n6=Exit");
+                Console.WriteLine("1=CatalogShow\n2=AddProduct\n3=Delete\n4=Search\n5=Exit");
                 switch (Convert.ToInt32(Console.ReadLine()))
                 {
-                    case 1: prodman.CatalogShow(); break;
+                    case 1: prodman.Show(); break;
                     case 2: prodman.Add(); break;
-                    case 3: prodman.Delete(); break;
-                    case 4: prodman.Sort(); break;
-                    case 5: prodman.Search(); break;
-                    case 6: return;
+                    case 3: prodman.Remove(); break;
+                    case 4: prodman.Search(); break;
+                    case 5: return;
                     default: Console.WriteLine("WRONG ENTRY!!!"); break;
 
                 }

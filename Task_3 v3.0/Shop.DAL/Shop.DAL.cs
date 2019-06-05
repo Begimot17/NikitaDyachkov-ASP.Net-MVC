@@ -12,9 +12,15 @@ namespace Shop.DAL
     {
         static void Main(string[] args)
         {
-            Phones phone = new Phones("name","description","type",123,"manufact",5);
-            Products<Phones> products = new Products<Phones>(phone);
-            
+            ProductManager prodman = new ProductManager();
+            CartManager cartman = new CartManager();
+            //prodman.Show(); 
+            //cartman.Add("Nikita");
+            cartman.Show("Nikita");
+            cartman.Remove("Nikita");
+            cartman.Show("Nikita");
+
+
             Console.ReadLine();
         }
     }

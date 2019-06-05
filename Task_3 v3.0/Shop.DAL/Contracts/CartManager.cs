@@ -8,101 +8,33 @@ namespace Shop.DAL.Contracts
 {
     public class CartManager
     {
-        string fileProduct = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Products.xml";
-        string fileCart = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Carts.xml";
-        public  void Sort(Cart cart)
+        public void Add(string name)
         {
-            Console.WriteLine("Sort by 1=Name/2=Description/3=Type/4=Price");
-            string sortby = "Name";
-            bool isNum = int.TryParse(Console.ReadLine(), out int quest);
-            switch (quest)
-            {
-                case 1: sortby = "Name"; break;
-                case 2: sortby = "Description"; break;
-                case 3: sortby = "Type"; break;
-                case 4: sortby = "Price"; break;
-                default: return;
-            }
-            SortBy sort;
-            Enum.TryParse(sortby, true, out sort);
-            cart.SetSort(sort);
+            XmlManager xml = new XmlManager();
+            Cart cart = new Cart();
+            xml.setCart(name, cart.SelectProd());
         }
-        public  void Add(string Name)
+        public void Show(string name)
         {
-            
-
-            XmlManager xmlman = new XmlManager();
-
-            ProductManager prodman = new ProductManager();
-            prodman.CatalogShow();
-            Product prod = null;
-            List<Product> ProdList = xmlman.DisProd(fileProduct).ToList();
-            int i = 1;
-            int quest = Convert.ToInt32(Console.ReadLine());
-            foreach (Product x in ProdList)
-            {
-                if (i == quest)
-                    prod = new Product(x.Name, x.Description, x.Type, x.Price);
-                i++;
-            }
-            if (prod == null)
-                return;
-            xmlman.AddProduct(Name,prod,fileCart);
+            XmlManager xml = new XmlManager();
+            Cart cart = new Cart();
+            cart=xml.getCarts(name);
+            cart.Show();
         }
-        //public  void CartShow(string Name)
-        //{
-        //    XmlManager xmlman = new XmlManager();
-        //    decimal AllPrice = 0;
-        //    Console.WriteLine("Your Cart");
-        //    //List<Cart> CartList = xmlman.CartsList(Name, fileCart);
-        //    //foreach (Cart x in CartList)
-        //    //{
-        //    //    Console.WriteLine("{0,-25}{1,-25}{2,-17}{3,-13}", x.Product.Name, x.Product.Description, x.Product.Type, x.Product.Price);
-        //    //    AllPrice += x.Product.Price;
-        //    //}
-        //    //Console.WriteLine($"AllPrice={AllPrice}");
-        //}
-        public void ShowCarts(string user)
+        public void Remove(string name)
         {
-            XmlManager xmlman = new XmlManager();
-            decimal AllPrice = 0;
-            var carts = xmlman.Test(user);
-            foreach (var product in carts)
-            {
-                foreach (var param in product)
-                {
-                    Console.Write($"{ param.Value,-24}");
-                    if (param.Key == "Price")
-                        AllPrice += Convert.ToDecimal(param.Value);
-                }
-                Console.WriteLine();
-            }
-            Console.WriteLine("AllPrice=" + AllPrice);
-            
-
+            XmlManager xml = new XmlManager();
+            Cart cart = new Cart();
+            Console.WriteLine("Enter Delete Product");
+            xml.RemoveProduct(name, Console.ReadLine());
         }
-        //public  void ShowCart(Cart cart, int TotalPrice)
-        //{
-        //    Console.WriteLine($"{"Name",-25}  {"Description",-11}  {"Type",-10}  {"Price",-5}");
-
-        //    foreach (Product x in cart.Contains())
-        //    {
-        //        Console.WriteLine($"{x.Name,-25}  {x.Description,-11}  {x.Type,-10}  {x.Price,-5}");
-        //    }
-        //    Console.WriteLine($"TotalPrice={TotalPrice}");
-        //}
-        public  void RemoveProd(Cart cart)
+        public void InfoId(string name)
         {
+            XmlManager xml = new XmlManager();
+            Cart cart = new Cart();
+            Console.WriteLine("Enter Delete Product");
+            xml.RemoveProduct(name, Console.ReadLine());
+        }
 
-            Console.Write("Enter Name: ");
-            cart.Remove(Console.ReadLine());
-        }
-        public  void RemoveProd(string Name)
-        {
-            XmlManager xmlman = new XmlManager();
-            ShowCarts(Name);
-            Console.Write("Enter Name: ");
-            xmlman.RemoveProduct(Name, Console.ReadLine(), fileCart);
-        }
     }
 }
