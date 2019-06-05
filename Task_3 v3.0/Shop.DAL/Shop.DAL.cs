@@ -14,10 +14,7 @@ namespace Shop.DAL
         {
             Phones phone = new Phones("name","description","type",123,"manufact",5);
             Products<Phones> products = new Products<Phones>(phone);
-            foreach (Phones ph in products)
-            {
-                Console.WriteLine(ph.Description );
-            }
+            
             Console.ReadLine();
         }
     }

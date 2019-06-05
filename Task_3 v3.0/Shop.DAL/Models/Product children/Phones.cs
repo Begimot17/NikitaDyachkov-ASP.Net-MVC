@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Shop.DAL.Models.Product_children
 {
+    [Serializable]
     class Phones:Product
     {
+     
         string Manufacturer;
         int Ram;
         public Phones(string name, string description, string type, int price , string manufacturer, int ram) : base(name, description,type,price)
@@ -16,5 +18,6 @@ namespace Shop.DAL.Models.Product_children
             Ram = ram;
         }
 
+        
     }
 }
