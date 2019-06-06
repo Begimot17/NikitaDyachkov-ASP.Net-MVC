@@ -51,6 +51,17 @@ namespace Shop.DAL.Contracts
                 item.Show();
             }
         }
+        public void Sort()
+        {
+            XmlManager xml = new XmlManager();
+            ProductsList productsList = ProductsList.ProductListIni();
+            productsList = xml.GetProducts(productsList);
+            Console.WriteLine("1=Name\n2=Description\n3=Currency\n4=Price");
+            int numsort = Int32.Parse(Console.ReadLine());
+            Product.SortSet(numsort);
+            productsList.products=Product.Sort(productsList.products);
+            Product.ShowList(productsList.products);
+        }
         public void ShowCategory()
         {
             XmlManager xml = new XmlManager();

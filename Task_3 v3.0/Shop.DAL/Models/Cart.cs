@@ -22,6 +22,36 @@ namespace Shop.DAL.Models
             this.NameUser = NameUser;
             this.ProdList = ProdList;
         }
+        public SortBy SortBy { get; private set; }
+        public void Sort()
+        {
+            switch (SortBy)
+            {
+                case SortBy.Name:
+                    ProdList= ProdList.OrderBy(x => x.Name).ToList();
+                    break;
+                case SortBy.Description:
+                    ProdList = ProdList.OrderBy(x => x.Description).ToList();
+                    break;
+                case SortBy.Currency:
+                    ProdList = ProdList.OrderBy(x => x.Currency).ToList();
+                    break;
+                case SortBy.Price:
+                    ProdList = ProdList.OrderBy(x => x.Price).ToList();
+                    break;
+            }
+        }
+        public void SortSet(int sort)
+        {
+            switch(sort)
+            {
+                case 1: SortBy = SortBy.Name; break;
+                case 2: SortBy = SortBy.Description; break;
+                case 3: SortBy = SortBy.Currency; break;
+                case 4: SortBy = SortBy.Price; break;
+                default:return;
+            }
+        }
         public Product SelectProd()
         {
             XmlManager xml = new XmlManager();

@@ -16,10 +16,8 @@ namespace Shop.DAL
             CartManager cartman = new CartManager();
             //prodman.Show(); 
             //cartman.Add("Nikita");
-            cartman.Show("Nikita");
-            cartman.Remove("Nikita");
-            cartman.Show("Nikita");
 
+            prodman.Sort();
 
             Console.ReadLine();
         }

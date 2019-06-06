@@ -117,6 +117,7 @@ namespace Shop.DAL.Contracts
             
             foreach (XElement prodElement in xdoc.Element("Products").Elements())
             {
+                
                 if (prodElement.Name == "Car")
                 {
                     Car car = new Car();

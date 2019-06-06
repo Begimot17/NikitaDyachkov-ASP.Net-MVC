@@ -1,4 +1,5 @@
 ﻿using Shop.DAL.Contracts;
+using Shop.DAL.Models.Product_children;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,45 @@ namespace Shop.DAL.Models
             Description = description;
             Currency = сurrency;
             Price = price;
+        }
+        
+        public static SortBy SortBy { get; private set; }
+        public static List<Product> Sort(List<Product> ProdList)
+        {
+            switch (SortBy)
+            {
+                case SortBy.Name:
+                    ProdList = ProdList.OrderBy(x => x.Name).ToList();
+                    break;
+                case SortBy.Description:
+                    ProdList = ProdList.OrderBy(x => x.Description).ToList();
+                    break;
+                case SortBy.Currency:
+                    ProdList = ProdList.OrderBy(x => x.Currency).ToList();
+                    break;
+                case SortBy.Price:
+                    ProdList = ProdList.OrderBy(x => x.Price).ToList();
+                    break;
+            }
+            return ProdList;
+        }
+        public static void SortSet(int sort)
+        {
+            switch (sort)
+            {
+                case 1: SortBy = SortBy.Name; break;
+                case 2: SortBy = SortBy.Description; break;
+                case 3: SortBy = SortBy.Currency; break;
+                case 4: SortBy = SortBy.Price; break;
+                default: return;
+            }
+        }
+        public static void ShowList(List<Product>ProdList)
+        {
+            foreach (var item in ProdList)
+            {
+                Console.WriteLine($"{item.Name,-15}{item.Manufactur,-15}{item.Description,-15}{item.Price,-15}{item.Currency,-15}");
+            }
         }
         public virtual void Show()
         {
