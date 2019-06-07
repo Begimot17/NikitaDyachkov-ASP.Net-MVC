@@ -44,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\CartManager.cs" />
+    <Compile Include="Contracts\DirectoryManager.cs" />
+    <Compile Include="Contracts\FileWatcher.cs" />
     <Compile Include="Contracts\ProductManager.cs" />
     <Compile Include="Contracts\XmlManager.cs" />
     <Compile Include="Contracts\XmlRegPar.cs" />

@@ -16,7 +16,8 @@ namespace Console_Admin
 
                 ProductManager prodman = new ProductManager();
                 Product prod = new Product();
-                Console.WriteLine("1=CatalogShow\n2=ShowCategory\n3=AddProduct\n4=Delete\n5=Search\n6=Sort\n7=Exit");
+                DirectoryManager dirman = new DirectoryManager();
+                Console.WriteLine("1=CatalogShow\n2=ShowCategory\n3=AddProduct\n4=Delete\n5=Search\n6=Sort\n7=DIRWATCHER\n8=Exit");
                 switch (Convert.ToInt32(Console.ReadLine()))
                 {
                     case 1: prodman.Show(); break;
@@ -24,8 +25,9 @@ namespace Console_Admin
                     case 3: prodman.Add(); break;
                     case 4: prodman.Remove(); break;
                     case 5: prodman.Search(); break;
-                    case 6: prodman.Sort(); ; break;
-                    case 7: return;
+                    case 6: prodman.Sort();  break;
+                    case 7: dirman.Go("C:\\");break;
+                    case 8: return;
                     default: Console.WriteLine("WRONG ENTRY!!!"); break;
 
                 }

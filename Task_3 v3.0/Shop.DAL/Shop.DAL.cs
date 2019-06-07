@@ -12,13 +12,9 @@ namespace Shop.DAL
     {
         static void Main(string[] args)
         {
-            ProductManager prodman = new ProductManager();
-            CartManager cartman = new CartManager();
-            //prodman.Show(); 
-            //cartman.Add("Nikita");
-
-            prodman.Sort();
-
+            
+            FileWatcher fileWatcher = new FileWatcher();
+            fileWatcher.Run(@DirectoryManager.DirManager("C:\\"));
             Console.ReadLine();
         }
     }
