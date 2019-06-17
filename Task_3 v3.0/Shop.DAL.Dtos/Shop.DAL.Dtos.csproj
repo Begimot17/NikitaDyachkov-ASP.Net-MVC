@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{072BFC02-36BA-4A53-BF10-9DB2BC3EA275}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Shop.DAL</RootNamespace>
-    <AssemblyName>Shop.DAL</AssemblyName>
+    <ProjectGuid>{EC3EB0B5-F26D-49FE-A180-AA1F5822435F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Shop.DAL.Dtos</RootNamespace>
+    <AssemblyName>Shop.DAL.Dtos</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -34,7 +32,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,47 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\CartManager.cs" />
-    <Compile Include="Contracts\DirectoryManager.cs" />
-    <Compile Include="Contracts\FileWatcher.cs" />
-    <Compile Include="Contracts\ProductManager.cs" />
-    <Compile Include="Contracts\XmlManager.cs" />
-    <Compile Include="Contracts\XmlRegPar.cs" />
-    <Compile Include="Models\Cart.cs" />
-    <Compile Include="Models\Product children\Car.cs" />
-    <Compile Include="Models\Product children\Phone.cs" />
-    <Compile Include="Models\Product children\ProductsList.cs" />
-    <Compile Include="Models\Product children\Sneakers.cs" />
-    <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\Products.cs" />
-    <Compile Include="Models\SortBy.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Products\ProductDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Shop.DAL.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Models\App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Repositories\Carts.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Repositories\Products.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Repositories\Users.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Shop.DAL.ADO\Shop.DAL.ADO.csproj">
-      <Project>{5febe8d6-e454-403c-a010-f2cc69730aa7}</Project>
-      <Name>Shop.DAL.ADO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Shop.DAL.Dtos\Shop.DAL.Dtos.csproj">
-      <Project>{ec3eb0b5-f26d-49fe-a180-aa1f5822435f}</Project>
-      <Name>Shop.DAL.Dtos</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Shop.Enums\Shop.Enums.csproj">
-      <Project>{D573FD2D-0B48-4FE7-AF95-985E1FBBB845}</Project>
+      <Project>{d573fd2d-0b48-4fe7-af95-985e1fbbb845}</Project>
       <Name>Shop.Enums</Name>
     </ProjectReference>
   </ItemGroup>

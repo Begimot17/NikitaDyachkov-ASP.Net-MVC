@@ -27,6 +27,7 @@ namespace Shop.DAL.Contracts
             new XElement("Price", prod.Price)
             ));
             xdoc.Save(xmlcart);
+            
         }
         public Cart getCarts (string name)
         {

@@ -77,4 +77,11 @@
     <Currency>USD</Currency>
     <Price>100000</Price>
   </Cart>
+  <Cart NameUser="qwerty">
+    <Name>Iphone</Name>
+    <Manufactur>XS</Manufactur>
+    <Description>America</Description>
+    <Currency>EUR</Currency>
+    <Price>1000</Price>
+  </Cart>
 </Carts>

@@ -8,11 +8,20 @@ namespace Shop.DAL.Contracts
 {
     public class CartManager
     {
+        public delegate void MethodContainer();
+        public event MethodContainer Message;
+        public void AddMessage()
+        {
+            Console.WriteLine("Add product to cart");
+        }
         public void Add(string name)
         {
+            MethodContainer method = AddMessage;
+            Message = method;
             XmlManager xml = new XmlManager();
             Cart cart = new Cart();
             xml.setCart(name, cart.SelectProd());
+            AddMessage();
         }
         public void Show(string name)
         {

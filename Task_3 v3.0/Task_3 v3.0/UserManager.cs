@@ -9,19 +9,16 @@ namespace Task_3_v3._0
 {
     public class UserManager
     {
-        public User NewUser
+        public User GetNewUser()
         {
-            get
-            {
-                User newUser = new User();
-                Console.Write("Enter Name->");
-                newUser.Name = Console.ReadLine();
-                Console.Write("Enter Email->");
-                newUser.Email = Console.ReadLine();
-                Console.Write("Enter (min 6 chars) Password->");
-                newUser.Pass = Console.ReadLine();
-                return newUser;
-            }
+            User newUser = new User();
+            Console.Write("Enter Name->");
+            newUser.Name = Console.ReadLine();
+            Console.Write("Enter Email->");
+            newUser.Email = Console.ReadLine();
+            Console.Write("Enter (min 6 chars) Password->");
+            newUser.Pass = Console.ReadLine();
+            return newUser;
         }
 
         public   void Registration()
@@ -30,7 +27,7 @@ namespace Task_3_v3._0
             string fileUser = @"C:\Users\Хозяйн\Documents\asp.net-mvc repa\Task_3 v3.0\Shop.DAL\Repositories\Users.xml";
             while (true)
             {
-                User newUser = NewUser;
+                User newUser = GetNewUser();
                 bool name = Regex.IsMatch(newUser.Name, @"^[\p{L} \.\-]+$");
                 bool email = Regex.IsMatch(newUser.Email, @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
              @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" + @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
