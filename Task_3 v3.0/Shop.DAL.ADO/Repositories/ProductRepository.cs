@@ -118,7 +118,21 @@ namespace Shop.DAL.ADO.Repositories
 
         public void Update(ProductDto product)
         {
-            throw new NotImplementedException();
+            using (SqlConnection cn = new SqlConnection(ConnectionString))
+            {
+                cn.Open();
+                string query = $"UPDATE Product" +
+                    $" SET " +
+                    
+                    $"Name='{product.Name}'," +
+                    $"CategoryId='{product.CategoryId}'," +
+                    $"Price='{product.Price}'," +
+                    $"Type='{product.Type}'" +
+                    $"WHERE Id ='{product.Id}'; ";
+                SqlCommand getProductsCommand = new SqlCommand(query, cn);
+                getProductsCommand.ExecuteReader(CommandBehavior.Default);
+                cn.Close();
+            }
         }
 
         public void Delete(int id)
